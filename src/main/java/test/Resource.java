@@ -12,6 +12,9 @@ public class Resource {
 
 	public final static int[] stoneXY = { 10, -100, 0, 90, -200, 0, 180, -340,
 			0, 120, -360, 0, 40, -400, 0 };
+
+	public final static int[] stoneXY1 = { 270, -150, 0, 90, -250, 0, 200,
+			-350, 0 };
 	public final static int[] MonsterBlood = { 100, 100, 100, 100, 100, 100,
 			100, 100, 100, 100, 100, 100, 100, 1500, 1800, 2400, 3000, 3300,
 			3900, 4500, 4800, 500 };
@@ -24,15 +27,22 @@ public class Resource {
 	public final static int[] MonsterImgIndex = { 79, 80, 81, 82, 83, 84, 85,
 			86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 119 };
 
-	public final static byte[] heroAndSoldierLevel = { 1, 0, 0, 0, 0, 0, 1, 1,
-			1, 1, 0, 0, 0, 0, 0 };
+	public final static byte[] heroAndSoldierLevel = { 1, 1, 1, 1, 0, 0, 0, 0,
+			0 };
+	public final static byte[] isBelongMyOfHero = { 1, 0, 0, 0, 0, 0 };
+
+	public final static long[] heroMoney = { 5000, 10000, 20000, 25000, 50000,
+			50000 };
+
+	public final static long[] soldierMoney = { 0, 0, 0, 0, 1000, 5000, 5000,
+			10000, 10000 };
 
 	public final static byte[] guanqiaLevel = { 0, -1, -1, -1, -1, -1, -1, -1,
 			-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 			-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 			-1, -1, -1, -1, -1, -1, -1, -1 };
 
-	public final static long[] myProperty = { 1, 0, 1000 };
+	public final static long[] myProperty = { 1, 0, 100000 };
 	public final static int[] goodsNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	public final static String[] shopInfo = { "血瓶", "恢复英雄的血量200点。（战斗中使用）",
 			"火球术", "召唤火球对场中的怪物造成200点伤害。", "狂暴术", "士兵的攻击力翻倍。（30秒）", "双倍经验卡",
@@ -94,7 +104,7 @@ public class Resource {
 	public static final short myherotext = NUMS++;
 	public static final short mysoldertext = NUMS++;
 	public static final short newcomer = NUMS++;
-	public static final short notgo = NUMS++;
+	public static final short selecthero = NUMS++;
 	public static final short numberbig = NUMS++;
 	public static final short panel1 = NUMS++;
 	public static final short pit = NUMS++;
@@ -216,7 +226,7 @@ public class Resource {
 			"/firstpage/ice.png", "/firstpage/leftright.png",
 			"/firstpage/login.jpg", "/firstpage/logintext.png",
 			"/firstpage/myherotext.png", "/firstpage/mysoldertext.png",
-			"/firstpage/newcomer.png", "/firstpage/notgo.png",
+			"/firstpage/newcomer.png", "/firstpage/selecthero.png",
 			"/firstpage/numberbig.png", "/firstpage/panel1.png",
 			"/firstpage/pit.png", "/firstpage/queding.png",
 			"/firstpage/selectforce.png", "/firstpage/shopbag.png",

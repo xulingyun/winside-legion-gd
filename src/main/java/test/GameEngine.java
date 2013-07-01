@@ -102,12 +102,15 @@ public class GameEngine extends GameCanvasEngine {
 	int win1;
 	int canGoodsKind;
 	Point skill1Hero;
+	long needMoney;
 
 	public PlayerProp[] props;
 	Myself my;
 	GameRecord record;
 	int temp_img_distance1 = 18;
 	int temp_img_distance2 = temp_img_distance1 + 54;
+	int tempMainPage0Index;
+	int enterWay;
 
 	protected GameEngine(MIDlet midlet) {
 		super(midlet);
@@ -125,6 +128,7 @@ public class GameEngine extends GameCanvasEngine {
 		selectSoldierindex = 0;
 		mainPage3Index = -1;
 		mainPage4Index = -1;
+		tempMainPage0Index = 7;
 		selectHeroIndex = 0;
 		shopPage = 0;
 		shopSum = 11;
@@ -171,6 +175,9 @@ public class GameEngine extends GameCanvasEngine {
 			for (j = 0; j < Resource.guanqiaLevel.length; j++) {
 				b[i++] = Resource.guanqiaLevel[j];
 			}
+			for (j = 0; j < Resource.isBelongMyOfHero.length; j++) {
+				b[i++] = Resource.isBelongMyOfHero[j];
+			}
 			for (j = 0; j < Resource.goodsNums.length; j++) {
 				BytesUtil.writeInt(b, i + 4 * j, Resource.goodsNums[j]);
 			}
@@ -189,6 +196,9 @@ public class GameEngine extends GameCanvasEngine {
 			}
 			for (j = 0; j < Resource.guanqiaLevel.length; j++) {
 				Resource.guanqiaLevel[j] = b[i++];
+			}
+			for (j = 0; j < Resource.isBelongMyOfHero.length; j++) {
+				Resource.isBelongMyOfHero[j] = b[i++];
 			}
 			for (j = 0; j < Resource.goodsNums.length; j++) {
 				Resource.goodsNums[j] = BytesUtil.readInt(b, i + j * 4);
@@ -328,7 +338,8 @@ public class GameEngine extends GameCanvasEngine {
 				.loadImage(Resource.mysoldertext);
 		img[temp_img_distance1 - 6 + 36] = Resource
 				.loadImage(Resource.newcomer);
-		img[temp_img_distance1 - 6 + 37] = Resource.loadImage(Resource.notgo);
+		img[temp_img_distance1 - 6 + 37] = Resource
+				.loadImage(Resource.selecthero);
 		img[temp_img_distance1 - 6 + 38] = Resource
 				.loadImage(Resource.numberbig);
 		img[temp_img_distance1 - 6 + 39] = Resource.loadImage(Resource.panel1);
@@ -379,7 +390,21 @@ public class GameEngine extends GameCanvasEngine {
 
 	private void handleMainKey3(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK)) {
-			if (mainPage3Index == 1)
+			if (mainPage3Index == 0) {
+				PopupText pt = UIResource.getInstance().buildDefaultPopupText();
+				if (my.getMoney() >= needMoney) {
+					my.setMoney(my.getMoney() - needMoney);
+					if (Resource.isBelongMyOfHero[mainPageIndex[3]] == 0)
+						pt.setText("购买成功！");
+					else {
+						pt.setText("升级成功！");
+					}
+					Resource.isBelongMyOfHero[mainPageIndex[3]]++;
+				} else {
+					pt.setText("金币不足！");
+				}
+				pt.popup();
+			} else if (mainPage3Index == 1)
 				selectHeroIndex = mainPageIndex[3];
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
 			if (mainPage3Index == -1) {
@@ -407,7 +432,10 @@ public class GameEngine extends GameCanvasEngine {
 				mainPage3Index = 1;
 			}
 		} else if (key.containsAndRemove(KeyCode.NUM0)) {
-			mainIndex = 2;
+			if (enterWay == 0)
+				mainIndex = 0;
+			else
+				mainIndex = 2;
 		}
 	}
 
@@ -459,7 +487,11 @@ public class GameEngine extends GameCanvasEngine {
 					pt.popup();
 					break;
 				} else if (i == 3) {
-					mainIndex = 2;
+					if (enterWay == 0) {
+						mainIndex = 0;
+					} else {
+						mainIndex = 2;
+					}
 					mainPageIndex[4] = 0;
 					selectSoldierLocation = 0;
 					selectSoldierindex = 0;
@@ -498,8 +530,10 @@ public class GameEngine extends GameCanvasEngine {
 				// }else if (mainPageIndex[2] == 1) {
 
 			} else if (mainPageIndex[2] == 2) {
+				enterWay = 1;
 				mainIndex = 3;
 			} else if (mainPageIndex[2] == 3) {
+				enterWay = 1;
 				mainIndex = 4;
 			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
@@ -591,6 +625,14 @@ public class GameEngine extends GameCanvasEngine {
 				weiyiCount = 0;
 				winNum = 0;
 				mainIndex = 6;
+			} else if (mainPageIndex[0] == 7) {
+				enterWay = 0;
+				mainIndex = 3;
+			} else if (mainPageIndex[0] == 8) {
+				enterWay = 0;
+				mainIndex = 4;
+			} else if (mainPageIndex[0] == 9) {
+				mainIndex = 7;
 			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
 			if (mainPageIndex[0] >= 1 && mainPageIndex[0] < 3) {
@@ -599,6 +641,9 @@ public class GameEngine extends GameCanvasEngine {
 			} else if (mainPageIndex[0] >= 3 && mainPageIndex[0] < 5) {
 				mainPageIndex[0]++;
 				arrowIndex = 0;
+			} else if (mainPageIndex[0] > 7 && mainPageIndex[0] <= 11) {
+				mainPageIndex[0]--;
+				arrowIndex = 0;
 			}
 		} else if (key.containsAndRemove(KeyCode.RIGHT)) {
 			if (mainPageIndex[0] >= 0 && mainPageIndex[0] < 2) {
@@ -606,6 +651,9 @@ public class GameEngine extends GameCanvasEngine {
 				arrowIndex = 0;
 			} else if (mainPageIndex[0] > 3 && mainPageIndex[0] <= 5) {
 				mainPageIndex[0]--;
+				arrowIndex = 0;
+			} else if (mainPageIndex[0] >= 7 && mainPageIndex[0] < 11) {
+				mainPageIndex[0]++;
 				arrowIndex = 0;
 			}
 		} else if (key.containsAndRemove(KeyCode.UP)) {
@@ -621,6 +669,11 @@ public class GameEngine extends GameCanvasEngine {
 			} else if (mainPageIndex[0] == 2) {
 				mainPageIndex[0] = 6;
 				arrowIndex = 0;
+			} else if (mainPageIndex[0] > 6) {
+				int temp = tempMainPage0Index;
+				tempMainPage0Index = mainPageIndex[0];
+				mainPageIndex[0] = temp;
+				arrowIndex = 0;
 			}
 		} else if (key.containsAndRemove(KeyCode.DOWN)) {
 			if (mainPageIndex[0] == 0) {
@@ -634,6 +687,12 @@ public class GameEngine extends GameCanvasEngine {
 				arrowIndex = 0;
 			} else if (mainPageIndex[0] == 6) {
 				mainPageIndex[0] = 2;
+				arrowIndex = 0;
+			} else if (mainPageIndex[0] == 3 || mainPageIndex[0] == 4
+					|| mainPageIndex[0] == 5) {
+				int temp = tempMainPage0Index;
+				tempMainPage0Index = mainPageIndex[0];
+				mainPageIndex[0] = temp;
 				arrowIndex = 0;
 			}
 		} else if (key.containsAndRemove(KeyCode.NUM3)) {
@@ -761,6 +820,16 @@ public class GameEngine extends GameCanvasEngine {
 				arrowAnim(9, 10, 350, 0, 0, 0);
 			} else if (mainPageIndex[0] == 6) {
 				arrowAnim(9, 520, 85, 0, 0, 0);
+			} else if (mainPageIndex[0] == 7) {
+				arrowAnim(9, 215, 475, 3, 0, 0);
+			} else if (mainPageIndex[0] == 8) {
+				arrowAnim(9, 305, 475, 3, 0, 0);
+			} else if (mainPageIndex[0] == 9) {
+				arrowAnim(9, 395, 475, 3, 0, 0);
+			} else if (mainPageIndex[0] == 10) {
+				arrowAnim(9, 485, 475, 3, 0, 0);
+			} else if (mainPageIndex[0] == 11) {
+				arrowAnim(9, 575, 475, 3, 0, 0);
 			}
 			roleInformation();
 		} else {
@@ -865,60 +934,103 @@ public class GameEngine extends GameCanvasEngine {
 							toppointy + 40, 20);
 					g.drawRegion(img[11], s * 62, 0, 62, 62, 0, leftpointx + 43
 							+ 90 * s + 1, toppointy + 40 + 1, 20);
-					if (mainPageIndex[3] == s) {
-						g.drawRegion(img[temp_img_distance1 - 6 + 15], 0, 0,
-								47, 29, 0, leftpointx + 43 + 90 * s + 3,
-								toppointy + 101, 20);
-						g.drawRegion(img[temp_img_distance1 - 6 + 20], 0, 0,
-								40, 20, 0, leftpointx + 43 + 90 * s + 5,
-								toppointy + 106, 20);
-						g.drawRegion(img[temp_img_distance1 - 6 + 15], 0, 0,
-								47, 29, 0, leftpointx + 43 + 90 * s + 3,
-								toppointy + 130, 20);
-						g.drawRegion(img[temp_img_distance1 - 6 + 18], 0, 20,
-								40, 20, 0, leftpointx + 43 + 90 * s + 5,
-								toppointy + 135, 20);
+					if (selectHeroIndex == s) {
+						g.drawImage(img[temp_img_distance1 - 6 + 37],
+								leftpointx + 43 + 90 * s + 24,
+								toppointy + 40 + 24, 20);
 					}
 				}
 				g.drawRegion(img[temp_img_distance1 - 6 + 28],
 						mainPageIndex[3] * 142, 0, 142, 161, 0,
-						leftpointx + 70, toppointy + 190, 20);
+						leftpointx + 70, toppointy + 130, 20);
+				g.drawRegion(img[temp_img_distance1 - 6 + 15], 0, 0, 47, 29, 0,
+						leftpointx + 80, toppointy + 300, 20);
+				g.drawImage(img[temp_img_distance1 - 6 + 17], leftpointx + 130,
+						toppointy + 300, 20);
+				if (Resource.isBelongMyOfHero[mainPageIndex[3]] > 0) {
+					g.drawRegion(img[temp_img_distance1 - 6 + 20], 0, 20, 40,
+							20, 0, leftpointx + 80 + 2, toppointy + 300 + 5, 20);
+					needMoney = Upgrade.upgradeHeroMoney(
+							Resource.isBelongMyOfHero[mainPageIndex[3]],
+							mainPageIndex[3]);
+					if (needMoney / 10000 != 0) {
+						g.drawRegion(img[16],
+								(int) Math.floor(needMoney / 10000) * 12, 0,
+								12, 16, 0, leftpointx + 140,
+								toppointy + 300 + 7, 20);
+					}
+					g.drawRegion(img[16], (int) (needMoney / 1000 % 10) * 12,
+							0, 12, 16, 0, leftpointx + 140 + 12,
+							toppointy + 300 + 7, 20);
+					g.drawRegion(img[16], 0, 0, 12, 16, 0,
+							leftpointx + 140 + 24, toppointy + 300 + 7, 20);
+					g.drawRegion(img[16], 0, 0, 12, 16, 0,
+							leftpointx + 140 + 36, toppointy + 300 + 7, 20);
+					g.drawRegion(img[16], 0, 0, 12, 16, 0,
+							leftpointx + 140 + 48, toppointy + 300 + 7, 20);
+					g.drawImage(img[17], leftpointx + 200, toppointy + 300 + 2,
+							20);
+				} else {
+					g.drawRegion(img[temp_img_distance1 - 6 + 20], 0, 0, 40,
+							20, 0, leftpointx + 80 + 2, toppointy + 300 + 5, 20);
+					needMoney = Resource.heroMoney[mainPageIndex[3]];
+					if (needMoney / 10000 != 0) {
+						g.drawRegion(img[16],
+								(int) Math.floor(needMoney / 10000) * 12, 0,
+								12, 16, 0, leftpointx + 140,
+								toppointy + 300 + 7, 20);
+					}
+					g.drawRegion(img[16], (int) (needMoney / 1000 % 10) * 12,
+							0, 12, 16, 0, leftpointx + 140 + 12,
+							toppointy + 300 + 7, 20);
+					g.drawRegion(img[16], 0, 0, 12, 16, 0,
+							leftpointx + 140 + 24, toppointy + 300 + 7, 20);
+					g.drawRegion(img[16], 0, 0, 12, 16, 0,
+							leftpointx + 140 + 36, toppointy + 300 + 7, 20);
+					g.drawRegion(img[16], 0, 0, 12, 16, 0,
+							leftpointx + 140 + 48, toppointy + 300 + 7, 20);
+					g.drawImage(img[17], leftpointx + 200, toppointy + 300 + 2,
+							20);
+				}
+				g.drawRegion(img[temp_img_distance1 - 6 + 15], 0, 0, 47, 29, 0,
+						leftpointx + 80, toppointy + 330, 20);
+				g.drawRegion(img[temp_img_distance1 - 6 + 18], 0, 20, 40, 20,
+						0, leftpointx + 80 + 2, toppointy + 330 + 5, 20);
 				if (mainPageIndex[3] < 6 && mainPage3Index == -1) {
-					if (arrowIndex % 16 >= 0 && arrowIndex % 16 < 4)
-						g.drawRegion(img[9], 0, 0, 50, 44, 3, leftpointx + 62
-								+ 90 * mainPageIndex[3], toppointy + 60, 20);
-					else if (arrowIndex % 16 >= 4 && arrowIndex % 16 < 8)
-						g.drawRegion(img[9], 50, 0, 50, 44, 3, leftpointx + 62
-								+ 90 * mainPageIndex[3], toppointy + 60, 20);
-					else if (arrowIndex % 16 >= 8 && arrowIndex % 16 < 12)
-						g.drawRegion(img[9], 100, 0, 50, 44, 3, leftpointx + 62
-								+ 90 * mainPageIndex[3], toppointy + 60, 20);
-					else if (arrowIndex % 16 >= 12 && arrowIndex % 16 < 16)
-						g.drawRegion(img[9], 150, 0, 50, 44, 3, leftpointx + 62
-								+ 90 * mainPageIndex[3], toppointy + 60, 20);
+					DrawUtil.drawRect(g, leftpointx + 43 + 90
+							* mainPageIndex[3], toppointy + 40, 63, 63, 2,
+							0xff0000);
 				} else {
 					if (mainPage3Index == 0) {
-						arrowAnim(9, leftpointx, toppointy, 3, 80, 300);
+						DrawUtil.drawRect(g, leftpointx + 80, toppointy + 300,
+								48, 30, 2, 0xff0000);
 					} else if (mainPage3Index == 1) {
-						arrowAnim(9, leftpointx, toppointy, 3, 80, 330);
+						DrawUtil.drawRect(g, leftpointx + 80, toppointy + 330,
+								48, 30, 2, 0xff0000);
 					}
 				}
 				g.drawImage(img[temp_img_distance1 - 6 + 39], leftpointx + 290,
-						toppointy + 160, 20);
+						toppointy + 110, 20);
 				g.drawImage(img[temp_img_distance1 - 6 + 26], leftpointx + 300,
-						toppointy + 170, 20);
+						toppointy + 120, 20);
 
 				int valueClour = 0x000000;
 				setColour(valueClour);
-				g.drawString(1 + "", leftpointx + 448, toppointy + 183, 20);
-				g.drawString(Upgrade.upgradeHeroDefence(1, mainPageIndex[3])
-						+ "", leftpointx + 448, toppointy + 214, 20);
+				g.drawString(Resource.isBelongMyOfHero[mainPageIndex[3]] + "",
+						leftpointx + 448, toppointy + 133, 20);
 				g.drawString(
-						Upgrade.upgradeHeroBlood(1, mainPageIndex[3]) + "",
-						leftpointx + 448, toppointy + 245, 20);
+						Upgrade.upgradeHeroDefence(
+								Resource.isBelongMyOfHero[mainPageIndex[3]],
+								mainPageIndex[3])
+								+ "", leftpointx + 448, toppointy + 164, 20);
+				g.drawString(
+						Upgrade.upgradeHeroBlood(
+								Resource.isBelongMyOfHero[mainPageIndex[3]],
+								mainPageIndex[3])
+								+ "", leftpointx + 448, toppointy + 195, 20);
 				g.drawString(Resource.heroSkillInfo[mainPageIndex[3]],
-						leftpointx + 448, toppointy + 276, 20);
-				g.drawImage(img[10], panle_x + 300, panle_y + 360, 20);
+						leftpointx + 448, toppointy + 226, 20);
+				g.drawImage(img[10], panle_x + 300, panle_y + 320, 20);
 			} else if (mainIndex == 4) {
 				roleInformation();
 				g.drawImage(img[temp_img_distance1 - 6 + 10], leftpointx,
@@ -949,23 +1061,100 @@ public class GameEngine extends GameCanvasEngine {
 					g.drawRegion(img[temp_img_distance1 - 6 + 15], 0, 0, 47,
 							29, 0, leftpointx + 110, toppointy + 66 + 70 * s,
 							20);
-					g.drawRegion(img[temp_img_distance1 - 6 + 20], 0, 00, 40,
-							20, 0, leftpointx + 113, toppointy + 71 + 70 * s,
-							20);
 					g.drawRegion(img[temp_img_distance1 - 6 + 15], 0, 0, 47,
 							29, 0, leftpointx + 110, toppointy + 96 + 70 * s,
 							20);
-					g.drawRegion(img[temp_img_distance1 - 6 + 18], 0, 20, 40,
-							20, 0, leftpointx + 113, toppointy + 101 + 70 * s,
-							20);
+					g.drawImage(img[temp_img_distance1 - 6 + 17],
+							leftpointx + 165, toppointy + 65 + 70 * s, 20);
+					g.drawImage(img[17], leftpointx + 260, toppointy + 66 + 70
+							* s, 20);
+					if (Resource.heroAndSoldierLevel[selectSoldierindex] > 0) {
+						g.drawRegion(img[temp_img_distance1 - 6 + 20], 0, 20,
+								40, 20, 0, leftpointx + 113, toppointy + 71
+										+ 70 * s, 20);
+						System.out.println(Resource.heroAndSoldierLevel[selectSoldierindex+ s - selectSoldierLocation]+"****"+(selectSoldierindex
+										+ s - selectSoldierLocation));
+						needMoney = Upgrade.upgradeSoldierMoney(
+								Resource.heroAndSoldierLevel[selectSoldierindex
+										+ s - selectSoldierLocation],
+								selectSoldierindex + s - selectSoldierLocation);
+						g.drawRegion(img[16], 0, 0, 12, 16, 0,
+								leftpointx + 248, toppointy + 71 + 70 * s, 20);
+						g.drawRegion(img[16], 0, 0, 12, 16, 0,
+								leftpointx + 248 - 12, toppointy + 71 + 70 * s,
+								20);
+						g.drawRegion(img[16],
+								(int) (needMoney / 100 % 10) * 12, 0, 12, 16,
+								0, leftpointx + 248 - 24, toppointy + 71 + 70
+										* s, 20);
+						g.drawRegion(
+								img[16],
+								((int) (Math.floor(needMoney / 1000))) % 10 * 12,
+								0, 12, 16, 0, leftpointx + 248 - 36, toppointy
+										+ 71 + 70 * s, 20);
+						g.drawRegion(
+								img[16],
+								((int) (Math.floor(needMoney / 10000))) % 10 * 12,
+								0, 12, 16, 0, leftpointx + 248 - 48, toppointy
+										+ 71 + 70 * s, 20);
+						g.drawRegion(img[16],
+								((int) (Math.floor(needMoney / 100000))) * 12,
+								0, 12, 16, 0, leftpointx + 248 - 60, toppointy
+										+ 71 + 70 * s, 20);
+					} else {
+						g.drawRegion(img[temp_img_distance1 - 6 + 20], 0, 0,
+								40, 20, 0, leftpointx + 113, toppointy + 71
+										+ 70 * s, 20);
+						needMoney = Resource.soldierMoney[selectSoldierindex];
+						g.drawRegion(img[16], 0, 0, 12, 16, 0,
+								leftpointx + 248, toppointy + 71 + 70 * s, 20);
+						g.drawRegion(img[16], 0, 0, 12, 16, 0,
+								leftpointx + 248 - 12, toppointy + 71 + 70 * s,
+								20);
+						g.drawRegion(img[16],
+								(int) (needMoney / 100 % 10) * 12, 0, 12, 16,
+								0, leftpointx + 248 - 24, toppointy + 71 + 70
+										* s, 20);
+						g.drawRegion(
+								img[16],
+								((int) (Math.floor(needMoney / 1000))) % 10 * 12,
+								0, 12, 16, 0, leftpointx + 248 - 36, toppointy
+										+ 71 + 70 * s, 20);
+						g.drawRegion(
+								img[16],
+								((int) (Math.floor(needMoney / 10000))) % 10 * 12,
+								0, 12, 16, 0, leftpointx + 248 - 48, toppointy
+										+ 71 + 70 * s, 20);
+						g.drawRegion(img[16],
+								((int) (Math.floor(needMoney / 100000))) * 12,
+								0, 12, 16, 0, leftpointx + 248 - 60, toppointy
+										+ 71 + 70 * s, 20);
+					}
+
+					for (int ggg = 0; ggg < 4; ggg++) {
+						if (CreatArray.selcetSoldier[ggg] == selectSoldierindex
+								+ s - selectSoldierLocation) {
+							g.drawRegion(img[temp_img_distance1 - 6 + 18], 0,
+									40, 40, 20, 0, leftpointx + 113, toppointy
+											+ 101 + 70 * s, 20);
+							break;
+						} else if (ggg == 3) {
+							g.drawRegion(img[temp_img_distance1 - 6 + 18], 0,
+									20, 40, 20, 0, leftpointx + 113, toppointy
+											+ 101 + 70 * s, 20);
+						}
+					}
 				}
 				if (mainPage4Index != -1) {
 					if (mainPage4Index == 0) {
-						arrowAnim(9, leftpointx, toppointy, 3, 120,
-								65 + 70 * selectSoldierLocation);
+						DrawUtil.drawRect(g, leftpointx + 110, toppointy + 66
+								+ 70 * selectSoldierLocation, 48, 30, 2,
+								0xff0000);
+
 					} else if (mainPage4Index == 1) {
-						arrowAnim(9, leftpointx, toppointy, 3, 120,
-								95 + 70 * selectSoldierLocation);
+						DrawUtil.drawRect(g, leftpointx + 110, toppointy + 66
+								+ 70 * selectSoldierLocation + 30, 48, 30, 2,
+								0xff0000);
 					}
 				}
 				g.drawRegion(img[temp_img_distance1 - 6 + 57], 0, 24, 54, 23,
@@ -994,12 +1183,14 @@ public class GameEngine extends GameCanvasEngine {
 								toppointy + 300, 20);
 				}
 				g.drawImage(img[10], panle_x + 300, panle_y + 340, 20);
-			} else if (mainIndex == 7) {
-				drawShop();
 			} else if (mainIndex == 6) {
 				drawAward();
+			} else if (mainIndex == 7) {
+				drawShop();
 			} else if (mainIndex == 8) {
 				drawAttainment();
+			} else if (mainIndex == 9) {
+				// drawAttainment();
 			}
 		}
 	}
@@ -1286,7 +1477,7 @@ public class GameEngine extends GameCanvasEngine {
 			} else if (winNum == 7) {
 				g.drawRegion(img[temp_img_distance1 - 6 + 51], 6 * 62, 0, 62,
 						62, 0, 280, 240, 20);// 保护卡
-			} else if (i == 8) {
+			} else if (winNum == 8) {
 				g.drawRegion(img[16], 12, 0, 12, 16, 0, 280 + 6, 240 + 10, 20);
 				g.drawRegion(img[16], 0, 0, 12, 16, 0, 280 + 18, 240 + 10, 20);
 				g.drawRegion(img[16], 0, 0, 12, 16, 0, 280 + 30, 240 + 10, 20);
@@ -1420,6 +1611,8 @@ public class GameEngine extends GameCanvasEngine {
 						62, 0, 170 + canGoodsIndex * 80, 430, 20);
 				g.drawImage(img[temp_img_distance1 - 6 + 50],
 						170 + canGoodsIndex * 80 + 40, 430, 20);
+				TextView.showSingleLineText(g, Resource.goodsNums[kj] + "",
+						170 + canGoodsIndex * 80 + 40, 430);
 				canGoodsIndex++;
 			}
 		}
@@ -1436,8 +1629,9 @@ public class GameEngine extends GameCanvasEngine {
 			pc.setText("是否购买道具");
 			if (pc.popup() == 0) {
 				boolean flag = pm.buyProp(138, 1, g);
-				if(flag){
-					PlayerProp props = pm.getPropById(135 + selectShopSmallIndex);
+				if (flag) {
+					PlayerProp props = pm
+							.getPropById(135 + selectShopSmallIndex);
 					props.setNums(props.getNums() + 1);
 					Resource.goodsNums[selectShopSmallIndex]++;
 				}
@@ -1636,6 +1830,8 @@ public class GameEngine extends GameCanvasEngine {
 					drawBoss5Bullet();
 				else if (((Monster) monsterVector.elementAt(kg)).getKind() == 19)
 					drawBoss6Bullet();
+				else if (((Monster) monsterVector.elementAt(kg)).getKind() == 20)
+					drawBoss7Bullet();
 			}
 		}
 		for (int i = 0; i < v1a.size();) {
@@ -1865,8 +2061,8 @@ public class GameEngine extends GameCanvasEngine {
 					h = boss5Attack(h, m);
 				else if (m.getKind() == 19)
 					h = boss6Attack(h, m);
-				else if (m.getKind() == 19)
-					h = boss6Attack(h, m);
+				else if (m.getKind() == 20)
+					h = boss7Attack(h, m);
 				else if (m.getKind() == 19)
 					h = boss6Attack(h, m);
 				else if (m.getKind() == 22)
@@ -2455,6 +2651,50 @@ public class GameEngine extends GameCanvasEngine {
 		return h;
 	}
 
+	private int boss7Attack(int h, Monster m) {
+		if (m.getEndTime() - m.getStartTime() < m.getWaitTime()) {
+			if (arrowIndex % 8 >= 0 && arrowIndex % 8 < 4) {
+				g.drawRegion(m.getSrc(), 0, 0, 262, 180, 0,
+						385 + m.getY() * 60, 11 + m.getX() * 60, 20);
+			} else {
+				g.drawRegion(m.getSrc(), 262, 0, 262, 180, 0,
+						385 + m.getY() * 60, 11 + m.getX() * 60, 20);
+			}
+			drawBloodAndMagicB(m);
+		} else if (m.getEndTime() - m.getStartTime() >= m.getWaitTime()
+				&& m.getEndTime() - m.getStartTime() < m.getWaitTime()
+						+ m.getSkillWaitTime() * 1000) {
+			if (arrowIndex % 6 >= 0 && arrowIndex % 6 < 2) {
+				g.drawRegion(img[temp_img_distance2 + 58], 0, 0, 183, 29, 0,
+						370 + m.getY() * 60, 11 + m.getX() * 60 + 160, 20);
+			} else if (arrowIndex % 6 >= 2 && arrowIndex % 6 < 4) {
+				g.drawRegion(img[temp_img_distance2 + 58], 183, 0, 183, 29, 0,
+						370 + m.getY() * 60, 11 + m.getX() * 60 + 160, 20);
+			} else {
+				g.drawRegion(img[temp_img_distance2 + 58], 366, 0, 183, 29, 0,
+						370 + m.getY() * 60, 11 + m.getX() * 60 + 160, 20);
+			}
+			g.drawRegion(m.getSrc(), 0, 0, 262, 180, 0, 385 + m.getY() * 60,
+					11 + m.getX() * 60, 20);
+			drawBloodAndMagicB(m);
+			int powerLength = (int) ((m.getEndTime() - m.getStartTime() - m
+					.getWaitTime()) / 100);
+			if (powerLength > 0) {
+				g.drawRegion(img[temp_img_distance2 + 60], 0, 0, powerLength,
+						4, 0, 385 + m.getY() * 60, 21 + m.getX() * 60 + 1, 20);
+			}
+		} else {
+			g.drawRegion(m.getSrc(), 0, 0, 262, 180, 0, 385 + m.getY() * 60,
+					11 + m.getX() * 60, 20);
+			drawBloodAndMagicB(m);
+			bossStart = true;
+			bossMoveindex = 0;
+			m.setStartTime(m.getEndTime());
+		}
+		h++;
+		return h;
+	}
+
 	public void drawBoss1Bullet() {
 		bossMoveindex++;
 		for (int j = 0; j < 8; j++) {
@@ -2585,6 +2825,40 @@ public class GameEngine extends GameCanvasEngine {
 				0, Resource.MonsterBlood[21]));
 		bossStart = false;
 		bossMoveindex = 0;
+	}
+
+	public void drawBoss7Bullet() {
+		bossMoveindex++;
+		int stoneLength = Resource.stoneXY1.length;
+		if (bossMoveindex <= 8) {
+			for (int j = 0; j < stoneLength / 3; j++) {
+				Resource.stoneXY1[j * 3 + 2] += 50;
+				g.drawRegion(img[temp_img_distance2 + 49],
+						(7 - (bossMoveindex % 3)) * 164, 0, 164, 159, 0,
+						Resource.stoneXY1[j * 3] - Resource.stoneXY1[j * 3 + 2]
+								/ 5, Resource.stoneXY1[j * 3 + 1]
+								+ Resource.stoneXY1[j * 3 + 2], 20);
+			}
+		} else if (bossMoveindex > 8 && bossMoveindex <= 13) {
+			for (int j = 0; j < stoneLength / 3; j++) {
+				g.drawRegion(img[temp_img_distance2 + 49],
+						(13 - bossMoveindex) * 164, 0, 164, 159, 0,
+						Resource.stoneXY1[j * 3] - Resource.stoneXY1[j * 3 + 2]
+								/ 5, Resource.stoneXY1[j * 3 + 1]
+								+ Resource.stoneXY1[j * 3 + 2], 20);
+				if (bossMoveindex == 13) {
+					Resource.stoneXY1[j * 3 + 2] = 0;
+					if (j == stoneLength / 3 - 1) {
+						bossStart = false;
+						bossMoveindex = 0;
+						moveSmall_Index = 0;
+						if (StrikeHero.getInstance().getIndexAnim() == 4) {
+							StrikeHero.getInstance().setIndexAnim(0);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private void drawBloodAndMagicM(Monster m, int bm) {
@@ -3941,7 +4215,7 @@ public class GameEngine extends GameCanvasEngine {
 					Hero.booldY + 53, 20);
 		}
 
-		g.drawRegion(hero.getSrc(), selectHeroIndex * 59, 0, 59, 59, 0,
+		g.drawRegion(hero.getSrc(), selectHeroIndex * 62, 0, 62, 62, 0,
 				hero.getX() + 1, hero.getY() + 1, 20);// 画英雄图片
 		int unit = hero.getBoolds() / 100;
 		if (hero.getBoold() >= unit) {// 画英雄血条
@@ -4678,14 +4952,15 @@ public class GameEngine extends GameCanvasEngine {
 		} else if (key.containsAndRemove(KeyCode.NUM1)) {
 			if (isDebugMode()) {
 				levelDebug++;
-				for(int i=0;i<9;i++){
+				for (int i = 0; i < 9; i++) {
 					Upgrade.upgradeSoldierAttack(levelDebug, i);
 				}
 			}
 		}
 	}
 
-	int levelDebug =1;
+	int levelDebug = 1;
+
 	public boolean collision(Soldier s, Monster m) {
 		if (mapIndexOfIndex == 3
 				&& m.getY() == 1
