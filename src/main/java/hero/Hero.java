@@ -31,8 +31,8 @@ public class Hero implements HeroInterface {
 		return negativeTime;
 	}
 
-	public void setNegativeTime() {
-		this.negativeTime = System.currentTimeMillis();
+	public void setNegativeTime(long negativeTime) {
+		this.negativeTime = negativeTime;
 	}
 
 	public float getAtkCoefficient() {

@@ -194,6 +194,7 @@ public class Resource {
 	public static final short hero1skill = NUMS++;
 	public static final short attacknumber = NUMS++;
 	public static final short baojibg = NUMS++;
+	public static final short stopimg =NUMS++;
 
 	public static final short soldier121 = NUMS++;
 	public static final short soldier122 = NUMS++;
@@ -271,7 +272,7 @@ public class Resource {
 			"/secondpage/bosspower1.png", "/secondpage/bosspower2.png",
 			"/secondpage/bossblood1.png", "/secondpage/bossblood2.jpg",
 			"/secondpage/hero1skill.png", "/secondpage/attacknumber.png",
-			"/secondpage/baojibg.png",
+			"/secondpage/baojibg.png","/secondpage/stopimg.png",
 
 			"/secondpage/soldier121.png", "/secondpage/soldier122.png"
 

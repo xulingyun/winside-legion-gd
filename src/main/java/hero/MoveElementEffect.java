@@ -1,5 +1,7 @@
 package hero;
 
+import test.GameEngine;
+
 public class MoveElementEffect {
 
 	public static boolean state = false;
@@ -23,6 +25,7 @@ public class MoveElementEffect {
 			for (int i = 0; i < 7; i++) {
 				for (int j = 3; j >= 0; j--) {
 					if (idPic[i][j]!=null&&idPic[i][j].getOffX() < 0) {
+						if(!GameEngine.stopState)
 						idPic[i][j].setOffX(idPic[i][j].getOffX() + 20);
 					}
 				}

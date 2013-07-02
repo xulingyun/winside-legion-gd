@@ -19,8 +19,8 @@ public class IceDrow {
 		return startTime;
 	}
 
-	public void setStartTime() {
-		this.startTime = System.currentTimeMillis();
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
 	}
 
 	public int getIndex() {

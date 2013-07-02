@@ -123,7 +123,7 @@ public class Monster implements HeroInterface {
 	}
 
 	public void setStartTime(long startTime) {
-		this.startTime = System.currentTimeMillis();
+		this.startTime = startTime;
 	}
 
 	public long getEndTime() {
@@ -134,6 +134,14 @@ public class Monster implements HeroInterface {
 	public int getState() {
 		return state;
 	}
+
+//	public long getEndTime() {
+//		return endTime;
+//	}
+//
+//	public void setEndTime(long endTime) {
+//		this.endTime = endTime;
+//	}
 
 	public void setState(int state) {
 		this.state = state;

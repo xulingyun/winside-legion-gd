@@ -2,11 +2,20 @@ package skill;
 
 public class Critical {
 
-	public int x;
-	public int y;
-	public int num;
-	public long time;
+	private int x;
+	private int y;
+	private int num;
+	private long time;
 	public static long showtime = 1000;
+	private int movePixel = 0;
+
+	public int getMovePixel() {
+		return movePixel;
+	}
+
+	public void setMovePixel(int movePixel) {
+		this.movePixel = movePixel;
+	}
 
 	public int getX() {
 		return x;
@@ -37,7 +46,7 @@ public class Critical {
 	}
 
 	public void setTime(long time) {
-		this.time = System.currentTimeMillis();
+		this.time = time;
 	}
 
 	public Critical(int x, int y, int num) {

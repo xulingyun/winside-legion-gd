@@ -54,7 +54,6 @@ public class CreatArray {
 
 	public boolean sss() {
 		sum = 0;
-		System.out.println("ºÇºÇ£¡");
 		vectorArray();
 		des(v1, "v1");
 		des(v2, "v2");
@@ -82,7 +81,6 @@ public class CreatArray {
 			ssIndex = 0;
 		}
 		moveArray();
-		System.out.println("Çå³ýÒ»ÇÐ£¡");
 		clear();
 		return canMove;
 	}
