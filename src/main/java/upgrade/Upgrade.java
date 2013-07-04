@@ -60,30 +60,30 @@ public class Upgrade {
 	}
 
 	public static int upgradeHeroBlood(int level, int kind) {
-		if (kind == 1)
+		if (kind == 0)
 			return 450 + (level - 1) * 50;
-		else if (kind == 2)
+		else if (kind == 1)
 			return 500 + (level - 1) * 60;
-		else if (kind == 3)
+		else if (kind == 2)
 			return 600 + (level - 1) * 70;
-		else if (kind == 4)
+		else if (kind == 3)
 			return 700 + (level - 1) * 80;
-		else if (kind == 5)
+		else if (kind == 4)
 			return 800 + (level - 1) * 100;
 		else
 			return 800 + (level - 1) * 120;
 	}
 
 	public static int upgradeHeroMoney(int level, int kind) {
-		if (kind == 1)
+		if (kind == 0)
 			return 1000 + (level - 1) * 4000;
-		else if (kind == 2)
+		else if (kind == 1)
 			return 2000 + (level - 1) * 4000;
-		else if (kind == 3)
+		else if (kind == 2)
 			return 3000 + (level - 1) * 5000;
-		else if (kind == 4)
+		else if (kind == 3)
 			return 4000 + (level - 1) * 5000;
-		else if (kind == 5)
+		else if (kind == 4)
 			return 5000 * level;
 		else
 			return 5000 * level + 1000;

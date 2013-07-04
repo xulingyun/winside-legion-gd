@@ -4,6 +4,15 @@ public class Myself {
 	long level;
 	long exp;
 	long money;
+	long nengliang;
+
+	public long getNengliang() {
+		return nengliang;
+	}
+
+	public void setNengliang(long nengliang) {
+		this.nengliang = nengliang;
+	}
 
 	public long getMoney() {
 		return money;
@@ -29,9 +38,10 @@ public class Myself {
 		this.exp = exp;
 	}
 
-	public Myself(long level, long exp, long money) {
+	public Myself(long level, long exp, long money,long nengliang) {
 		this.level = level;
 		this.exp = exp;
 		this.money = money;
+		this.nengliang = nengliang;
 	}
 }

@@ -6,26 +6,26 @@ import javax.microedition.lcdui.Image;
 
 public class Resource {
 
-	// public final static int[] MonsterBlood = { 100, 500, 200, 700, 300, 900,
-	// 400, 1200, 400, 400, 400, 400, 400, 1500, 2000, 2500, 3000, 3500,
-	// 4000, 4500, 5000 };
+	public final static int[] MonsterBlood = { 100, 500, 200, 700, 300, 900,
+			400, 1200, 400, 400, 400, 400, 400, 1500, 2000, 2500, 3000, 3500,
+			4000, 4500, 5000 };
 
 	public final static int[] stoneXY = { 10, -100, 0, 90, -200, 0, 180, -340,
 			0, 120, -360, 0, 40, -400, 0 };
 
 	public final static int[] stoneXY1 = { 270, -150, 0, 90, -250, 0, 200,
 			-350, 0 };
-	public final static int[] MonsterBlood = { 100, 100, 100, 100, 100, 100,
-			100, 100, 100, 100, 100, 100, 100, 1500, 1800, 2400, 3000, 3300,
-			3900, 4500, 4800, 500 };
+	// public final static int[] MonsterBlood = { 100, 100, 100, 100, 100, 100,
+	// 100, 100, 100, 100, 100, 100, 100, 1500, 1800, 2400, 3000, 3300,
+	// 3900, 4500, 4800, 500 };
 	public final static int[] MonsterAttack = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	public final static int[] MonsterSpeed = { 10, 10, 10, 10, 10, 10, 10, 10,
 			10, 10, 10, 10, 10, 15, 15, 15, 15, 15, 15, 15, 15, 10 };
 	public final static int[] MonsterLevel = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-	public final static int[] MonsterImgIndex = { 79, 80, 81, 82, 83, 84, 85,
-			86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 119 };
+	public final static int[] MonsterImgIndex = { 83, 84, 85, 86, 87, 88, 89,
+			90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 101, 102, 103, 123 };
 
 	public final static byte[] heroAndSoldierLevel = { 1, 1, 1, 1, 0, 0, 0, 0,
 			0 };
@@ -42,12 +42,14 @@ public class Resource {
 			-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 			-1, -1, -1, -1, -1, -1, -1, -1 };
 
-	public final static long[] myProperty = { 1, 0, 100000 };
+	public final static long[] myProperty = { 1, 0, 100000, 50 };
 	public final static int[] goodsNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	public final static String[] shopInfo = { "血瓶", "恢复英雄的血量200点。（战斗中使用）",
 			"火球术", "召唤火球对场中的怪物造成200点伤害。", "狂暴术", "士兵的攻击力翻倍。（30秒）", "双倍经验卡",
-			"战斗胜利获得的经验翻倍。（10场）", "双倍金币卡", "战斗胜利获得的金币翻倍。（10场）", "", "", "", "",
-			"", "", "", "", "", "", "", "", "金币礼包", "兑换10000金币。" };
+			"战斗胜利获得的经验翻倍。（10场）", "双倍金币卡", "战斗胜利获得的金币翻倍。（10场）", "能量石",
+			"使用后增加10点能量。", "保护符文", "通天塔战斗失败避免损失。", "军团之力",
+			"增加所有士兵10%攻击力。（10场）", "刚性护符", "增加英雄20点防御力。(10场)", "生命谐音",
+			"增加英雄20%生命。（10场）", "金币礼包", "兑换10000金币。" };
 
 	final static String[] heroSkillInfo = { "对一条线上的所有敌人造成伤害（优先最靠前敌人所在的位置）",
 			"提升防御力", "对一条线上的敌人造成伤害，并昏迷3秒", "恢复英雄生命", "对全部的敌人造成伤害",
@@ -127,14 +129,18 @@ public class Resource {
 	public static final short udanddown = NUMS++;
 	public static final short wujin = NUMS++;
 	public static final short awardtext = NUMS++;
-	// 71
+	public static final short jbar = NUMS++;
+	public static final short nbar = NUMS++;
+	public static final short help1 = NUMS++;
+	public static final short help2 = NUMS++;
+	// 75
 	public static final short bg0 = NUMS++;
 	public static final short bg1 = NUMS++;
 	public static final short bg2 = NUMS++;
 	public static final short bg3 = NUMS++;
 	public static final short bg4 = NUMS++;
 	public static final short bg5 = NUMS++;
-	// 77
+	// 78
 	public static final short monster1 = NUMS++;
 	public static final short monster2 = NUMS++;
 	public static final short monster3 = NUMS++;
@@ -194,7 +200,8 @@ public class Resource {
 	public static final short hero1skill = NUMS++;
 	public static final short attacknumber = NUMS++;
 	public static final short baojibg = NUMS++;
-	public static final short stopimg =NUMS++;
+	public static final short stopimg = NUMS++;
+	public static final short hero4skill = NUMS++;
 
 	public static final short soldier121 = NUMS++;
 	public static final short soldier122 = NUMS++;
@@ -239,6 +246,8 @@ public class Resource {
 			"/firstpage/somewherename.png", "/firstpage/titlebingzhong.png",
 			"/firstpage/titlehero.png", "/firstpage/udanddown.png",
 			"/firstpage/wujin.png", "/firstpage/awardtext.png",
+			"/firstpage/jbar.png", "/firstpage/nbar.png",
+			"/firstpage/help1.png", "/firstpage/help2.png",
 
 			"/secondpage/bg0.jpg", "/secondpage/bg1.jpg",
 			"/secondpage/bg2.jpg", "/secondpage/bg3.jpg",
@@ -272,7 +281,8 @@ public class Resource {
 			"/secondpage/bosspower1.png", "/secondpage/bosspower2.png",
 			"/secondpage/bossblood1.png", "/secondpage/bossblood2.jpg",
 			"/secondpage/hero1skill.png", "/secondpage/attacknumber.png",
-			"/secondpage/baojibg.png","/secondpage/stopimg.png",
+			"/secondpage/baojibg.png", "/secondpage/stopimg.png",
+			"/secondpage/hero4skill.png",
 
 			"/secondpage/soldier121.png", "/secondpage/soldier122.png"
 

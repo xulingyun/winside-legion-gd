@@ -65,7 +65,7 @@ public class Monster implements HeroInterface {
 		animIndex = 0;
 		animIndex_attack = 0;
 		setWaitTime();
-		setStartTime(endTime);
+		setStartTime(System.currentTimeMillis());
 	}
 
 	public boolean isShowBlood() {
@@ -135,13 +135,13 @@ public class Monster implements HeroInterface {
 		return state;
 	}
 
-//	public long getEndTime() {
-//		return endTime;
-//	}
-//
-//	public void setEndTime(long endTime) {
-//		this.endTime = endTime;
-//	}
+	// public long getEndTime() {
+	// return endTime;
+	// }
+	//
+	// public void setEndTime(long endTime) {
+	// this.endTime = endTime;
+	// }
 
 	public void setState(int state) {
 		this.state = state;
