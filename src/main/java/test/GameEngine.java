@@ -65,7 +65,7 @@ public class GameEngine extends GameCanvasEngine {
 	boolean startAddState = false;
 	private int[][][][][] mapArray;
 	int[][] location = new int[4][9];
-	public static Image[] img = new Image[145];
+	public static Image[] img = new Image[149];
 	Soldier[][] idPic = new Soldier[7][4];
 	Monster[][] monsterPic = new Monster[7][4];
 	int[] mainPageIndex = new int[5];
@@ -111,7 +111,7 @@ public class GameEngine extends GameCanvasEngine {
 	Myself my;
 	GameRecord record;
 	int temp_img_distance1 = 18;
-	int temp_img_distance2 = temp_img_distance1 + 58;
+	int temp_img_distance2 = temp_img_distance1 + 59;
 	int tempMainPage0Index;
 	int enterWay;
 	int money = 0;
@@ -222,6 +222,7 @@ public class GameEngine extends GameCanvasEngine {
 		img[temp_img_distance1 - 6 + 15] = Resource.loadImage(Resource.button1);
 		img[temp_img_distance1 - 6 + 16] = Resource.loadImage(Resource.button2);
 		img[temp_img_distance1 - 6 + 53] = Resource.loadImage(Resource.shopx2);
+		img[temp_img_distance1 - 6 + 39] = Resource.loadImage(Resource.panel1);
 		img[temp_img_distance2] = Resource.loadImage(Resource.bg0);
 		img[temp_img_distance2 + 1] = Resource.loadImage(Resource.bg1);
 		img[temp_img_distance2 + 2] = Resource.loadImage(Resource.bg2);
@@ -296,6 +297,11 @@ public class GameEngine extends GameCanvasEngine {
 		img[temp_img_distance2 + 65] = Resource.loadImage(Resource.baojibg);
 		img[temp_img_distance2 + 66] = Resource.loadImage(Resource.stopimg);
 		img[temp_img_distance2 + 67] = Resource.loadImage(Resource.hero4skill);
+		img[temp_img_distance2 + 68] = Resource
+				.loadImage(Resource.boss87attack);
+		img[temp_img_distance2 + 69] = Resource.loadImage(Resource.hero3skill);
+		img[temp_img_distance2 + 70] = Resource.loadImage(Resource.hero5skill);
+		img[temp_img_distance2 + 71] = Resource.loadImage(Resource.hero6skill);
 	}
 
 	public void loadMainImg() {
@@ -645,8 +651,7 @@ public class GameEngine extends GameCanvasEngine {
 		moveSmall_y = 0;
 		stopState = false;
 		stopGameTime = 0;
-		System.out.println("********************mainPageIndex[3]:"
-				+ mainPageIndex[3]);
+		boss8StoneNum = 0;
 		hero = new Hero("xulingyun", mainPageIndex[3], 1,
 				Upgrade.upgradeHeroDefence(1, mainPageIndex[3]), 22, 452,
 				Upgrade.upgradeHeroBlood(1, mainPageIndex[3]), 0, 0,
@@ -1413,6 +1418,25 @@ public class GameEngine extends GameCanvasEngine {
 						temp = 12 - (tempWinNum - winNum);
 					}
 					sumCircleNum = 24 + temp;
+					if (winNum == 0 || winNum == 4 || winNum == 8) {
+						my.setMoney(my.getMoney() + 1000);
+					} else if (winNum == 2 || winNum == 6) {
+						my.setMoney(my.getMoney() + 2000);
+					} else if (winNum == 10) {
+						my.setMoney(my.getMoney() + 99999);
+					} else if (winNum == 1) {
+						Resource.goodsNums[4]++;
+					} else if (winNum == 3) {
+						Resource.goodsNums[3]++;
+					} else if (winNum == 5) {
+						Resource.goodsNums[9]++;
+					} else if (winNum == 7) {
+						Resource.goodsNums[6]++;
+					} else if (winNum == 9) {
+						Resource.goodsNums[7]++;
+					} else if (winNum == 11) {
+						Resource.goodsNums[8]++;
+					}
 				}
 			}
 		} else if (key.containsAndRemove(KeyCode.NUM0)) {
@@ -2001,6 +2025,8 @@ public class GameEngine extends GameCanvasEngine {
 					drawBoss6Bullet();
 				else if (((Monster) monsterVector.elementAt(kg)).getKind() == 20)
 					drawBoss7Bullet();
+				else if (((Monster) monsterVector.elementAt(kg)).getKind() == 21)
+					drawBoss8Bullet();
 			}
 		}
 		ArrayHandle(v1a, temp_img_distance2 + 51, 3);
@@ -2056,9 +2082,9 @@ public class GameEngine extends GameCanvasEngine {
 			else if (hero.getKind() == 3)
 				auto3Skill();
 			else if (hero.getKind() == 4)
-				auto0Skill();
+				auto4Skill();
 			else if (hero.getKind() == 5)
-				auto0Skill();
+				auto4Skill();
 		}
 		drawHeroInfo1();
 		drawHeroSkill(heroSkillmonster);
@@ -2090,6 +2116,7 @@ public class GameEngine extends GameCanvasEngine {
 			skill1Hero = new Point(325 + moveSmall_x, 11
 					+ (((Monster) (heroSkillmonster.elementAt(0))).getX() - 1)
 					* 60 + moveSmall_y + 20, 0);
+			System.out.println("*****************skill1Hero===>" + skill1Hero);
 			hero.setMagic(0, 0);
 		}
 	}
@@ -2100,6 +2127,18 @@ public class GameEngine extends GameCanvasEngine {
 		hero.setBoold(hero.getBoold() + 200);
 		if (hero.getBoold() > hero.getBoolds())
 			hero.setBoold(hero.getBoolds());
+	}
+
+	public void auto4Skill() {
+		if (monsterVector.size() != 0) {
+			for (int i = 0; i < monsterVector.size(); i++) {
+				Monster m = new Monster();
+				m = (Monster) monsterVector.elementAt(i);
+				heroSkillmonster.addElement(m);
+			}
+			skill1Hero = new Point(180 + moveSmall_x, moveSmall_y + 30, 0);
+			hero.setMagic(0, 0);
+		}
 	}
 
 	public void drawStopPanel() {
@@ -2178,15 +2217,15 @@ public class GameEngine extends GameCanvasEngine {
 	private void drawHeroSkill(Vector heroSkillmonster2) {
 		if (skill1Hero != null && hero.getKind() == 0) {
 			drawSkill0(heroSkillmonster);
-			// } else if (hero.getKind() == 1) {
-			// drawSkill1(heroSkillmonster);
+		} else if (skill1Hero != null && hero.getKind() == 2) {
+			drawSkill2(heroSkillmonster);
 		} else if (skill1Hero != null && hero.getKind() == 3) {
 			drawSkill3();
-		} // else if (hero.getKind() == 2) {
-			// drawSkill1(heroSkillmonster);
-			// } else if (hero.getKind() == 4) {
-			// drawSkill1(heroSkillmonster);
-			// } else if (hero.getKind() == 5) {
+		} else if (skill1Hero != null && hero.getKind() == 4) {
+			drawSkill4(heroSkillmonster);
+		} else if (skill1Hero != null && hero.getKind() == 5) {
+			drawSkill5(heroSkillmonster);
+		} // else if (hero.getKind() == 5) {
 			// drawSkill1(heroSkillmonster);
 			// }
 	}
@@ -2239,8 +2278,8 @@ public class GameEngine extends GameCanvasEngine {
 					h = boss6Attack(h, m);
 				else if (m.getKind() == 20)
 					h = boss7Attack(h, m);
-				else if (m.getKind() == 19)
-					h = boss6Attack(h, m);
+				else if (m.getKind() == 21)
+					h = boss8Attack(h, m);
 				else if (m.getKind() == 22)
 					h = monster22Attack(h, m);
 			} else {
@@ -2298,6 +2337,9 @@ public class GameEngine extends GameCanvasEngine {
 					|| 385 + m.getY() * 60 + moveSmall_x >= skill1Hero.getX() + 40) {
 				m.setShowBlood(true);
 				m.setStartBlood(System.currentTimeMillis());
+				Critical c = new Critical(385 + m.getY() * 60 + moveSmall_x, 11
+						+ m.getX() * 60 + moveSmall_y, 200);
+				criticalArray1.addElement(c);
 			}
 			if (j % 6 >= 0 && j % 6 < 2) {
 				g.drawRegion(img[temp_img_distance2 + 63], 0, 0, 64, 103, 0,
@@ -2318,10 +2360,44 @@ public class GameEngine extends GameCanvasEngine {
 		}
 	}
 
+	public void drawSkill2(Vector ms) {
+		int j = hero.getSkillIndex();
+		skill1Hero.setX(skill1Hero.getX() + 20);
+		for (int i = 0; i < ms.size(); i++) {
+			Monster m = ((Monster) ms.elementAt(i));
+			if (385 + m.getY() * 60 + moveSmall_x <= skill1Hero.getX()
+					|| 385 + m.getY() * 60 + moveSmall_x >= skill1Hero.getX() + 40) {
+				m.setShowBlood(true);
+				m.setStartBlood(System.currentTimeMillis());
+				Critical c = new Critical(385 + m.getY() * 60 + moveSmall_x, 11
+						+ m.getX() * 60 + moveSmall_y, 200);
+				criticalArray1.addElement(c);
+			}
+			if (j % 8 >= 0 && j % 8 < 2) {
+				g.drawRegion(img[temp_img_distance2 + 69], 0, 0, 91, 54, 0,
+						skill1Hero.getX(), skill1Hero.getY(), 20);
+			} else if (j % 8 >= 2 && j % 8 < 4) {
+				g.drawRegion(img[temp_img_distance2 + 69], 91, 0, 91, 54, 0,
+						skill1Hero.getX(), skill1Hero.getY(), 20);
+			} else if (j % 8 >= 4 && j % 8 < 6) {
+				g.drawRegion(img[temp_img_distance2 + 69], 91 * 2, 0, 91, 54,
+						0, skill1Hero.getX(), skill1Hero.getY(), 20);
+			} else {
+				g.drawRegion(img[temp_img_distance2 + 69], 91 * 3, 0, 91, 54,
+						0, skill1Hero.getX(), skill1Hero.getY(), 20);
+			}
+		}
+		hero.setSkillIndex(hero.getSkillIndex() + 1);
+		if (skill1Hero.getX() >= 660) {
+			hero.setSkillIndex(0);
+			heroSkillmonster.removeAllElements();
+			skill1Hero = null;
+		}
+	}
+
 	public void drawSkill3() {
 		int j = hero.getSkillIndex();
 		hero.setSkillIndex(hero.getSkillIndex() + 1);
-		System.out.println("j =================》" + j);
 		if (j % 10 >= 0 && j % 10 < 2) {
 			g.drawRegion(img[temp_img_distance2 + 67], 0, 0, 60, 113, 0,
 					skill1Hero.getX(), skill1Hero.getY(), 20);
@@ -2339,6 +2415,105 @@ public class GameEngine extends GameCanvasEngine {
 					skill1Hero.getX(), skill1Hero.getY(), 20);
 			hero.setSkillIndex(0);
 			skill1Hero = null;
+		}
+	}
+
+	public void drawSkill4(Vector ms) {
+		int j = hero.getSkillIndex();
+		hero.setSkillIndex(hero.getSkillIndex() + 1);
+		if (j % 3 == 0) {
+			skill1Hero.setX(skill1Hero.getX() + 16 * j / 3);
+			skill1Hero.setY(skill1Hero.getY() + 16 * j / 3);
+		}
+		int temp_x = 0;
+		int temp_y = 0;
+		for (int i = 0; i < 3; i++) {
+			if (i == 1) {
+				temp_x = 100;
+				temp_y = 50;
+			} else if (i == 2) {
+				temp_x = 200;
+				temp_y = 100;
+			}
+			if (j % 18 >= 0 && j % 18 < 3) {
+				g.drawRegion(img[temp_img_distance2 + 70], 0, 0, 125, 123, 0,
+						skill1Hero.getX() + temp_x, skill1Hero.getY() + temp_y,
+						20);
+			} else if (j % 18 >= 3 && j % 18 < 6) {
+				g.drawRegion(img[temp_img_distance2 + 70], 125, 0, 125, 123, 0,
+						skill1Hero.getX() + temp_x, skill1Hero.getY() + temp_y,
+						20);
+			} else if (j % 18 >= 6 && j % 18 < 9) {
+				g.drawRegion(img[temp_img_distance2 + 70], 125 * 2, 0, 125,
+						123, 0, skill1Hero.getX() + temp_x, skill1Hero.getY()
+								+ temp_y, 20);
+			} else if (j % 18 >= 9 && j % 18 < 12) {
+				g.drawRegion(img[temp_img_distance2 + 70], 125 * 3, 0, 125,
+						123, 0, skill1Hero.getX() + temp_x, skill1Hero.getY()
+								+ temp_y, 20);
+			} else if (j % 18 >= 12 && j % 18 < 15) {
+				g.drawRegion(img[temp_img_distance2 + 70], 125 * 4, 0, 125,
+						123, 0, skill1Hero.getX() + temp_x, skill1Hero.getY()
+								+ temp_y, 20);
+			} else {
+				g.drawRegion(img[temp_img_distance2 + 70], 125 * 5, 0, 125,
+						123, 0, skill1Hero.getX() + temp_x, skill1Hero.getY()
+								+ temp_y, 20);
+				if (i == 2) {
+					hero.setSkillIndex(0);
+					skill1Hero = null;
+					for (int count = 0; count < ms.size(); count++) {
+						Monster m = ((Monster) ms.elementAt(count));
+						m.setShowBlood(true);
+						m.setStartBlood(System.currentTimeMillis());
+						m.setBoold(m.getBoold() - 100);
+						if (m.getBoold() <= 0) {
+							deathArray.addElement(m);
+						}
+						Critical c = new Critical(385 + m.getY() * 60
+								+ moveSmall_x,
+								11 + m.getX() * 60 + moveSmall_y, 100);
+						criticalArray1.addElement(c);
+					}
+				}
+			}
+		}
+	}
+
+	public void drawSkill5(Vector ms) {
+		int j = hero.getSkillIndex();
+		hero.setSkillIndex(hero.getSkillIndex() + 1);
+		for (int i = 0; i < 3; i++) {
+			if (j % 12 >= 0 && j % 12 < 3) {
+				g.drawRegion(img[temp_img_distance2 + 71], 0, 0, 98, 430, 0,
+						385 + i * 98, 0, 20);
+			} else if (j % 12 >= 3 && j % 12 < 6) {
+				g.drawRegion(img[temp_img_distance2 + 71], 98, 0, 98, 430, 0,
+						385 + i * 98, 0, 20);
+			} else if (j % 12 >= 6 && j % 12 < 9) {
+				g.drawRegion(img[temp_img_distance2 + 71], 98 * 2, 0, 98, 430,
+						0, 385 + i * 98, 0, 20);
+			} else {
+				g.drawRegion(img[temp_img_distance2 + 71], 98 * 3, 0, 98, 430,
+						0, 385 + i * 98, 0, 20);
+				if (i == 2) {
+					hero.setSkillIndex(0);
+					skill1Hero = null;
+					for (int count = 0; count < ms.size(); count++) {
+						Monster m = ((Monster) ms.elementAt(count));
+						m.setShowBlood(true);
+						m.setStartBlood(System.currentTimeMillis());
+						m.setBoold(m.getBoold() - 100);
+						if (m.getBoold() <= 0) {
+							deathArray.addElement(m);
+						}
+						Critical c = new Critical(385 + m.getY() * 60
+								+ moveSmall_x,
+								11 + m.getX() * 60 + moveSmall_y, 100);
+						criticalArray1.addElement(c);
+					}
+				}
+			}
 		}
 	}
 
@@ -2363,7 +2538,8 @@ public class GameEngine extends GameCanvasEngine {
 	private void drawBloodAndMagicB(Monster m) {
 		g.drawImage(img[temp_img_distance2 + 61], 385 + m.getY() * 60,
 				11 + m.getX() * 60, 20);
-		int bloodLength = (int) (m.getBoold() / Math.ceil(m.getBloods() / 150));
+		int bloodLength = (int) (m.getBoold() / Math
+				.ceil(m.getBloods() * 1.0 / 150));
 		g.drawRegion(img[temp_img_distance2 + 62], 0, 0, bloodLength, 7, 0,
 				385 + m.getY() * 60 + 1, 11 + m.getX() * 60 + 1, 20);
 		g.drawImage(img[temp_img_distance2 + 59], 385 + m.getY() * 60,
@@ -2656,6 +2832,7 @@ public class GameEngine extends GameCanvasEngine {
 			}
 		} else {
 			drawBloodAndMagicB(m);
+			boss5Random = RandomValue.getRandInt(0, 3);
 			bossStart = true;
 			bossMoveindex = 0;
 			m.setStartTime(m.getEndTime());
@@ -2746,6 +2923,57 @@ public class GameEngine extends GameCanvasEngine {
 		} else {
 			g.drawRegion(m.getSrc(), 0, 0, 262, 180, 0, 385 + m.getY() * 60,
 					11 + m.getX() * 60, 20);
+			drawBloodAndMagicB(m);
+			bossStart = true;
+			bossMoveindex = 0;
+			m.setStartTime(m.getEndTime());
+		}
+		h++;
+		return h;
+	}
+
+	private int boss8Attack(int h, Monster m) {
+		m.setStartTime(m.getStartTime() + stopGameTime);
+		int height = m.getSrc().getHeight();
+		int width = m.getSrc().getWidth() / 4;
+		if (m.getEndTime() - m.getStartTime() < m.getWaitTime()) {
+			if (arrowIndex % 6 >= 0 && arrowIndex % 6 < 2) {
+				g.drawRegion(m.getSrc(), 0, 0, width, height, 0,
+						385 + m.getY() * 60, 11 + m.getX() * 60, 20);
+			}
+			if (arrowIndex % 6 >= 2 && arrowIndex % 6 < 4) {
+				g.drawRegion(m.getSrc(), width, 0, width, height, 0,
+						385 + m.getY() * 60, 11 + m.getX() * 60, 20);
+			} else {
+				g.drawRegion(m.getSrc(), width * 2, 0, width, height, 0,
+						385 + m.getY() * 60, 11 + m.getX() * 60, 20);
+			}
+			drawBloodAndMagicB(m);
+		} else if (m.getEndTime() - m.getStartTime() >= m.getWaitTime()
+				&& m.getEndTime() - m.getStartTime() < m.getWaitTime()
+						+ m.getSkillWaitTime() * 1000) {
+			if (arrowIndex % 6 >= 0 && arrowIndex % 6 < 2) {
+				g.drawRegion(img[temp_img_distance2 + 58], 0, 0, 183, 29, 0,
+						370 + m.getY() * 60, 11 + m.getX() * 60 + 160, 20);
+			} else if (arrowIndex % 6 >= 2 && arrowIndex % 6 < 4) {
+				g.drawRegion(img[temp_img_distance2 + 58], 183, 0, 183, 29, 0,
+						370 + m.getY() * 60, 11 + m.getX() * 60 + 160, 20);
+			} else {
+				g.drawRegion(img[temp_img_distance2 + 58], 366, 0, 183, 29, 0,
+						370 + m.getY() * 60, 11 + m.getX() * 60 + 160, 20);
+			}
+			g.drawRegion(m.getSrc(), 0, 0, width, height, 0,
+					385 + m.getY() * 60, 11 + m.getX() * 60, 20);
+			drawBloodAndMagicB(m);
+			int powerLength = (int) ((m.getEndTime() - m.getStartTime() - m
+					.getWaitTime()) / 100);
+			if (powerLength > 0) {
+				g.drawRegion(img[temp_img_distance2 + 60], 0, 0, powerLength,
+						4, 0, 385 + m.getY() * 60, 21 + m.getX() * 60 + 1, 20);
+			}
+		} else {
+			g.drawRegion(m.getSrc(), 0, 0, width, height, 0,
+					385 + m.getY() * 60, 11 + m.getX() * 60, 20);
 			drawBloodAndMagicB(m);
 			bossStart = true;
 			bossMoveindex = 0;
@@ -2850,19 +3078,37 @@ public class GameEngine extends GameCanvasEngine {
 		}
 	}
 
+	int boss5Random;
+
 	public void drawBoss5Bullet() {
-		if (bossMoveindex >= 6 && stopState)
+		if (bossMoveindex >= 6 && !stopState)
 			bossMoveindex++;
-		for (int j = 0; j < 3; j++) {
-			g.drawRegion(img[temp_img_distance2 + 46],
-					((int) Math.floor(bossMoveindex / 3)) * 48, 0, 48, 90, 0,
-					320 - 80 * (int) Math.floor(bossMoveindex / 3),
-					20 + 120 * j, 20);
-		}
+		System.out.println("****bossMoveindex==>" + bossMoveindex
+				+ "***Math.floor(bossMoveindex / 3))==>"
+				+ Math.floor(bossMoveindex / 3));
+		g.drawRegion(img[temp_img_distance2 + 46],
+				((int) Math.floor(bossMoveindex / 3)) * 48, 0, 48, 90, 0,
+				320 - 80 * (int) Math.floor(bossMoveindex / 3 - 2),
+				20 + 120 * boss5Random, 20);
 		if (bossMoveindex == 11) {
 			bossStart = false;
 			bossMoveindex = 0;
 			moveSmall_Index = 0;
+			hero.setBoold(hero.getBoold() - 100);
+			if (hero.getBoold() < 0) {
+				hero.setBoold(0);
+			}
+			for (int oop = 0; oop < 4; oop++) {
+				if (idPic[boss5Random][oop].getOffX() == 0) {
+					idPic[boss5Random][oop].setIceNoMove(true);
+					idPic[boss5Random][oop].setStartTime();
+					IceDrow id = new IceDrow(idPic[boss5Random][oop]);
+					id.setStartTime(System.currentTimeMillis());
+					id.setX(oop * 60 + 17);
+					id.setY(boss5Random * 60 + 11);
+					IceDrowVector.addElement(id);
+				}
+			}
 			if (StrikeHero.getInstance().getIndexAnim() == 4) {
 				StrikeHero.getInstance().setIndexAnim(0);
 			}
@@ -2870,22 +3116,37 @@ public class GameEngine extends GameCanvasEngine {
 	}
 
 	public void drawBoss6Bullet() {
+		int random_x1 = RandomValue.getRandInt(0, 6);
+		int random_y1;
+		int random_x2 = random_x1 + 1;
+		int random_y2;
+		if (random_x1 >= 2 && random_x1 <= 4) {
+			random_y1 = 0;
+		} else {
+			random_y1 = RandomValue.getRandInt(0, 4);
+		}
+		if (random_x2 >= 2 && random_x2 <= 4) {
+			random_y2 = 0;
+		} else {
+			random_y2 = RandomValue.getRandInt(0, 4);
+		}
 		for (int h = 0; h < monsterVector.size(); h++) {
 			Monster m = (Monster) monsterVector.elementAt(h);
-			if ((m.getX() == 2 || m.getX() == 3) && m.getY() == 0) {
+			if ((m.getX() == random_x1 && m.getY() == random_y1)
+					|| (m.getX() == random_x2 && m.getY() == random_y2)) {
 				monsterVector.removeElement(m);
 			}
 		}
 		monsterVector.addElement(new Monster(Resource.MonsterSpeed[21],
 				Resource.MonsterAttack[21], 22,
 				img[Resource.MonsterImgIndex[21]], "zhaohuan",
-				Resource.MonsterLevel[21], 2, 0, Resource.MonsterBlood[21], 1,
-				0, Resource.MonsterBlood[21]));
+				Resource.MonsterLevel[21], random_x1, random_y1,
+				Resource.MonsterBlood[21], 1, 0, Resource.MonsterBlood[21]));
 		monsterVector.addElement(new Monster(Resource.MonsterSpeed[21],
 				Resource.MonsterAttack[21], 22,
 				img[Resource.MonsterImgIndex[21]], "zhaohuan",
-				Resource.MonsterLevel[21], 3, 0, Resource.MonsterBlood[21], 1,
-				0, Resource.MonsterBlood[21]));
+				Resource.MonsterLevel[21], random_x2, random_y2,
+				Resource.MonsterBlood[21], 1, 0, Resource.MonsterBlood[21]));
 		bossStart = false;
 		bossMoveindex = 0;
 	}
@@ -2916,11 +3177,38 @@ public class GameEngine extends GameCanvasEngine {
 						bossStart = false;
 						bossMoveindex = 0;
 						moveSmall_Index = 0;
+						hero.setBoold(hero.getBoold() - 100);
+						if (hero.getBoold() < 0) {
+							hero.setBoold(0);
+						}
 						if (StrikeHero.getInstance().getIndexAnim() == 4) {
 							StrikeHero.getInstance().setIndexAnim(0);
 						}
 					}
 				}
+			}
+		}
+	}
+
+	int boss8StoneNum;
+
+	public void drawBoss8Bullet() {
+		if (boss8StoneNum < 3 && Resource.stoneXY2[boss8StoneNum * 3 + 2] < 7) {
+			g.drawRegion(img[temp_img_distance2 + 68],
+					Resource.stoneXY2[boss8StoneNum * 3 + 2] * 141, 0, 141,
+					242, 0, Resource.stoneXY2[boss8StoneNum * 3],
+					Resource.stoneXY2[boss8StoneNum * 3 + 1], 20);
+			Resource.stoneXY2[boss8StoneNum * 3 + 2]++;
+		} else {
+			hero.setBoold(hero.getBoold() - 100);
+			if (hero.getBoold() < 0) {
+				hero.setBoold(0);
+			}
+			Resource.stoneXY2[boss8StoneNum * 3 + 2] = 0;// 重新开始游戏的时候要置为0
+			boss8StoneNum++;
+			if (boss8StoneNum == 3) {
+				bossStart = false;
+				boss8StoneNum = 0;
 			}
 		}
 	}
@@ -4723,13 +5011,13 @@ public class GameEngine extends GameCanvasEngine {
 			if (!stopState) {
 				if (_x == 0) {
 					xielv = 0.0f;
-					id.setY(id.getY() + 50);
+					id.setY(id.getY() + 30);
 				} else if (_y == 0) {
-					id.setX(id.getX() + 50);
+					id.setX(id.getX() + 30);
 					xielv = 0.0f;
 				} else {
 					xielv = (float) ((_x * 1.0) / (_y * 1.0));
-					double yy = Math.sqrt((50 * 50) / (xielv * xielv + 1));
+					double yy = Math.sqrt((30 * 30) / (xielv * xielv + 1));
 					double xx = yy * xielv;
 					id.setX(id.getX() + (int) xx);
 					id.setY(id.getY() + (int) yy);

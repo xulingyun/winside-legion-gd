@@ -8,24 +8,26 @@ public class Resource {
 
 	public final static int[] MonsterBlood = { 100, 500, 200, 700, 300, 900,
 			400, 1200, 400, 400, 400, 400, 400, 1500, 2000, 2500, 3000, 3500,
-			4000, 4500, 5000 };
+			4000, 4500, 5000, 1000 };
 
 	public final static int[] stoneXY = { 10, -100, 0, 90, -200, 0, 180, -340,
 			0, 120, -360, 0, 40, -400, 0 };
 
 	public final static int[] stoneXY1 = { 270, -150, 0, 90, -250, 0, 200,
 			-350, 0 };
+
+	public final static int[] stoneXY2 = { 20, 60, 0, 150, 80, 0, 70, 150, 0 };
 	// public final static int[] MonsterBlood = { 100, 100, 100, 100, 100, 100,
 	// 100, 100, 100, 100, 100, 100, 100, 1500, 1800, 2400, 3000, 3300,
 	// 3900, 4500, 4800, 500 };
 	public final static int[] MonsterAttack = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	public final static int[] MonsterSpeed = { 10, 10, 10, 10, 10, 10, 10, 10,
 			10, 10, 10, 10, 10, 15, 15, 15, 15, 15, 15, 15, 15, 10 };
 	public final static int[] MonsterLevel = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 	public final static int[] MonsterImgIndex = { 83, 84, 85, 86, 87, 88, 89,
-			90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 101, 102, 103, 123 };
+			90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 101, 102, 103, 104, 124 };
 
 	public final static byte[] heroAndSoldierLevel = { 1, 1, 1, 1, 0, 0, 0, 0,
 			0 };
@@ -43,7 +45,7 @@ public class Resource {
 			-1, -1, -1, -1, -1, -1, -1, -1 };
 
 	public final static long[] myProperty = { 1, 0, 100000, 50 };
-	public final static int[] goodsNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	public final static int[] goodsNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	public final static String[] shopInfo = { "血瓶", "恢复英雄的血量200点。（战斗中使用）",
 			"火球术", "召唤火球对场中的怪物造成200点伤害。", "狂暴术", "士兵的攻击力翻倍。（30秒）", "双倍经验卡",
 			"战斗胜利获得的经验翻倍。（10场）", "双倍金币卡", "战斗胜利获得的金币翻倍。（10场）", "能量石",
@@ -140,7 +142,7 @@ public class Resource {
 	public static final short bg3 = NUMS++;
 	public static final short bg4 = NUMS++;
 	public static final short bg5 = NUMS++;
-	// 78
+	// 81
 	public static final short monster1 = NUMS++;
 	public static final short monster2 = NUMS++;
 	public static final short monster3 = NUMS++;
@@ -202,6 +204,10 @@ public class Resource {
 	public static final short baojibg = NUMS++;
 	public static final short stopimg = NUMS++;
 	public static final short hero4skill = NUMS++;
+	public static final short boss87attack = NUMS++;
+	public static final short hero3skill = NUMS++;
+	public static final short hero5skill = NUMS++;
+	public static final short hero6skill = NUMS++;
 
 	public static final short soldier121 = NUMS++;
 	public static final short soldier122 = NUMS++;
@@ -282,7 +288,9 @@ public class Resource {
 			"/secondpage/bossblood1.png", "/secondpage/bossblood2.jpg",
 			"/secondpage/hero1skill.png", "/secondpage/attacknumber.png",
 			"/secondpage/baojibg.png", "/secondpage/stopimg.png",
-			"/secondpage/hero4skill.png",
+			"/secondpage/hero4skill.png", "/secondpage/boss87attack.png",
+			"/secondpage/hero3skill.png", "/secondpage/hero5skill.png",
+			"/secondpage/hero6skill.png",
 
 			"/secondpage/soldier121.png", "/secondpage/soldier122.png"
 
