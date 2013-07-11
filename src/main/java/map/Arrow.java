@@ -10,15 +10,52 @@ public class Arrow extends Bullet {
 	int end_y;
 	int level;
 	int count;
+	int index = 0;
+	int _x_;
+	int _y_;
+	boolean isFirst = true;;
+
 
 	public Arrow(int start_x, int start_y, Image src, int end_x, int end_y,
 			Monster m, int level, int count) {
-		super(start_x, start_y, src,null);
+		super(start_x, start_y, src, null);
 		this.end_x = end_x;
 		this.level = level;
 		this.end_y = end_y;
 		this.m = m;
 		this.count = count;
+	}
+	
+	public boolean isFirst() {
+		return isFirst;
+	}
+
+	public void setFirst(boolean isFirst) {
+		this.isFirst = isFirst;
+	}
+
+	public int get_x_() {
+		return _x_;
+	}
+
+	public void set_x_(int _x_) {
+		this._x_ = _x_;
+	}
+
+	public int get_y_() {
+		return _y_;
+	}
+
+	public void set_y_(int _y_) {
+		this._y_ = _y_;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	public int getCount() {

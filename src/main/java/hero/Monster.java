@@ -23,6 +23,15 @@ public class Monster implements HeroInterface {
 	int _x;
 	int animIndex;
 	boolean newMonster;
+	int animDeath = 0;
+
+	public int getAnimDeath() {
+		return animDeath;
+	}
+
+	public void setAnimDeath(int animDeath) {
+		this.animDeath = animDeath;
+	}
 
 	public boolean isNewMonster() {
 		return newMonster;

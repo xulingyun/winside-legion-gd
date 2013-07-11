@@ -102,8 +102,11 @@ public class CreatArray {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 4; j++) {
 				int imgIndex = RandomValue.getRandInt(1, 5);
-				idPic[i][j] = new Soldier("Soldier", img[imgIndex - 1], 1, i,
-						j, imgIndex, 0, 0, 0, selcetSoldier[imgIndex - 1], 0);
+				idPic[i][j] = new Soldier(
+						"Soldier",
+						img[imgIndex - 1],
+						Resource.heroAndSoldierLevel[selcetSoldier[imgIndex - 1]],
+						i, j, imgIndex, 0, 0, 0, selcetSoldier[imgIndex - 1], 0);
 			}
 		}
 		pppp();
@@ -238,7 +241,10 @@ public class CreatArray {
 						}
 					}
 					int imgIndex = RandomValue.getRandInt(1, 5);
-					idPic[i][j] = new Soldier("Soldier", img[imgIndex - 1], 1,
+					idPic[i][j] = new Soldier(
+							"Soldier",
+							img[imgIndex - 1],
+							Resource.heroAndSoldierLevel[selcetSoldier[imgIndex - 1]],
 							i, j, imgIndex, 0, 0, 0,
 							selcetSoldier[imgIndex - 1], 0);
 					idPic[i][j].setOffX(-(j + h) * 60);

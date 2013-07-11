@@ -7,6 +7,24 @@ public class Critical {
 	private int num;
 	private long time;
 	public static long showtime = 1000;
+	private int count = 0;
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public static long getShowtime() {
+		return showtime;
+	}
+
+	public static void setShowtime(long showtime) {
+		Critical.showtime = showtime;
+	}
+
 	private int movePixel = 0;
 
 	public int getMovePixel() {

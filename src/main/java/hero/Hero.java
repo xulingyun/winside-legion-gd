@@ -26,6 +26,25 @@ public class Hero implements HeroInterface {
 	float AtkCoefficient = 1.0f;
 	float booldCoefficient = 1.0f;
 	long negativeTime = 0l;
+	public final static long  hurtTime = 10000;
+	long hurtStartTime;
+	boolean lastHurt = false;
+
+	public boolean isLastHurt() {
+		return lastHurt;
+	}
+
+	public void setLastHurt(boolean lastHurt) {
+		this.lastHurt = lastHurt;
+	}
+
+	public long getHurtStartTime() {
+		return hurtStartTime;
+	}
+
+	public void setHurtStartTime(long hurtStartTime) {
+		this.hurtStartTime = hurtStartTime;
+	}
 
 	public long getNegativeTime() {
 		return negativeTime;

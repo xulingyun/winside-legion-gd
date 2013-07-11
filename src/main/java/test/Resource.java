@@ -8,7 +8,7 @@ public class Resource {
 
 	public final static int[] MonsterBlood = { 100, 500, 200, 700, 300, 900,
 			400, 1200, 400, 400, 400, 400, 400, 1500, 2000, 2500, 3000, 3500,
-			4000, 4500, 5000, 1000 };
+			4000, 4500, 5000, 400 };
 
 	public final static int[] stoneXY = { 10, -100, 0, 90, -200, 0, 180, -340,
 			0, 120, -360, 0, 40, -400, 0 };
@@ -17,17 +17,14 @@ public class Resource {
 			-350, 0 };
 
 	public final static int[] stoneXY2 = { 20, 60, 0, 150, 80, 0, 70, 150, 0 };
-	// public final static int[] MonsterBlood = { 100, 100, 100, 100, 100, 100,
-	// 100, 100, 100, 100, 100, 100, 100, 1500, 1800, 2400, 3000, 3300,
-	// 3900, 4500, 4800, 500 };
-	public final static int[] MonsterAttack = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	public final static int[] MonsterAttack = { 15, 10, 25, 20, 35, 30, 45, 40,
+			50, 50, 0, 0, 0, 100, 100, 350, 400, 450, 0, 600, 700, 60 };
 	public final static int[] MonsterSpeed = { 10, 10, 10, 10, 10, 10, 10, 10,
-			10, 10, 10, 10, 10, 15, 15, 15, 15, 15, 15, 15, 15, 10 };
+			10, 10, 10, 10, 20, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
 	public final static int[] MonsterLevel = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-	public final static int[] MonsterImgIndex = { 83, 84, 85, 86, 87, 88, 89,
-			90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 101, 102, 103, 104, 124 };
+	public final static int[] MonsterImgIndex = { 84, 85, 86, 87, 88, 89, 90,
+			91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 124 };
 
 	public final static byte[] heroAndSoldierLevel = { 1, 1, 1, 1, 0, 0, 0, 0,
 			0 };
@@ -43,6 +40,18 @@ public class Resource {
 			-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 			-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 			-1, -1, -1, -1, -1, -1, -1, -1 };
+	public final static int[][] heroValue = {
+			{ 400, 4, 1000, 50, 1, 4000, 100, 10 },
+			{ 500, 5, 2000, 60, 1, 4000, 10, 2 },
+			{ 600, 6, 3000, 70, 1, 5000, 110, 10 },
+			{ 700, 7, 4000, 80, 1, 8000, 100, 10 },
+			{ 800, 8, 5000, 100, 1, 5000, 200, 10 },
+			{ 800, 9, 6000, 120, 1, 5000, 200, 10, 10, 1 } };
+	public final static int[][] soldierValue = { { 30, 1000, 3, 1000, 0, 0 },
+			{ 35, 3500, 3, 3500 }, { 25, 3000, 3, 3000, 5, 1 },
+			{ 25, 2000, 3, 2000, 0, 0 }, { 35, 2500, 3, 2500 },
+			{ 30, 4000, 3, 4000, 6, 1 }, { 35, 5000, 3, 5000 },
+			{ 45, 5000, 3, 5000 }, { 50, 5000, 3, 5000, 20, 1 } };
 
 	public final static long[] myProperty = { 1, 0, 100000, 50 };
 	public final static int[] goodsNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -53,9 +62,18 @@ public class Resource {
 			"增加所有士兵10%攻击力。（10场）", "刚性护符", "增加英雄20点防御力。(10场)", "生命谐音",
 			"增加英雄20%生命。（10场）", "金币礼包", "兑换10000金币。" };
 
-	final static String[] heroSkillInfo = { "对一条线上的所有敌人造成伤害（优先最靠前敌人所在的位置）",
-			"提升防御力", "对一条线上的敌人造成伤害，并昏迷3秒", "恢复英雄生命", "对全部的敌人造成伤害",
-			"对全部的敌人造成伤害，并恢复英雄生命" };
+	public final static String[] heroSkillInfo = {
+			"对一条线上的所有敌人造成伤害（优先最靠前敌人所在的位置）", "提升防御力", "对一条线上的敌人造成伤害，并昏迷3秒",
+			"恢复英雄生命", "对全部的敌人造成伤害", "对全部的敌人造成伤害，并恢复英雄生命" };
+
+	public final static String[] heroSkillName = { "虹灵之刃", "钢铁壁垒", "震荡波",
+			"自然之助", "神秘之耀", "群星坠落" };
+
+	public final static String[] soldierSkillDescribe = { "近战，只攻击同一条线上的第一个敌人。",
+			"近战，攻击同一条线上的所有敌人。", "远程，命中目标后会附带中毒效果，持续时间3秒。",
+			"近战，攻击同一条线上的第一个敌人，被攻击的敌人施法暂停。", "远程，攻击最前面的敌人，攻击伤害的部分会转化成HP恢复给英雄。",
+			"近战，攻击同一条线上的第一个敌人，被攻击敌人左右两边的敌人也会受到伤害。", "远程，召唤火球攻击敌人。",
+			"近战，攻击同一条线上的第一个敌人，连续攻击2次。", "远程，拥有最高的攻击力，并且有一定的几率产生爆击。" };
 
 	public static short NUMS = 0;
 	public static final short soldier0 = NUMS++;
@@ -208,9 +226,19 @@ public class Resource {
 	public static final short hero3skill = NUMS++;
 	public static final short hero5skill = NUMS++;
 	public static final short hero6skill = NUMS++;
+	public static final short soldier51 = NUMS++;
+	public static final short soldier52 = NUMS++;
+	public static final short soldier53 = NUMS++;
+	public static final short soldier92 = NUMS++;
+	public static final short soldier71 = NUMS++;
+	public static final short soldier33 = NUMS++;
+	public static final short hero2skill = NUMS++;
+	public static final short shenglishibai = NUMS++;
+	public static final short star1 = NUMS++;
 
 	public static final short soldier121 = NUMS++;
 	public static final short soldier122 = NUMS++;
+	public static final byte isfirst = 0;
 
 	public static final String[] PAGE_INDEX = { "PASS", "HOME_PAGE0",
 			"GAME_PAGE" };
@@ -290,7 +318,11 @@ public class Resource {
 			"/secondpage/baojibg.png", "/secondpage/stopimg.png",
 			"/secondpage/hero4skill.png", "/secondpage/boss87attack.png",
 			"/secondpage/hero3skill.png", "/secondpage/hero5skill.png",
-			"/secondpage/hero6skill.png",
+			"/secondpage/hero6skill.png", "/secondpage/soldier51.png",
+			"/secondpage/soldier52.png", "/secondpage/soldier53.png",
+			"/secondpage/soldier92.png", "/secondpage/soldier71.png",
+			"/secondpage/soldier33.png", "/secondpage/hero2skill.png",
+			"/secondpage/shenglishibai.png", "/secondpage/star1.png",
 
 			"/secondpage/soldier121.png", "/secondpage/soldier122.png"
 
