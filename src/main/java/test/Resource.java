@@ -23,8 +23,8 @@ public class Resource {
 			10, 10, 10, 10, 20, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
 	public final static int[] MonsterLevel = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-	public final static int[] MonsterImgIndex = { 84, 85, 86, 87, 88, 89, 90,
-			91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 124 };
+	public final static int[] MonsterImgIndex = { 85, 86, 87, 88, 89, 90, 91,
+			92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 125 };
 
 	public final static byte[] heroAndSoldierLevel = { 1, 1, 1, 1, 0, 0, 0, 0,
 			0 };
@@ -40,6 +40,7 @@ public class Resource {
 			-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 			-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 			-1, -1, -1, -1, -1, -1, -1, -1 };
+
 	public final static int[][] heroValue = {
 			{ 400, 4, 1000, 50, 1, 4000, 100, 10 },
 			{ 500, 5, 2000, 60, 1, 4000, 10, 2 },
@@ -74,6 +75,11 @@ public class Resource {
 			"近战，攻击同一条线上的第一个敌人，被攻击的敌人施法暂停。", "远程，攻击最前面的敌人，攻击伤害的部分会转化成HP恢复给英雄。",
 			"近战，攻击同一条线上的第一个敌人，被攻击敌人左右两边的敌人也会受到伤害。", "远程，召唤火球攻击敌人。",
 			"近战，攻击同一条线上的第一个敌人，连续攻击2次。", "远程，拥有最高的攻击力，并且有一定的几率产生爆击。" };
+	public final static String[] heroSay = { "走你！！！", "再不治疗我就要挂了！！！",
+			"火球术可以全屏攻击。", "狂暴术可以提升士兵攻击力。", "我和我的小伙伴都惊呆了！！！", "给跪了，对面太强了！！！",
+			"不怕神一样的对手，就怕猪一样的队友。", "不给你点颜色瞧瞧，你当我是国足！！！", "使用金币可以升级哦！" };
+	public final static String[] soldierSay = { "冲啊！！！", "杀啊！！！", "我要升级！！！",
+			"我要吃肉！！！", "霍哈！！！", "我要狂暴！！！" };
 
 	public static short NUMS = 0;
 	public static final short soldier0 = NUMS++;
@@ -94,7 +100,8 @@ public class Resource {
 	public static final short star = NUMS++;
 	public static final short number = NUMS++;
 	public static final short money = NUMS++;
-	// 18
+	public static final short newbox = NUMS++;
+	// 19
 	public static final short awardbutton = NUMS++;
 	public static final short bg6 = NUMS++;
 	public static final short bg10 = NUMS++;
@@ -238,6 +245,8 @@ public class Resource {
 
 	public static final short soldier121 = NUMS++;
 	public static final short soldier122 = NUMS++;
+	public static final short saybox = NUMS++;
+
 	public static final byte isfirst = 0;
 
 	public static final String[] PAGE_INDEX = { "PASS", "HOME_PAGE0",
@@ -251,7 +260,7 @@ public class Resource {
 			"/common/arrows.png", "/common/back0.png", "/common/hero.png",
 			"/common/selectbox1.png", "/common/selectbox2.png",
 			"/common/select2.png", "/common/star.png", "/common/number.png",
-			"/common/money.png",
+			"/common/money.png", "/common/newbox.png",
 
 			"/firstpage/awardbutton.png", "/firstpage/bg6.jpg",
 			"/firstpage/bg10.jpg", "/firstpage/bg11.jpg",
@@ -324,7 +333,8 @@ public class Resource {
 			"/secondpage/soldier33.png", "/secondpage/hero2skill.png",
 			"/secondpage/shenglishibai.png", "/secondpage/star1.png",
 
-			"/secondpage/soldier121.png", "/secondpage/soldier122.png"
+			"/secondpage/soldier121.png", "/secondpage/soldier122.png",
+			"/secondpage/saybox.png"
 
 	};
 

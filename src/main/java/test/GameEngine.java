@@ -5,6 +5,7 @@ import hero.IceDrow;
 import hero.Monster;
 import hero.MoveElementEffect;
 import hero.Point;
+import hero.Say;
 import hero.Soldier;
 import skill.Critical;
 import test.PropManager;
@@ -65,7 +66,7 @@ public class GameEngine extends GameCanvasEngine {
 	boolean startAddState = false;
 	private int[][][][][] mapArray;
 	int[][] location = new int[4][9];
-	public static Image[] img = new Image[158];
+	public static Image[] img = new Image[160];
 	Soldier[][] idPic = new Soldier[7][4];
 	Monster[][] monsterPic = new Monster[7][4];
 	int[] mainPageIndex = new int[5];
@@ -110,8 +111,8 @@ public class GameEngine extends GameCanvasEngine {
 	public PlayerProp[] props;
 	Myself my;
 	GameRecord record;
-	int temp_img_distance1 = 18;
-	int temp_img_distance2 = temp_img_distance1 + 59;
+	int temp_img_distance1 = 19;
+	int temp_img_distance2 = temp_img_distance1 + 60;
 	int tempMainPage0Index;
 	int enterWay;
 	int money = 0;
@@ -156,66 +157,77 @@ public class GameEngine extends GameCanvasEngine {
 		img[15] = Resource.loadImage(Resource.star);
 		img[16] = Resource.loadImage(Resource.number);
 		img[17] = Resource.loadImage(Resource.money);
+		img[18] = Resource.loadImage(Resource.newbox);
 		loadMainImg();
 	}
 
-	public void getData() {
+	private boolean isFirstEnter() {
 		ServiceWrapper sw = getServiceWrapper();
 		record = sw.readRecord(100);
 		pm = new PropManager(this);
 		pm.queryProps();
-		byte[] b = new byte[10000];
-		if (record == null || mainPageIndex[0] == 11) {
-			record = new GameRecord();
-			record.setRecordId(100);
-			record.setRemark("这是记录");
-			int j = 0;
-			int i = 0;
-			for (j = 0; j < Resource.myProperty.length; j++) {
-				BytesUtil.writeLong(b, j * 8, Resource.myProperty[j]);
-			}
-			i = (j + 1) * 8;
-			for (j = 0; j < Resource.heroAndSoldierLevel.length; j++) {
-				b[i++] = Resource.heroAndSoldierLevel[j];
-			}
-			for (j = 0; j < Resource.guanqiaLevel.length; j++) {
-				b[i++] = Resource.guanqiaLevel[j];
-			}
-			for (j = 0; j < Resource.isBelongMyOfHero.length; j++) {
-				b[i++] = Resource.isBelongMyOfHero[j];
-			}
-			for (j = 0; j < Resource.goodsNums.length; j++) {
-				BytesUtil.writeInt(b, i + 4 * j, Resource.goodsNums[j]);
-			}
-
-			record.setData(b);
-			sw.saveRecord(record);
+		if (record == null) {
+			return true;
 		} else {
-			b = record.getData();
-			int i = 0;
-			int j = 0;
-			for (j = 0; j < Resource.myProperty.length; j++) {
-				Resource.myProperty[j] = BytesUtil.readLong(b, j * 8);
-			}
-			i = (j + 1) * 8;
-			for (j = 0; j < Resource.heroAndSoldierLevel.length; j++) {
-				Resource.heroAndSoldierLevel[j] = b[i++];
-			}
-			for (j = 0; j < Resource.guanqiaLevel.length; j++) {
-				Resource.guanqiaLevel[j] = b[i++];
-			}
-			for (j = 0; j < Resource.isBelongMyOfHero.length; j++) {
-				Resource.isBelongMyOfHero[j] = b[i++];
-			}
-			for (j = 0; j < Resource.goodsNums.length; j++) {
-				Resource.goodsNums[j] = BytesUtil.readInt(b, i + j * 4);
-				if (Resource.goodsNums[j] > 0) {
-					canGoodsKind++;
-				}
+			return false;
+		}
+	}
+
+	private void saveData_xv() {
+		ServiceWrapper sw = getServiceWrapper();
+		record = sw.readRecord(100);
+		byte[] b = new byte[10000];
+		record = new GameRecord();
+		record.setRecordId(100);
+		record.setRemark("这是记录");
+		int j = 0;
+		int i = 0;
+		for (j = 0; j < Resource.myProperty.length; j++) {
+			BytesUtil.writeLong(b, j * 8, Resource.myProperty[j]);
+		}
+		i = (j + 1) * 8;
+		for (j = 0; j < Resource.heroAndSoldierLevel.length; j++) {
+			b[i++] = Resource.heroAndSoldierLevel[j];
+		}
+		for (j = 0; j < Resource.guanqiaLevel.length; j++) {
+			b[i++] = Resource.guanqiaLevel[j];
+		}
+		for (j = 0; j < Resource.isBelongMyOfHero.length; j++) {
+			b[i++] = Resource.isBelongMyOfHero[j];
+		}
+		for (j = 0; j < Resource.goodsNums.length; j++) {
+			BytesUtil.writeInt(b, i + 4 * j, Resource.goodsNums[j]);
+		}
+		record.setData(b);
+		sw.saveRecord(record);
+	}
+
+	private void getData_xv() {
+		ServiceWrapper sw = getServiceWrapper();
+		record = sw.readRecord(100);
+		byte[] b = new byte[10000];
+		b = record.getData();
+		int i = 0;
+		int j = 0;
+		for (j = 0; j < Resource.myProperty.length; j++) {
+			Resource.myProperty[j] = BytesUtil.readLong(b, j * 8);
+		}
+		i = (j + 1) * 8;
+		for (j = 0; j < Resource.heroAndSoldierLevel.length; j++) {
+			Resource.heroAndSoldierLevel[j] = b[i++];
+		}
+		for (j = 0; j < Resource.guanqiaLevel.length; j++) {
+			Resource.guanqiaLevel[j] = b[i++];
+		}
+		for (j = 0; j < Resource.isBelongMyOfHero.length; j++) {
+			Resource.isBelongMyOfHero[j] = b[i++];
+		}
+		for (j = 0; j < Resource.goodsNums.length; j++) {
+			Resource.goodsNums[j] = BytesUtil.readInt(b, i + j * 4);
+			if (Resource.goodsNums[j] > 0) {
+				canGoodsKind++;
 			}
 		}
-		my = new Myself(Resource.myProperty[0], Resource.myProperty[1],
-				Resource.myProperty[2], Resource.myProperty[3]);
 	}
 
 	private void loadGameBg(int index) {
@@ -425,7 +437,7 @@ public class GameEngine extends GameCanvasEngine {
 	}
 
 	public void clearMainImg() {
-		for (int i = 18; i < temp_img_distance2; i++)
+		for (int i = 19; i < temp_img_distance2; i++)
 			img[i] = null;
 	}
 
@@ -674,16 +686,16 @@ public class GameEngine extends GameCanvasEngine {
 		stopState = false;
 		stopGameTime = 0;
 		boss8StoneNum = 0;
-		useProp = 0;
-		hero = new Hero("xulingyun", mainPageIndex[3],
-				Resource.isBelongMyOfHero[mainPageIndex[3]],
+		useProp = 0;// selectHeroIndex
+		hero = new Hero("xulingyun", selectHeroIndex,
+				Resource.isBelongMyOfHero[selectHeroIndex],
 				Upgrade.upgradeHeroDefence(
-						Resource.isBelongMyOfHero[mainPageIndex[3]],
-						mainPageIndex[3]), 22, 452, Upgrade.upgradeHeroBlood(
-						Resource.isBelongMyOfHero[mainPageIndex[3]],
-						mainPageIndex[3]), 0, 0, Upgrade.upgradeHeroBlood(
-						Resource.isBelongMyOfHero[mainPageIndex[3]],
-						mainPageIndex[3]));
+						Resource.isBelongMyOfHero[selectHeroIndex],
+						selectHeroIndex), 22, 452, Upgrade.upgradeHeroBlood(
+						Resource.isBelongMyOfHero[selectHeroIndex],
+						selectHeroIndex), 0, 0, Upgrade.upgradeHeroBlood(
+						Resource.isBelongMyOfHero[selectHeroIndex],
+						selectHeroIndex));
 		ca = new CreatArray(img, hero);
 		idPic = ca.randomArray();
 		ca.setIdPic(idPic);
@@ -691,8 +703,6 @@ public class GameEngine extends GameCanvasEngine {
 		hero.setSrc(img[11]);
 		win1 = 0;
 	}
-
-	String info = "";
 
 	private void handleMainKey1(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK)) {
@@ -702,23 +712,19 @@ public class GameEngine extends GameCanvasEngine {
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
 			if (mainPageIndex[1] > 0)
 				mainPageIndex[1]--;
-			info = "我按下了左键！";
 		} else if (key.containsAndRemove(KeyCode.RIGHT)) {
 			if (mainPageIndex[1] < 9)
 				mainPageIndex[1]++;
-			info = "我按下了右键！";
 		} else if (key.containsAndRemove(KeyCode.UP)) {
 			if (mainPageIndex[1] < 5)
 				mainPageIndex[1] += 5;
 			else
 				mainPageIndex[1] -= 5;
-			info = "我按下了上键！";
 		} else if (key.containsAndRemove(KeyCode.DOWN)) {
 			if (mainPageIndex[1] < 5)
 				mainPageIndex[1] += 5;
 			else
 				mainPageIndex[1] -= 5;
-			info = "我按下了下键！";
 		} else if (key.containsAndRemove(KeyCode.NUM0)) {
 			mainIndex = 0;
 			mainPageIndex[1] = 0;
@@ -774,7 +780,7 @@ public class GameEngine extends GameCanvasEngine {
 				mainIndex = 12;
 				isHelp = true;
 			} else if (mainPageIndex[0] == 11) {
-				getData();
+				saveData_xv();
 				exit = true;
 			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
@@ -847,6 +853,134 @@ public class GameEngine extends GameCanvasEngine {
 			mainIndex = 7;
 		} else if (key.containsAndRemove(KeyCode.NUM4)) {
 			mainIndex = 8;
+		}
+	}
+
+	int newGuideIndex = 0;
+	Hero newHero;
+	Soldier[] newSoldier = new Soldier[6];
+	Monster newMonster;
+	Bullet newBullet;
+
+	private void handleNewGuide(KeyState key) {
+		if (key.containsAndRemove(KeyCode.OK)) {
+			newGuideIndex++;
+			if (newGuideIndex == 2) {
+				clearMainImg();
+				loadGameImg();
+				img[temp_img_distance1] = Resource.loadImage(Resource.bg0);
+				newHero = new Hero("xulingyun", 0, 1, 10, 22, 452, 200, 10, 0,
+						500);
+				newHero.setSrc(img[11]);
+				for (int i = 0; i < 2; i++) {
+					for (int j = 0; j < 3; j++) {
+						if (i * 3 + j == 0 || i * 3 + j == 2 || i * 3 + j == 4) {
+							newSoldier[i * 3 + j] = new Soldier("Soldier",
+									img[0], 1, i + 2, j, 0, 0, 0, 0, 0, 0);
+						} else {
+							newSoldier[i * 3 + j] = new Soldier("Soldier",
+									img[1], 1, i + 2, j, 1, 0, 0, 0, 0, 0);
+						}
+					}
+				}
+				newMonster = new Monster(10, 20, 0,
+						img[Resource.MonsterImgIndex[0] + 1], "Monster", 1, 2,
+						0, 50, 0, 0, 50);
+				newBullet = new Bullet(newMonster.getY() * 60 + 385,
+						newMonster.getX() * 60 + 11,
+						img[temp_img_distance2 + 56], newMonster);
+				Resource.goodsNums[0] = 1;
+				Resource.goodsNums[1] = 1;
+				Resource.goodsNums[2] = 1;
+			}
+			if (newGuideIndex == 20) {
+				mainIndex = 2;
+			}
+		} else if (key.containsAndRemove(KeyCode.NUM0)) {
+			mainIndex = 0;
+			mainPageIndex[1] = 0;
+		}
+	}
+
+	private void drawNewGuide() {
+		setColour(0xff00ff);
+		if (newGuideIndex == 0) {
+			g.drawImage(img[temp_img_distance1 - 6 + 32], 0, 0, 20);
+			if (arrowIndex % 12 >= 0 && arrowIndex % 12 < 6) {
+				g.drawImage(img[temp_img_distance1 - 6 + 33], 200, 480, 20);
+			}
+		} else if (newGuideIndex == 1) {
+			arrowIndex++;
+			if (arrowIndex == 10000)
+				arrowIndex = 0;
+			g.drawImage(img[temp_img_distance1 - 6 + 8], 0, 0, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 36], 10, 180, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 54], 20, 230, 20);
+			g.drawRegion(img[temp_img_distance1 - 6 + 27], 0, 0, 85, 18, 0, 28,
+					235, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 23], 210, 140, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 54], 235, 230, 20);
+			g.drawRegion(img[temp_img_distance1 - 6 + 27], 0, 18, 85, 18, 0,
+					243, 235, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 40], 450, 160, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 54], 465, 230, 20);
+			g.drawRegion(img[temp_img_distance1 - 6 + 27], 0, 36, 85, 18, 0,
+					473, 235, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 30], 510, 330, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 54], 525, 395, 20);
+			g.drawRegion(img[temp_img_distance1 - 6 + 27], 0, 54, 85, 18, 0,
+					533, 400, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 22], 290, 320, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 54], 305, 385, 20);
+			g.drawRegion(img[temp_img_distance1 - 6 + 27], 0, 72, 85, 18, 0,
+					313, 390, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 58], 500, 0, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 54], 510, 125, 20);
+			g.drawRegion(img[temp_img_distance1 - 6 + 27], 0, 90, 85, 18, 0,
+					518, 130, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 21], 0, 350, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 54], 10, 415, 20);
+			g.drawRegion(img[temp_img_distance1 - 6 + 27], 0, 108, 85, 18, 0,
+					18, 420, 20);
+			g.drawImage(img[temp_img_distance1 - 6 + 62], 20, 460, 20);
+			arrowAnim(9, 20, 190, 0, 0, 0);
+			roleInformation();
+			g.drawImage(img[18], 220, 200, 20);
+			TextView.showMultiLineText(g, "冒险者，欢迎来到皇家军团的世界，点击确认键开始冒险。",
+					TextView.STYLE_NORMAL, 240, 250, 230, 100);
+		} else if (newGuideIndex >= 2) {
+			g.drawImage(img[temp_img_distance1], 0, 0, 20);
+			for (int k = 0; k < 6; k++) {
+				g.drawRegion(
+						newSoldier[k].getSrc(),
+						0,
+						0,
+						62,
+						62,
+						0,
+						newSoldier[k].getY() * 60 + 17
+								+ newSoldier[k].getOffX(),
+						newSoldier[k].getX() * 60 + 11, 20);
+			}
+			g.drawRegion(newMonster.getSrc(), 0, 0, 60, 60, 0,
+					385 + newMonster.getY() * 60, 11 + newMonster.getX() * 60,
+					20);
+			if (newGuideIndex == 2) {
+				g.drawRegion(newBullet.getSrc(), 0, 0, 32, 20, 0,
+						newBullet.getX(), newBullet.getY(), 20);
+				newBullet.setX(newBullet.getX() - 50);
+				if (newBullet.getX() <= 0) {
+					newGuideIndex = 3;
+					newBullet = null;
+				}
+			} else if (newGuideIndex == 3) {
+				g.drawImage(img[18], 220, 200, 20);
+				TextView.showMultiLineText(g,
+						"血量马上见底了，快使用治疗药剂恢复血量。按数字键1使用治疗药剂。",
+						TextView.STYLE_NORMAL, 240, 250, 230, 100);
+				// g.drawImage(img, x, y, 20);
+			}
+			drawHeroInfo1(newHero);
 		}
 	}
 
@@ -2051,10 +2185,10 @@ public class GameEngine extends GameCanvasEngine {
 				panle_y + 120);
 		TextView.showSingleLineText(g, "获得的金币：" + winMoney, panle_x + 80,
 				panle_y + 140);
-		if (Resource.guanqiaLevel[mainPageIndex[0] + mainPageIndex[1]] < tempStar)
-			Resource.guanqiaLevel[mainPageIndex[0] + mainPageIndex[1]] = (byte) tempStar;
-		if (Resource.guanqiaLevel[mainPageIndex[0] + mainPageIndex[1] + 1] == -1)
-			Resource.guanqiaLevel[mainPageIndex[0] + mainPageIndex[1] + 1] = 0;
+		if (Resource.guanqiaLevel[mainPageIndex[0] * 10 + mainPageIndex[1]] < tempStar)
+			Resource.guanqiaLevel[mainPageIndex[0] * 10 + mainPageIndex[1]] = (byte) tempStar;
+		if (Resource.guanqiaLevel[mainPageIndex[0] * 10 + mainPageIndex[1] + 1] == -1)
+			Resource.guanqiaLevel[mainPageIndex[0] * 10 + mainPageIndex[1] + 1] = 0;
 		g.drawRegion(img[temp_img_distance1 - 6 + 15], 0, 0, 47, 29, 0,
 				panle_x + 117, panle_y + 175, 20);
 		g.drawRegion(img[temp_img_distance1 - 6 + 41], 0, 0, 40, 20, 0,
@@ -2242,6 +2376,13 @@ public class GameEngine extends GameCanvasEngine {
 		for (int kk = 0; kk < stickVector.size();) {
 			kk = drawStick((Bullet) stickVector.elementAt(kk), kk);
 		}
+		// setColour(0xffffff);
+		// for (int kk = 0; kk < sayJokeArray.size();) {
+		// Say sayJoke = (Say) sayJokeArray.elementAt(kk);
+		// drawSayBox(sayJoke);
+		// kk++;
+		// }
+
 		drawMonsterBullet1();
 		drawSoldierBullet1();
 		drawSoldierBullet2();
@@ -2269,8 +2410,9 @@ public class GameEngine extends GameCanvasEngine {
 				auto3Skill();
 			}
 		}
+
 		diaoblood();
-		drawHeroInfo1();
+		drawHeroInfo1(hero);
 		drawHeroSkill();
 		judgeRemove();
 		if (useProp == 1) {
@@ -2349,7 +2491,6 @@ public class GameEngine extends GameCanvasEngine {
 				if (hero.getBoold() <= 0) {
 					hero.setBoold(0);
 				}
-				System.out.println("*******次数：" + diaobloodIndex);
 			} else {
 				hero.setLastHurt(false);
 				hero.setHurtStartTime(0);
@@ -4923,8 +5064,20 @@ public class GameEngine extends GameCanvasEngine {
 		}
 	}
 
+	// Vector sayJokeArray = new Vector();
+
 	private void soldier1Anim(Soldier[][][] ss, int f, int i) {
 		int length2 = ss[f][i].length;
+		// if (length2 >= 3 && ss[f][i][0] != null &&
+		// ss[f][i][0].isFirstAction()) {
+		// ss[f][i][0].setFirstAction(false);
+		// Say sayJoke = new Say(ss[f][i][0].getY() * 60 + 40,
+		// ss[f][i][0].getX() * 60, 0);
+		// int sayIndex = RandomValue
+		// .getRandInt(0, Resource.soldierSay.length);
+		// sayJoke.setSayString(Resource.soldierSay[sayIndex]);
+		// sayJokeArray.addElement(sayJoke);
+		// }
 		for (int j = 0; j < length2; j++) {
 			if (ss[f][i][j] != null) {
 				if (!stopState) {
@@ -4945,7 +5098,19 @@ public class GameEngine extends GameCanvasEngine {
 		}
 	}
 
-	public void drawHeroInfo1() {
+	// private void drawSayBox(Say sayJoke) {
+	// if (System.currentTimeMillis() - sayJoke.getStartTime() < Say.lastTime) {
+	// g.drawImage(Say.img, sayJoke.getX() + sayJoke.getOff_x(),
+	// sayJoke.getY(), 20);
+	// TextView.showSingleLineText(g, sayJoke.getSayString(),
+	// sayJoke.getX() + sayJoke.getOff_x(), sayJoke.getY(), 77,
+	// 20, TextView.STYLE_ALIGN_CENTER);
+	// sayJoke.setOff_x(sayJoke.getOff_x() + 45);
+	// }
+	//
+	// }
+
+	public void drawHeroInfo1(Hero hero) {
 		int temp_x = 5;
 		int temp_y = 435;
 		setColour(0xffffff);
@@ -5512,7 +5677,10 @@ public class GameEngine extends GameCanvasEngine {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		if (page.equals(Resource.PAGE_INDEX[0])
 				|| page.equals(Resource.PAGE_INDEX[1])) {
-			drawMain();
+			if (mainIndex != 20)
+				drawMain();
+			else
+				drawNewGuide();
 		} else if (page.equals(Resource.PAGE_INDEX[2])) {
 			drawGame();
 		}
@@ -5578,13 +5746,22 @@ public class GameEngine extends GameCanvasEngine {
 	public void handleKey(KeyState key) {
 		if (page == Resource.PAGE_INDEX[0]) {
 			if (key.containsAndRemove(KeyCode.OK)) {
-				getData();
+				if (isFirstEnter()) {
+					mainIndex = 20;
+					newGuideIndex = 1;
+				} else {
+					getData_xv();
+					mainIndex = 0;
+					isHelp = false;
+				}
 				page = Resource.PAGE_INDEX[1];
-				mainIndex = 0;
-				isHelp = false;
+				my = new Myself(Resource.myProperty[0], Resource.myProperty[1],
+						Resource.myProperty[2], Resource.myProperty[3]);
 			}
 		} else if (page == Resource.PAGE_INDEX[1]) {
-			if (mainIndex == 0)
+			if (mainIndex == 20) {
+				handleNewGuide(key);
+			} else if (mainIndex == 0)
 				handleMainKey0(key);
 			else if (mainIndex == 1)
 				handleMainKey1(key);
@@ -5624,7 +5801,6 @@ public class GameEngine extends GameCanvasEngine {
 
 	private void handeGameOver1(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK) && mayEnterButton) {
-			mainPageIndex[1] = 0;
 			mainIndex = 1;
 			gameIndex = 0;
 			page = Resource.PAGE_INDEX[1];
@@ -5637,7 +5813,6 @@ public class GameEngine extends GameCanvasEngine {
 
 	private void handeGameOver2(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK) && mayEnterButton) {
-			mainPageIndex[1] = 0;
 			mainIndex = 1;
 			gameIndex = 0;
 			page = Resource.PAGE_INDEX[1];
@@ -5648,7 +5823,6 @@ public class GameEngine extends GameCanvasEngine {
 				mainPageIndex[0]++;
 				mainPageIndex[1] = 0;
 			}
-
 			clearGameImg();
 			loadMainImg();
 		}
@@ -5711,7 +5885,6 @@ public class GameEngine extends GameCanvasEngine {
 					at.start();
 				}
 			}
-			info = "我按下了左键";
 		} else if (key.containsAndRemove(KeyCode.RIGHT)) {
 			if (indexSelect == -1) {
 				if (index % 4 == 3)
@@ -5736,7 +5909,6 @@ public class GameEngine extends GameCanvasEngine {
 					at.start();
 				}
 			}
-			info = "我按下了右键";
 		} else if (key.containsAndRemove(KeyCode.UP)) {
 			if (indexSelect == -1) {
 				if (index < 4)
@@ -5761,7 +5933,6 @@ public class GameEngine extends GameCanvasEngine {
 					at.start();
 				}
 			}
-			info = "我按下了上键";
 		} else if (key.containsAndRemove(KeyCode.DOWN)) {
 			if (indexSelect == -1) {
 				if (index > 23)
@@ -5786,7 +5957,6 @@ public class GameEngine extends GameCanvasEngine {
 					at.start();
 				}
 			}
-			info = "我按下了下键";
 		} else if (key.containsAndRemove(KeyCode.NUM0)) {
 			stopState = true;
 			gameIndex = 3;

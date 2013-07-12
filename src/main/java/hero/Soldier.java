@@ -12,6 +12,15 @@ public class Soldier extends Animal {
 	private int animIndex;
 	private boolean fightWait;
 	private int fightWaitIndex;
+	private boolean firstAction = true;
+
+	public boolean isFirstAction() {
+		return firstAction;
+	}
+
+	public void setFirstAction(boolean firstAction) {
+		this.firstAction = firstAction;
+	}
 
 	public boolean isFightWait() {
 		return fightWait;
