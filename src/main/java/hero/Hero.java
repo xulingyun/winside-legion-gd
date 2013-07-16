@@ -2,15 +2,18 @@ package hero;
 
 import javax.microedition.lcdui.Image;
 
+import test.Resource;
+
 public class Hero implements HeroInterface {
 
 	public final static int booldX = 178;
-	public final static int booldY = 448;
+	public final static int booldY = 473;
 	public final static int magicX = 178;
-	public final static int magicY = 478;
+	public final static int magicY = 498;
 
 	String name;
-	Image src;
+	Image src = Resource.loadImage(Resource.hero);
+	Image heroskillSrc = Resource.loadImage(Resource.heroskillsrc);
 	int level;
 	int x;
 	int y;
@@ -26,9 +29,13 @@ public class Hero implements HeroInterface {
 	float AtkCoefficient = 1.0f;
 	float booldCoefficient = 1.0f;
 	long negativeTime = 0l;
-	public final static long  hurtTime = 10000;
+	public final static long hurtTime = 10000;
 	long hurtStartTime;
 	boolean lastHurt = false;
+
+	public Image getHeroskillSrc() {
+		return heroskillSrc;
+	}
 
 	public boolean isLastHurt() {
 		return lastHurt;

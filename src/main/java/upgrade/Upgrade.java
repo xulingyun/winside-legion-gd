@@ -33,9 +33,13 @@ public class Upgrade {
 				* Resource.heroValue[kind][7];
 	}
 
-	public static long upgradeLeader(long level) {
+	public static long upgradeLeaderExp(long level) {
 		long exp = (long) (((level - 1) * (level - 1) + 60) / 5 * ((level - 1) * 2 + 60));
 		return exp;
+	}
+
+	public static int upgradeLeaderNengliang(int level) {
+		return 20 + (level - 1) * 1;
 	}
 
 }

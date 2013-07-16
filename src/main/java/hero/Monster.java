@@ -144,14 +144,6 @@ public class Monster implements HeroInterface {
 		return state;
 	}
 
-	// public long getEndTime() {
-	// return endTime;
-	// }
-	//
-	// public void setEndTime(long endTime) {
-	// this.endTime = endTime;
-	// }
-
 	public void setState(int state) {
 		this.state = state;
 	}
