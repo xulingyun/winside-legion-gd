@@ -13,6 +13,15 @@ public class Soldier extends Animal {
 	private boolean fightWait;
 	private int fightWaitIndex;
 	private boolean firstAction = true;
+	private static float AtkCoefficient = 1.0f;
+
+	public static float getAtkCoefficient() {
+		return AtkCoefficient;
+	}
+
+	public static void setAtkCoefficient(float f) {
+		AtkCoefficient = f;
+	}
 
 	public boolean isFirstAction() {
 		return firstAction;

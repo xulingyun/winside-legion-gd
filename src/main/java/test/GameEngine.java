@@ -66,7 +66,7 @@ public class GameEngine extends GameCanvasEngine {
 	boolean startAddState = false;
 	private int[][][][][] mapArray;
 	int[][] location = new int[4][9];
-	public static Image[] img = new Image[163];
+	public static Image[] img = new Image[166];
 	Soldier[][] idPic = new Soldier[7][4];
 	Monster[][] monsterPic = new Monster[7][4];
 	int[] mainPageIndex = new int[5];
@@ -105,14 +105,14 @@ public class GameEngine extends GameCanvasEngine {
 	Point skill1Hero;
 	long needMoney;
 	int awardCount = 1;
-	int selectShopBigIndex = 0;
-	int selectShopSmallIndex = -1;
+	int selectShopBigIndex;
+	int selectShopSmallIndex;
 
 	public PlayerProp[] props;
 	Myself my;
 	GameRecord record;
 	int temp_img_distance1 = 20;
-	int temp_img_distance2 = temp_img_distance1 + 60;
+	int temp_img_distance2 = temp_img_distance1 + 61;
 	int tempMainPage0Index;
 	int enterWay;
 	int money = 0;
@@ -139,6 +139,9 @@ public class GameEngine extends GameCanvasEngine {
 		selectHeroIndex = 0;
 		shopPage = 0;
 		shopSum = 11;
+		isEnhanceBoold = false;
+		isEnhanceSoldierATK = false;
+		isEnhanceArmor = false;
 		img[0] = Resource.loadImage(Resource.soldier0);
 		img[1] = Resource.loadImage(Resource.soldier1);
 		img[2] = Resource.loadImage(Resource.soldier2);
@@ -347,6 +350,8 @@ public class GameEngine extends GameCanvasEngine {
 				.loadImage(Resource.shenglishibai);
 		img[temp_img_distance2 + 80] = Resource.loadImage(Resource.star1);
 		img[temp_img_distance2 + 81] = Resource.loadImage(Resource.buff);
+		img[temp_img_distance2 + 82] = Resource.loadImage(Resource.herosay1);
+		img[temp_img_distance2 + 82] = Resource.loadImage(Resource.herosay2);
 		img[temp_img_distance1 - 6 + 51] = Resource
 				.loadImage(Resource.shoptool);
 		img[temp_img_distance1 - 6 + 50] = Resource
@@ -444,6 +449,7 @@ public class GameEngine extends GameCanvasEngine {
 		img[temp_img_distance1 - 6 + 61] = Resource.loadImage(Resource.nbar);
 		img[temp_img_distance1 - 6 + 62] = Resource.loadImage(Resource.help1);
 		img[temp_img_distance1 - 6 + 63] = Resource.loadImage(Resource.help2);
+		img[temp_img_distance1 - 6 + 64] = Resource.loadImage(Resource.use);
 	}
 
 	public void clearMainImg() {
@@ -710,6 +716,15 @@ public class GameEngine extends GameCanvasEngine {
 						selectHeroIndex), 0, 0, Upgrade.upgradeHeroBlood(
 						Resource.isBelongMyOfHero[selectHeroIndex],
 						selectHeroIndex));
+		if (isEnhanceBoold) {
+			drawUseProp10();
+		}
+		if (isEnhanceArmor) {
+			drawUseProp9();
+		}
+		if (isEnhanceSoldierATK) {
+			drawUseProp8();
+		}
 		ca = new CreatArray(img, hero);
 		idPic = ca.randomArray();
 		ca.setIdPic(idPic);
@@ -795,8 +810,11 @@ public class GameEngine extends GameCanvasEngine {
 				enterWay = 0;
 				mainIndex = 4;
 			} else if (mainPageIndex[0] == 9) {
-				selectShopSmallIndexTemp = 0;
+				shopArea = 0;
 				mainIndex = 7;
+				canGoodsIndex = 0;
+				selectShopBigIndex = 0;
+				selectShopSmallIndex = 0;
 			} else if (mainPageIndex[0] == 12) {
 				mainIndex = 12;
 				isHelp = true;
@@ -2262,7 +2280,6 @@ public class GameEngine extends GameCanvasEngine {
 			g.drawRegion(img[temp_img_distance1 - 6 + 49], 0, 20 * i, 80, 20,
 					0, temp_x + 15 + 96 * i, temp_y - 20, 20);
 		}
-
 		if (shopPage * 6 - 6 >= 0) {
 			g.drawRegion(img[temp_img_distance1 - 6 + 31], 0, 0, 23, 54, 0,
 					temp_x + 5, temp_y + 117, 20);
@@ -2296,9 +2313,70 @@ public class GameEngine extends GameCanvasEngine {
 					(shopPage * 6 + i) * 62, 0, 62, 62, 0, temp_x + 33
 							+ (i % 2) * 165, temp_y + 40 + i / 2 * 65, 20);
 		}
-		if (selectShopSmallIndex == -1) {
-			arrowAnim(9, temp_x, temp_y, 3, 25 + 96 * selectShopBigIndex, -20);
+		if (shopArea != 0) {
+			g.drawImage(img[temp_img_distance1 - 6 + 53], temp_x + 390, temp_y,
+					20);
+			int valueClour = 0x000000;
+			setColour(valueClour);
+			if (shopArea == 1) {
+				TextView.showSingleLineText(g,
+						Resource.shopInfo[(selectShopSmallIndex) * 2],
+						temp_x + 400, temp_y + 15, 190, 30,
+						TextView.STYLE_ALIGN_CENTER);
+				TextView.showMultiLineText(g,
+						Resource.shopInfo[(selectShopSmallIndex) * 2 + 1],
+						TextView.STYLE_ALIGN_CENTER, temp_x + 400, temp_y + 50,
+						180, 60);
+			} else {
+				TextView.showSingleLineText(g,
+						Resource.shopInfo[(canGoodsIndex) * 2], temp_x + 400,
+						temp_y + 15, 190, 30, TextView.STYLE_ALIGN_CENTER);
+				TextView.showMultiLineText(g,
+						Resource.shopInfo[(canGoodsIndex) * 2 + 1],
+						TextView.STYLE_ALIGN_CENTER, temp_x + 400, temp_y + 50,
+						180, 60);
+			}
+		}
+		for (int kl = 0; kl < 5; kl++) {
+			g.drawImage(img[temp_img_distance1 - 6 + 52], kl * 144, 420, 20);
+		}
+		g.drawImage(img[temp_img_distance1 - 6 + 43], 0, 420, 20);
+		if (canGoodsIndex < 6) {
+			for (int kj = 0; kj < 6; kj++) {
+				g.drawImage(img[14], 150 + kj * 80, 430, 20);
+				g.drawRegion(img[temp_img_distance1 - 6 + 51], 62 * kj, 0, 62,
+						62, 0, 150 + kj * 80, 430, 20);
+				g.drawImage(img[temp_img_distance1 - 6 + 50],
+						150 + kj * 80 + 40, 430, 20);
+				TextView.showSingleLineText(g, Resource.goodsNums[kj] + "",
+						150 + kj * 80 + 40, 430);
+				g.drawRegion(img[temp_img_distance1 - 6 + 15], 0, 0, 47, 29, 0,
+						150 + kj * 80, 492, 20);
+				g.drawImage(img[temp_img_distance1 - 6 + 64], 154 + kj * 80,
+						497, 20);
+			}
+			g.drawRegion(img[temp_img_distance1 - 6 + 31], 24, 0, 23, 54, 0,
+					615, 430, 20);
 		} else {
+			for (int kj = 6; kj < Resource.goodsNums.length; kj++) {
+				g.drawImage(img[14], 150 + (kj - 6) * 80, 430, 20);
+				g.drawRegion(img[temp_img_distance1 - 6 + 51], 62 * kj, 0, 62,
+						62, 0, 150 + (kj - 6) * 80, 430, 20);
+				g.drawImage(img[temp_img_distance1 - 6 + 50],
+						150 + (kj - 6) * 80 + 40, 430, 20);
+				TextView.showSingleLineText(g, Resource.goodsNums[kj] + "",
+						150 + (kj - 6) * 80 + 40, 430);
+				g.drawRegion(img[temp_img_distance1 - 6 + 15], 0, 0, 47, 29, 0,
+						150 + (kj - 6) * 80, 492, 20);
+				g.drawImage(img[temp_img_distance1 - 6 + 64],
+						154 + (kj - 6) * 80, 497, 20);
+			}
+			g.drawRegion(img[temp_img_distance1 - 6 + 31], 0, 0, 23, 54, 0,
+					125, 430, 20);
+		}
+		if (shopArea == 0) {
+			arrowAnim(9, temp_x, temp_y, 3, 25 + 96 * selectShopBigIndex, -20);
+		} else if (shopArea == 1) {
 			if (selectShopSmallIndex < 6)
 				arrowAnim(9, temp_x, temp_y, 3,
 						155 + selectShopSmallIndex % 2 * 165,
@@ -2308,73 +2386,105 @@ public class GameEngine extends GameCanvasEngine {
 						155 + (selectShopSmallIndex - 6) % 2 * 165,
 						75 + 62 * ((selectShopSmallIndex - 6) / 2));
 			}
-		}
-		if (selectShopSmallIndex != -1) {
-			g.drawImage(img[temp_img_distance1 - 6 + 53], temp_x + 390, temp_y,
-					20);
-			int valueClour = 0x000000;
-			setColour(valueClour);
-			TextView.showMultiLineText(g,
-					Resource.shopInfo[(selectShopSmallIndex) * 2],
-					temp_x + 400, temp_y + 15, 190, 30,
-					TextView.STYLE_ALIGN_CENTER);
-			TextView.showMultiLineText(g,
-					Resource.shopInfo[(selectShopSmallIndex) * 2 + 1],
-					TextView.STYLE_ALIGN_CENTER, temp_x + 400, temp_y + 50,
-					180, 60);
-		}
-		for (int kl = 0; kl < 5; kl++) {
-			g.drawImage(img[temp_img_distance1 - 6 + 52], kl * 144, 420, 20);
-		}
-		g.drawImage(img[temp_img_distance1 - 6 + 43], 0, 420, 20);
-		if (canGoodsKind > 5) {
-
-		}
-		int canGoodsIndex = 0;
-		for (int kj = 0; kj < Resource.goodsNums.length; kj++) {
-			if (Resource.goodsNums[kj] > 0) {
-				g.drawImage(img[14], 170 + canGoodsIndex * 80, 430, 20);
-				g.drawRegion(img[temp_img_distance1 - 6 + 51], 62 * kj, 0, 62,
-						62, 0, 170 + canGoodsIndex * 80, 430, 20);
-				g.drawImage(img[temp_img_distance1 - 6 + 50],
-						170 + canGoodsIndex * 80 + 40, 430, 20);
-				TextView.showSingleLineText(g, Resource.goodsNums[kj] + "",
-						170 + canGoodsIndex * 80 + 40, 430);
-				canGoodsIndex++;
-			}
+		} else if (shopArea == 2) {
+			arrowAnim(9, 160 + 80 * (canGoodsIndex % 6), 490, 3, 0, 0);
 		}
 	}
 
+	int canGoodsIndex;
 	int selectShopSmallIndexTemp;
+	int shopArea;
 
 	private void handleMainKey7(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK)) {
-			PopupConfirm pc = UIResource.getInstance()
-					.buildDefaultPopupConfirm();
-			pc.setText("是否购买道具");
-			if (pc.popup() == 0) {
-				boolean flag = pm.buyProp(135 + selectShopSmallIndex, 1, g);
-				if (flag) {
-					PlayerProp props = pm
-							.getPropById(135 + selectShopSmallIndex);
-					props.setNums(props.getNums() + 1);
-					Resource.goodsNums[selectShopSmallIndex]++;
+			if (shopArea == 1) {
+				PopupConfirm pc = UIResource.getInstance()
+						.buildDefaultPopupConfirm();
+				pc.setText("是否购买道具");
+				if (pc.popup() == 0) {
+					boolean flag = pm.buyProp(135 + selectShopSmallIndex, 1, g);
+					if (flag) {
+						PlayerProp props = pm
+								.getPropById(135 + selectShopSmallIndex);
+						props.setNums(props.getNums() + 1);
+						Resource.goodsNums[selectShopSmallIndex]++;
+					}
+				}
+			} else if (shopArea == 2) {
+				if (canGoodsIndex >= 0 && canGoodsIndex <= 2) {
+					PopupText pt = UIResource.getInstance()
+							.buildDefaultPopupText();
+					pt.setText("该物品在战斗中才能使用！");
+					pt.popup();
+				} else if (canGoodsIndex == 3) {
+					PopupText pt = UIResource.getInstance()
+							.buildDefaultPopupText();
+					pt.setText("你使用了双倍经验卡，在接下来一场战斗中，你将会获得双倍的经验！");
+					pt.popup();
+					heroStateLength++;
+					isDoubleExp = true;
+					drawUseProp4();
+				} else if (canGoodsIndex == 4) {
+					PopupText pt = UIResource.getInstance()
+							.buildDefaultPopupText();
+					pt.setText("你使用了双倍金币卡，在接下来一场战斗中，你将会获得双倍的金币！");
+					pt.popup();
+					heroStateLength++;
+					isDoubleMoney = true;
+					drawUseProp5();
+				} else if (canGoodsIndex == 5) {
+					PopupText pt = UIResource.getInstance()
+							.buildDefaultPopupText();
+					pt.setText("你使用了能量石道具，使你的能量增加，能更好的去战斗！！");
+					pt.popup();
+					Resource.goodsNums[5]--;
+					drawUseProp6();
+				} else if (canGoodsIndex == 7) {
+					PopupText pt = UIResource.getInstance()
+							.buildDefaultPopupText();
+					pt.setText("你使用了军团之力道具，在接下来一场战斗中，士兵的攻击力将提高20%！");
+					pt.popup();
+					heroStateLength++;
+					isEnhanceSoldierATK = true;
+					Resource.goodsNums[7]--;
+				} else if (canGoodsIndex == 8) {
+					PopupText pt = UIResource.getInstance()
+							.buildDefaultPopupText();
+					pt.setText("你使用了刚性护符道具，在接下来一场战斗中，你将会增加20点的防御力！");
+					pt.popup();
+					heroStateLength++;
+					isEnhanceArmor = true;
+					Resource.goodsNums[8]--;
+				} else if (canGoodsIndex == 9) {
+					PopupText pt = UIResource.getInstance()
+							.buildDefaultPopupText();
+					pt.setText("你使用了生命谐音道具，在接下来一场战斗中，你将会增加20%的生命值！");
+					pt.popup();
+					heroStateLength++;
+					isEnhanceBoold = true;
+					Resource.goodsNums[9]--;
+				} else if (canGoodsIndex == 10) {
+					PopupText pt = UIResource.getInstance()
+							.buildDefaultPopupText();
+					pt.setText("你获得了10000金币！");
+					pt.popup();
+					Resource.goodsNums[10]--;
+					drawUseProp11();
 				}
 			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
-			if (selectShopSmallIndex == -1) {
+			if (shopArea == 0) {
 				if (selectShopBigIndex == 1) {
 					selectShopBigIndex = 0;
 					shopSum = 11;
 					shopPage = 0;
-					selectShopSmallIndexTemp = 0;
+					selectShopSmallIndex = 0;
 				}
-			} else {
+			} else if (shopArea == 1) {
 				if (selectShopSmallIndex == 1 || selectShopSmallIndex == 3
 						|| selectShopSmallIndex == 5
 						|| selectShopSmallIndex == 7
-						|| selectShopSmallIndex == 9
-						|| selectShopSmallIndex == 11) {
+						|| selectShopSmallIndex == 9) {
 					selectShopSmallIndex--;
 					if (selectShopSmallIndex > shopSum - 1) {
 						selectShopSmallIndex++;
@@ -2389,21 +2499,25 @@ public class GameEngine extends GameCanvasEngine {
 						shopPage += 1;
 					}
 				}
+			} else if (shopArea == 2) {
+				canGoodsIndex--;
+				if (canGoodsIndex < 0) {
+					canGoodsIndex++;
+				}
 			}
 		} else if (key.containsAndRemove(KeyCode.RIGHT)) {
-			if (selectShopSmallIndex == -1) {
+			if (shopArea == 0) {
 				if (selectShopBigIndex == 0) {
 					selectShopBigIndex = 1;
 					shopSum = 3;
 					shopPage = 0;
-					selectShopSmallIndexTemp = 0;
+					selectShopSmallIndex = 0;
 				}
-			} else {
+			} else if (shopArea == 1) {
 				if (selectShopSmallIndex == 0 || selectShopSmallIndex == 2
 						|| selectShopSmallIndex == 4
 						|| selectShopSmallIndex == 6
-						|| selectShopSmallIndex == 8
-						|| selectShopSmallIndex == 10) {
+						|| selectShopSmallIndex == 8) {
 					selectShopSmallIndex++;
 					if (selectShopSmallIndex > shopSum - 1) {
 						selectShopSmallIndex--;
@@ -2418,31 +2532,45 @@ public class GameEngine extends GameCanvasEngine {
 						shopPage -= 1;
 					}
 				}
+			} else if (shopArea == 2) {
+				canGoodsIndex++;
+				if (canGoodsIndex > Resource.goodsNums.length - 1) {
+					canGoodsIndex--;
+				}
 			}
 		} else if (key.containsAndRemove(KeyCode.UP)) {
-			if (selectShopSmallIndex != -1) {
+			if (shopArea == 1) {
 				if (selectShopSmallIndex != 0 && selectShopSmallIndex != 1
 						&& selectShopSmallIndex != 6
 						&& selectShopSmallIndex != 7) {
 					selectShopSmallIndex -= 2;
-					if (selectShopSmallIndex > shopSum - 1) {
-						selectShopSmallIndex += 2;
-					}
 				} else {
-					selectShopSmallIndexTemp = selectShopSmallIndex;
-					selectShopSmallIndex = -1;
+					shopArea = 0;
 				}
+			} else if (shopArea == 2) {
+				shopArea = 1;
 			}
 		} else if (key.containsAndRemove(KeyCode.DOWN)) {
-			if (selectShopSmallIndex == -1) {
-				selectShopSmallIndex = selectShopSmallIndexTemp;
-			} else {
-				if (selectShopSmallIndex != 4 && selectShopSmallIndex != 5
-						&& selectShopSmallIndex != 10
-						&& selectShopSmallIndex != 11)
-					selectShopSmallIndex += 2;
-				if (selectShopSmallIndex > shopSum - 1) {
-					selectShopSmallIndex -= 2;
+			if (shopArea == 0) {
+				shopArea = 1;
+			} else if (shopArea == 1) {
+				if (selectShopBigIndex == 0) {
+					if (selectShopSmallIndex != 4 && selectShopSmallIndex != 5
+							&& selectShopSmallIndex != 10
+							&& selectShopSmallIndex != 9) {
+						selectShopSmallIndex += 2;
+						if (selectShopSmallIndex > shopSum - 1) {
+							selectShopSmallIndex -= 2;
+						}
+					} else {
+						shopArea = 2;
+					}
+				} else if (selectShopBigIndex == 1) {
+					if (selectShopSmallIndex != 1 && selectShopSmallIndex != 2) {
+						selectShopSmallIndex += 2;
+					} else {
+						shopArea = 2;
+					}
 				}
 			}
 		} else if (key.containsAndRemove(KeyCode.NUM0)) {
@@ -2486,10 +2614,18 @@ public class GameEngine extends GameCanvasEngine {
 		else
 			tempStar = 1;
 		mayEnterButton = drawStar1(tempStar);
-		TextView.showSingleLineText(g, "获得的经验：" + winExp, panle_x + 80,
-				panle_y + 120);
-		TextView.showSingleLineText(g, "获得的金币：" + winMoney, panle_x + 80,
-				panle_y + 140);
+		if (isDoubleExp)
+			TextView.showSingleLineText(g, "获得的经验：" + winExp + "x" + 2,
+					panle_x + 80, panle_y + 120);
+		else
+			TextView.showSingleLineText(g, "获得的经验：" + winExp, panle_x + 80,
+					panle_y + 120);
+		if (isDoubleMoney)
+			TextView.showSingleLineText(g, "获得的金币：" + winMoney + "x" + 2,
+					panle_x + 80, panle_y + 140);
+		else
+			TextView.showSingleLineText(g, "获得的金币：" + winMoney, panle_x + 80,
+					panle_y + 140);
 		if (Resource.guanqiaLevel[(mainPageIndex[0] - 1) * 10
 				+ mainPageIndex[1]] < tempStar)
 			Resource.guanqiaLevel[(mainPageIndex[0] - 1) * 10
@@ -2643,14 +2779,6 @@ public class GameEngine extends GameCanvasEngine {
 				moveSmall_y = 0;
 			}
 		}
-		hero.setNegativeTime(hero.getNegativeTime() + suggestAndStopEndTime);
-		if (System.currentTimeMillis() - hero.getNegativeTime() > 10000) {
-			hero.setDefenceCoefficient(1.0f);
-		} else {
-			g.drawRegion(img[temp_img_distance2 + 81], 5 * 24, 0, 24, 24, 0,
-					Hero.booldX + heroStateIndex * 24, Hero.booldY - 25, 20);
-			heroStateIndex++;
-		}
 		g.drawImage(img[temp_img_distance2 + mainPageIndex[0] - 1],
 				moveSmall_x, moveSmall_y, 20);
 		drawMonster();
@@ -2724,12 +2852,71 @@ public class GameEngine extends GameCanvasEngine {
 		}
 		diaoblood();
 		drawHeroInfo1(hero);
+		hero.setNegativeTime(hero.getNegativeTime() + suggestAndStopEndTime);
+		if (System.currentTimeMillis() - hero.getNegativeTime() > 10000) {// 怪物11给的负面buff
+			hero.setDefenceCoefficient(1.0f);
+		} else {
+			g.drawRegion(img[temp_img_distance2 + 81], 5 * 24, 0, 24, 24, 0,
+					Hero.booldX + heroStateIndex * 24, Hero.booldY - 25, 20);
+			heroStateIndex++;
+		}
+		if (isDoubleExp) {// 经验buff位置
+			g.drawRegion(img[temp_img_distance2 + 81], 5 * 24, 0, 24, 24, 0,
+					Hero.booldX + heroStateIndex * 24, Hero.booldY - 25, 20);
+			heroStateIndex++;
+		}
+		if (isDoubleMoney) {// 金币buff位置
+			g.drawRegion(img[temp_img_distance2 + 81], 5 * 24, 0, 24, 24, 0,
+					Hero.booldX + heroStateIndex * 24, Hero.booldY - 25, 20);
+			heroStateIndex++;
+		}
+		if (isAddArmor// 英雄2护盾的buff
+				&& (System.currentTimeMillis() - addArmorStartTime - suggestAndStopEndTime) < 10000) {
+			g.drawRegion(img[temp_img_distance2 + 81], 4 * 24, 0, 24, 24, 0,
+					Hero.booldX + heroStateIndex * 24, Hero.booldY - 25, 20);
+			heroStateIndex++;
+		} else {
+			isAddArmor = false;
+		}
+		if (isEnhanceBoold) {// 增加血量的buff
+			g.drawRegion(img[temp_img_distance2 + 81], 1 * 24, 0, 24, 24, 0,
+					Hero.booldX + heroStateIndex * 24, Hero.booldY - 25, 20);
+			heroStateIndex++;
+		}
+		if (isEnhanceArmor) {// 增加护甲的buff
+			g.drawRegion(img[temp_img_distance2 + 81], 2 * 24, 0, 24, 24, 0,
+					Hero.booldX + heroStateIndex * 24, Hero.booldY - 25, 20);
+			heroStateIndex++;
+		}
+		if (isEnhanceSoldierATK) {// 增加士兵攻击力的buff
+			g.drawRegion(img[temp_img_distance2 + 81], 0 * 24, 0, 24, 24, 0,
+					Hero.booldX + heroStateIndex * 24, Hero.booldY - 25, 20);
+			heroStateIndex++;
+		}
+		if (isDoubleAtk
+				&& (System.currentTimeMillis() - prop3StartTime - suggestAndStopEndTime) < 30000) {// 狂暴术使士兵攻击力翻倍的buff
+			g.drawRegion(img[temp_img_distance2 + 81], 3 * 24, 0, 24, 24, 0,
+					Hero.booldX + heroStateIndex * 24, Hero.booldY - 25, 20);
+			heroStateIndex++;
+		} else {
+			soldierATkTimes = 1;
+			isDoubleAtk = false;
+		}
+
 		drawHeroSkill();
 		judgeRemove();
 		if (useProp == 1) {
 			drawUseProp1();
+		} else if (useProp == 2) {
+			drawUseProp2();
 		} else if (useProp == 3) {
 			drawUseProp3();
+		}
+		if (isNowSay) {
+			drawHeroSay(0);
+		}
+		if (hero.getBoold() * 1.0 / hero.getBoolds() < 0.2) {
+			isNowSay = true;
 		}
 		int returnWinValue = judgeWinAndFail();
 		heroStateIndex = 0;
@@ -2916,8 +3103,14 @@ public class GameEngine extends GameCanvasEngine {
 				if (win1 == 0) {
 					winExp = 800;
 					winMoney = 1000;
-					Resource.myProperty[1] += winExp;
-					Resource.myProperty[2] += winMoney;
+					if (isDoubleExp)
+						Resource.myProperty[1] += winExp * 2;
+					else
+						Resource.myProperty[1] += winExp;
+					if (isDoubleMoney)
+						Resource.myProperty[2] += winMoney * 2;
+					else
+						Resource.myProperty[2] += winMoney;
 					if (Resource.myProperty[1] >= Upgrade
 							.upgradeLeaderExp(Resource.myProperty[0])) {
 						Resource.myProperty[1] -= Upgrade
@@ -3122,6 +3315,9 @@ public class GameEngine extends GameCanvasEngine {
 		}
 	}
 
+	private boolean isAddArmor;
+	private long addArmorStartTime;
+
 	public void drawSkill1() {
 		int j = hero.getSkillIndex();
 		g.drawRegion(img[temp_img_distance2 + 78], j / 2 * 281, 0, 281, 214, 0,
@@ -3131,6 +3327,10 @@ public class GameEngine extends GameCanvasEngine {
 		if (hero.getSkillIndex() == 11) {
 			hero.setSkillIndex(0);
 			skill1Hero = null;
+			heroStateLength++;
+			addArmorStartTime = System.currentTimeMillis();
+			isAddArmor = true;
+
 		}
 	}
 
@@ -3167,10 +3367,6 @@ public class GameEngine extends GameCanvasEngine {
 		if (!stopState && !isSuggest)
 			hero.setSkillIndex(hero.getSkillIndex() + 1);
 		if (skill1Hero.getX() >= 660) {
-			hero.setDefenceCoefficient((100 + Resource.heroValue[1][6] + Resource.heroValue[1][7]
-					* (hero.getLevel() - 1))
-					* Upgrade.upgradeHeroDefence(hero.getLevel(),
-							hero.getKind()) / 100);
 			hero.setSkillIndex(0);
 			heroSkillmonster.removeAllElements();
 			skill1Hero = null;
@@ -3240,7 +3436,51 @@ public class GameEngine extends GameCanvasEngine {
 		}
 	}
 
-	int soldierAttackCoefficient;
+	int prop2Index;
+
+	private void drawUseProp2() {
+		if (!stopState && !isSuggest) {
+			prop2Index++;
+			if (prop2Index < 6) {
+				for (int i = 0; i < Resource.prop2Localtion.length / 4; i++) {
+					Resource.prop2Localtion[i * 4 + 2]++;
+					Resource.prop2Localtion[i * 4 + 3]++;
+				}
+			}
+		}
+		if (prop2Index < 6) {
+			for (int i = 0; i < Resource.prop2Localtion.length / 4; i++) {
+				g.drawRegion(img[temp_img_distance2 + 76], prop2Index / 2 * 82,
+						0, 82, 80, 0, Resource.prop2Localtion[i * 4]
+								+ Resource.prop2Localtion[i * 4 + 2] * 40,
+						Resource.prop2Localtion[i * 4 + 1]
+								+ Resource.prop2Localtion[i * 4 + 3] * 50, 20);
+			}
+		} else {
+			for (int i = 0; i < Resource.prop2Localtion.length / 4; i++) {
+				g.drawRegion(img[temp_img_distance2 + 76], prop2Index / 2 * 82,
+						0, 82, 80, 0, Resource.prop2Localtion[i * 4]
+								+ Resource.prop2Localtion[i * 4 + 2] * 40,
+						Resource.prop2Localtion[i * 4 + 1]
+								+ Resource.prop2Localtion[i * 4 + 3] * 50, 20);
+				if (prop2Index == 15 && i == 4) {
+					for (int kl = 0; kl < Resource.prop2Localtion.length / 4; kl++) {
+						Resource.prop2Localtion[kl * 4 + 2] = 0;
+						Resource.prop2Localtion[kl * 4 + 3] = 0;
+					}
+					for (int jb = 0; jb < monsterVector.size(); jb++) {
+						Monster m = (Monster) monsterVector.elementAt(jb);
+						m.setShowBlood(true);
+						Critical c = new Critical(385 + m.getY() * 60
+								+ moveSmall_x,
+								11 + m.getX() * 60 + moveSmall_y, 200);
+						criticalArray1.addElement(c);
+					}
+					useProp = 0;
+				}
+			}
+		}
+	}
 
 	long prop3StartTime;
 	int heroStateLength;
@@ -3255,6 +3495,53 @@ public class GameEngine extends GameCanvasEngine {
 						20);
 			}
 		}
+	}
+
+	boolean isDoubleExp;
+
+	private void drawUseProp4() {
+
+	}
+
+	boolean isDoubleMoney;
+
+	private void drawUseProp5() {
+
+	}
+
+	private void drawUseProp6() {
+		my.setNengliang(my.getNengliang() + 10);
+		if (my.getNengliang() > Upgrade.upgradeLeaderNengliang((int) my
+				.getLevel())) {
+			my.setNengliang(Upgrade.upgradeLeaderNengliang((int) my.getLevel()));
+		}
+	}
+
+	private void drawUseProp7() {
+		heroStateLength++;
+	}
+
+	private boolean isEnhanceSoldierATK;
+
+	private void drawUseProp8() {
+		Soldier.setAtkCoefficient(1.1f);
+	}
+
+	private boolean isEnhanceArmor;
+
+	private void drawUseProp9() {
+		hero.setArmor(hero.getArmor() + 20);
+	}
+
+	private boolean isEnhanceBoold;
+
+	private void drawUseProp10() {
+		hero.setBoold((int) (hero.getBoold() * (1 + 0.2)));
+		hero.setBoolds((int) (hero.getBoolds() * (1 + 0.2)));
+	}
+
+	private void drawUseProp11() {
+		my.setMoney(my.getMoney() + 10000);
 	}
 
 	public void drawSkill4() {
@@ -3858,8 +4145,7 @@ public class GameEngine extends GameCanvasEngine {
 		if (kind == 20) {
 			fangyuli = 0;
 		} else {
-			fangyuli = (int) (hero.getDefenceCoefficient() * Upgrade
-					.upgradeHeroDefence(hero.getLevel(), hero.getKind()));
+			fangyuli = (int) (hero.getDefenceCoefficient() * hero.getArmor());
 		}
 		int tempBloods;
 		if (fangyuli >= monsterAttack) {
@@ -5234,8 +5520,11 @@ public class GameEngine extends GameCanvasEngine {
 		}
 	}
 
+	int soldierATkTimes;
+
 	public int shanghai(int level, int kind, int count) {
-		int atk = Upgrade.upgradeSoldierAttack(level, kind);
+		int atk = (int) (Upgrade.upgradeSoldierAttack(level, kind)
+				* Soldier.getAtkCoefficient() * soldierATkTimes);
 		if (count == 3) {
 			return atk;
 		} else if (count == 4) {
@@ -5800,9 +6089,7 @@ public class GameEngine extends GameCanvasEngine {
 				}
 				b.setIndex(imgIndex + 1);
 				if (b.getX() < 0) {
-					int fangyuli = (int) (Upgrade.upgradeHeroDefence(
-							hero.getLevel(), hero.getKind()) * hero
-							.getDefenceCoefficient());
+					int fangyuli = (int) (hero.getArmor());
 					int ddx;
 					int monsterAttack = b.getM().getHurtValue();
 					if (fangyuli >= monsterAttack) {
@@ -6154,6 +6441,10 @@ public class GameEngine extends GameCanvasEngine {
 	private void handeGameOver1(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK) && mayEnterButton) {
 			mainIndex = 1;
+			isEnhanceBoold = false;
+			isEnhanceArmor = false;
+			isEnhanceSoldierATK = false;
+			Soldier.setAtkCoefficient(1.0f);
 			gameIndex = 0;
 			page = Resource.PAGE_INDEX[1];
 			mapIndexOfIndex = 0;
@@ -6167,6 +6458,10 @@ public class GameEngine extends GameCanvasEngine {
 		if (key.containsAndRemove(KeyCode.OK) && mayEnterButton) {
 			mainIndex = 1;
 			gameIndex = 0;
+			isEnhanceBoold = false;
+			isEnhanceArmor = false;
+			isEnhanceSoldierATK = false;
+			Soldier.setAtkCoefficient(1.0f);
 			page = Resource.PAGE_INDEX[1];
 			mapIndexOfIndex = 0;
 			stopState = false;
@@ -6188,9 +6483,17 @@ public class GameEngine extends GameCanvasEngine {
 				stopState = false;
 				gameIndex = 0;
 			} else if (stopIndex == 1) {
+				isEnhanceBoold = false;
+				isEnhanceArmor = false;
+				isEnhanceSoldierATK = false;
+				Soldier.setAtkCoefficient(1.0f);
 				startEnertGame();
 			} else if (stopIndex == 2) {
 				mainIndex = 1;
+				isEnhanceBoold = false;
+				isEnhanceArmor = false;
+				isEnhanceSoldierATK = false;
+				Soldier.setAtkCoefficient(1.0f);
 				page = Resource.PAGE_INDEX[1];
 				clearGameImg();
 				loadMainImg();
@@ -6208,7 +6511,99 @@ public class GameEngine extends GameCanvasEngine {
 
 	private void handeSuggest(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK)) {
-
+			if (suggestIndex == 0) {
+				if (Resource.goodsNums[7] == 0) {
+					PopupConfirm pc = UIResource.getInstance()
+							.buildDefaultPopupConfirm();
+					pc.setText("是否购买道具");
+					if (pc.popup() == 0) {
+						boolean flag = pm.buyProp(142, 1, g);
+						if (flag) {
+							PlayerProp props = pm.getPropById(142);
+							props.setNums(props.getNums() + 1);
+						}
+					}
+					heroStateLength++;
+					isEnhanceSoldierATK = true;
+					if (isEnhanceSoldierATK) {
+						drawUseProp8();
+					}
+				} else {
+					heroStateLength++;
+					isEnhanceSoldierATK = true;
+					Resource.goodsNums[7]--;
+					if (isEnhanceSoldierATK) {
+						drawUseProp8();
+					}
+				}
+			} else if (suggestIndex == 1) {
+				if (Resource.goodsNums[8] == 0) {
+					PopupConfirm pc = UIResource.getInstance()
+							.buildDefaultPopupConfirm();
+					pc.setText("是否购买道具");
+					if (pc.popup() == 0) {
+						boolean flag = pm.buyProp(143, 1, g);
+						if (flag) {
+							PlayerProp props = pm.getPropById(143);
+							props.setNums(props.getNums() + 1);
+						}
+					}
+					heroStateLength++;
+					isEnhanceArmor = true;
+					if (isEnhanceArmor) {
+						drawUseProp9();
+					}
+				} else {
+					heroStateLength++;
+					isEnhanceArmor = true;
+					Resource.goodsNums[8]--;
+					if (isEnhanceArmor) {
+						drawUseProp9();
+					}
+				}
+			} else if (suggestIndex == 2) {
+				if (Resource.goodsNums[9] == 0) {
+					PopupConfirm pc = UIResource.getInstance()
+							.buildDefaultPopupConfirm();
+					pc.setText("是否购买道具");
+					if (pc.popup() == 0) {
+						boolean flag = pm.buyProp(144, 1, g);
+						if (flag) {
+							PlayerProp props = pm.getPropById(144);
+							props.setNums(props.getNums() + 1);
+						}
+					}
+					heroStateLength++;
+					isEnhanceBoold = true;
+					if (isEnhanceBoold) {
+						drawUseProp10();
+					}
+				} else {
+					heroStateLength++;
+					isEnhanceBoold = true;
+					Resource.goodsNums[9]--;
+					if (isEnhanceBoold) {
+						drawUseProp10();
+					}
+				}
+			} else if (suggestIndex == 3) {
+				if (Resource.goodsNums[10] == 0) {
+					PopupConfirm pc = UIResource.getInstance()
+							.buildDefaultPopupConfirm();
+					pc.setText("是否购买道具");
+					if (pc.popup() == 0) {
+						boolean flag = pm.buyProp(145, 1, g);
+						if (flag) {
+							PlayerProp props = pm.getPropById(145);
+							props.setNums(props.getNums() + 1);
+						}
+					}
+					drawUseProp11();
+				} else {
+					Resource.goodsNums[10]--;
+					drawUseProp11();
+				}
+			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
 			if (suggestIndex > 0) {
 				suggestIndex--;
@@ -6337,12 +6732,20 @@ public class GameEngine extends GameCanvasEngine {
 				Resource.goodsNums[0]--;
 				useProp = 1;
 			}
+		} else if (key.containsAndRemove(KeyCode.NUM2)) {
+			if (Resource.goodsNums[1] > 0) {
+				Resource.goodsNums[1]--;
+				useProp = 2;
+				prop2Index = 0;
+			}
 		} else if (key.containsAndRemove(KeyCode.NUM3)) {
 			if (Resource.goodsNums[2] > 0) {
 				Resource.goodsNums[2]--;
 				prop3StartTime = System.currentTimeMillis();
 				useProp = 3;
+				soldierATkTimes = 2;
 				heroStateLength++;
+				isDoubleAtk = true;
 			}
 		} else if (key.containsAndRemove(KeyCode.NUM5)) {
 			if (hero.getMagic() == 100) {
@@ -6360,11 +6763,42 @@ public class GameEngine extends GameCanvasEngine {
 					auto5Skill();
 					auto3Skill();
 				}
+				if (!isNowSay) {
+					randomHeroSayIndex = 0;
+					randomHeroSayLocaltion = RandomValue.getRandInt(0, 4);
+					isNowSay = true;
+				}
 			}
 		}
 	}
 
+	int randomHeroSayLocaltion;
+	int randomHeroSayIndex;
+
+	private void drawHeroSay(int why) {
+		if (randomHeroSayIndex * 10 < 640) {
+			randomHeroSayIndex++;
+			if (why == 0) {
+				g.drawRegion(img[temp_img_distance2 + 82], 0,
+						randomHeroSayLocaltion * 25, 413, 25, 0,
+						randomHeroSayIndex * 10, 200, 20);
+			} else {
+				if (randomHeroSayLocaltion == 3)
+					randomHeroSayLocaltion = 2;
+				g.drawRegion(img[temp_img_distance2 + 83], 0,
+						randomHeroSayLocaltion * 25, 402, 26, 0,
+						randomHeroSayIndex * 10, 200, 20);
+			}
+			randomHeroSayIndex++;
+		} else {
+			isNowSay = false;
+			randomHeroSayIndex = 0;
+		}
+	}
+
+	private boolean isNowSay;
 	int useProp;
+	private boolean isDoubleAtk;
 	public static boolean stopState;
 
 	public boolean collision(Soldier s, Monster m) {

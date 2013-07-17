@@ -23,8 +23,9 @@ public class Resource {
 			10, 10, 10, 10, 20, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
 	public final static int[] MonsterLevel = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-	public final static int[] MonsterImgIndex = { 87, 88, 89, 90, 91, 92, 93,
-			94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 127 };
+	public final static int[] MonsterImgIndex = { 88, 89, 90, 91, 92, 93, 94,
+			95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108,
+			128 };
 
 	public final static byte[] heroAndSoldierLevel = { 1, 1, 1, 1, 0, 0, 0, 0,
 			0 };
@@ -57,12 +58,16 @@ public class Resource {
 			10, 10, 10, 1000, 1000, 1000 };
 
 	public final static long[] myProperty = { 1, 0, 100000, 20 };
-	public final static int[] goodsNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	public final static int[] goodsNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	public final static int[] prop2Localtion = { 150, -150, 0, 0, 250, 0, 0, 0,
+			350, 50, 0, 0, 300, 100, 0, 0, 200, 100, 0, 0, 200, 150, 0, 0, 250,
+			100, 0, 0 };
+
 	public final static String[] shopInfo = { "血瓶", "恢复英雄的血量200点。（战斗中使用）",
 			"火球术", "召唤火球对场中的怪物造成200点伤害。", "狂暴术", "士兵的攻击力翻倍。（30秒）", "双倍经验卡",
 			"战斗胜利获得的经验翻倍。", "双倍金币卡", "战斗胜利获得的金币翻倍。", "能量石", "使用后增加10点能量。",
 			"保护符文", "通天塔战斗失败避免损失。", "军团之力", "增加所有士兵10%攻击力。", "刚性护符",
-			"增加英雄20点防御力。", "生命谐音", "增加英雄20%生命。（10场）", "金币礼包", "兑换10000金币。" };
+			"增加英雄20点防御力。", "生命谐音", "增加英雄20%生命。", "金币礼包", "兑换10000金币。" };
 
 	public final static String[] heroSkillInfo = {
 			"对一条线上的所有敌人造成伤害（优先最靠前敌人所在的位置）", "提升防御力", "对一条线上的敌人造成伤害，并昏迷3秒",
@@ -162,6 +167,7 @@ public class Resource {
 	public static final short nbar = NUMS++;
 	public static final short help1 = NUMS++;
 	public static final short help2 = NUMS++;
+	public static final short use = NUMS++;
 	// 75
 	public static final short bg0 = NUMS++;
 	public static final short bg1 = NUMS++;
@@ -245,8 +251,10 @@ public class Resource {
 	public static final short shenglishibai = NUMS++;
 	public static final short star1 = NUMS++;
 	public static final short buff = NUMS++;
-	public static final short heroskillsrc = NUMS++;
+	public static final short herosay1 = NUMS++;
+	public static final short herosay2 = NUMS++;
 
+	public static final short heroskillsrc = NUMS++;
 	public static final short soldier121 = NUMS++;
 	public static final short soldier122 = NUMS++;
 	public static final short saybox = NUMS++;
@@ -295,6 +303,7 @@ public class Resource {
 			"/firstpage/wujin.png", "/firstpage/awardtext.png",
 			"/firstpage/jbar.png", "/firstpage/nbar.png",
 			"/firstpage/help1.png", "/firstpage/help2.png",
+			"/firstpage/use.png",
 
 			"/secondpage/bg0.jpg", "/secondpage/bg1.jpg",
 			"/secondpage/bg2.jpg", "/secondpage/bg3.jpg",
@@ -336,7 +345,8 @@ public class Resource {
 			"/secondpage/soldier92.png", "/secondpage/soldier71.png",
 			"/secondpage/soldier33.png", "/secondpage/hero2skill.png",
 			"/secondpage/shenglishibai.png", "/secondpage/star1.png",
-			"/secondpage/buff.png", "/secondpage/heroskillsrc.png",
+			"/secondpage/buff.png", "/secondpage/herosay1.png",
+			"/secondpage/herosay2.png", "/secondpage/heroskillsrc.png",
 
 			"/secondpage/soldier121.png", "/secondpage/soldier122.png",
 			"/secondpage/saybox.png"
