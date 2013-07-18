@@ -65,6 +65,13 @@ public class CreatArray {
 			return canMove;
 		} else {
 			GameEngine.state = false;
+			if ((v1.size() >= 5 || v2.size() >= 5 || v3.size() >= 5 || v4
+					.size() >= 5) && (!GameEngine.isNowSoldierSay)) {
+				GameEngine.isNowSoldierSay = true;
+				GameEngine.randomSoldierSayLocaltion = RandomValue.getRandInt(
+						0, 5);
+				GameEngine.randomSoldierSayIndex = 0;
+			}
 			canMove = true;
 		}
 		DataHandle dh = new DataHandle(v1, v2, v3, v4);

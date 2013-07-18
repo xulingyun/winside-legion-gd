@@ -5,4 +5,4 @@ MicroEdition-Profile: MIDP-2.0
 MIDlet-Jar-URL: legion.jar
 MIDlet-Name: legion MIDlet Suite
 MIDlet-1: legionMIDlet,,test.TestG
-MIDlet-Jar-Size: 1414232
+MIDlet-Jar-Size: 1423008

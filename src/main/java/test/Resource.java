@@ -23,9 +23,9 @@ public class Resource {
 			10, 10, 10, 10, 20, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
 	public final static int[] MonsterLevel = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-	public final static int[] MonsterImgIndex = { 88, 89, 90, 91, 92, 93, 94,
-			95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108,
-			128 };
+	public final static int[] MonsterImgIndex = { 91, 92, 93, 94, 95, 96, 97,
+			98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+			131 };
 
 	public final static byte[] heroAndSoldierLevel = { 1, 1, 1, 1, 0, 0, 0, 0,
 			0 };
@@ -81,11 +81,27 @@ public class Resource {
 			"近战，攻击同一条线上的第一个敌人，被攻击的敌人施法暂停。", "远程，攻击最前面的敌人，攻击伤害的部分会转化成HP恢复给英雄。",
 			"近战，攻击同一条线上的第一个敌人，被攻击敌人左右两边的敌人也会受到伤害。", "远程，召唤火球攻击敌人。",
 			"近战，攻击同一条线上的第一个敌人，连续攻击2次。", "远程，拥有最高的攻击力，并且有一定的几率产生爆击。" };
-	public final static String[] heroSay = { "走你！！！", "再不治疗我就要挂了！！！",
-			"火球术可以全屏攻击。", "狂暴术可以提升士兵攻击力。", "我和我的小伙伴都惊呆了！！！", "给跪了，对面太强了！！！",
-			"不怕神一样的对手，就怕猪一样的队友。", "不给你点颜色瞧瞧，你当我是国足！！！", "使用金币可以升级哦！" };
-	public final static String[] soldierSay = { "冲啊！！！", "杀啊！！！", "我要升级！！！",
-			"我要吃肉！！！", "霍哈！！！", "我要狂暴！！！" };
+
+	public static String[] AttainmentName = { "牛刀小试", "出入草原", "草原征服者", "地底冒险",
+			"地心游记", "冰天雪地", "风雪之王", "炽热战场", "地狱之主", "探险者", "再接再厉", "优胜者",
+			"所向披靡", "初出茅庐", "小有所成", "势不可挡", "战争之王", "杀戮盛宴", "清道夫", "一骑当千",
+			"虚空之王", "魔法之王", "灵魂医者", "步战勇士", "构装骑士", "丛林主宰", "风暴之锤", "生命之光",
+			"野蛮人", "传奇法师", "刺客信条", "狙击专家" };
+	public static String[] AttainmentCondition = { "完成新手指导。", "击败索米亚草原的boss1",
+			"击败索米亚草原的boss2", "击败怨灵大陆的boss1", "击败怨灵大陆的boss2", "击败冰霜大陆的boss1",
+			"击败冰霜大陆的boss2", "击败熔岩之岛的boss1", "击败熔岩之岛的boss2", "在通天塔第10层取得胜利",
+			"在通天塔第20层取得胜利", "在通天塔第30层取得胜利", "在通天塔第40层取得胜利",
+			"在索米亚草原的所有关卡取得3星评价", "在怨灵地窟的所有关卡取得3星评价", "在冰霜大陆的所有关卡取得3星评价",
+			"在熔岩之岛的所有关卡取得3星评价", "英雄1升到20级", "英雄2升到20级", "英雄3升到20级", "英雄4升到20级",
+			"英雄5升到20级", "英雄6升到20级", "步兵升到20级", "骑士升到20级", "猎人升到20级", "锤兵升到20级",
+			"牧师升到20级", "狂战士升到20级", "魔法兵升到20级", "刺客升到20级", "火枪兵升到20级" };
+	public static int[] isFinishAttainment = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	public static int[] AttainmentMoney = { 5000, 5000, 5000, 5000, 5000,
+			10000, 10000, 10000, 10000, 5000, 5000, 10000, 10000, 10000, 10000,
+			10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,
+			10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000 };
+	public static int tongtiantafloor = 0;
 
 	public static short NUMS = 0;
 	public static final short soldier0 = NUMS++;
@@ -108,6 +124,7 @@ public class Resource {
 	public static final short money = NUMS++;
 	public static final short newbox = NUMS++;
 	public static final short newtext = NUMS++;
+	public static final short chengjiupanel = NUMS++;
 	// 19
 	public static final short awardbutton = NUMS++;
 	public static final short bg6 = NUMS++;
@@ -168,6 +185,8 @@ public class Resource {
 	public static final short help1 = NUMS++;
 	public static final short help2 = NUMS++;
 	public static final short use = NUMS++;
+	public static final short attainment_icon = NUMS++;
+	public static final short attainment_finish = NUMS++;
 	// 75
 	public static final short bg0 = NUMS++;
 	public static final short bg1 = NUMS++;
@@ -253,6 +272,7 @@ public class Resource {
 	public static final short buff = NUMS++;
 	public static final short herosay1 = NUMS++;
 	public static final short herosay2 = NUMS++;
+	public static final short shanmove = NUMS++;
 
 	public static final short heroskillsrc = NUMS++;
 	public static final short soldier121 = NUMS++;
@@ -273,6 +293,7 @@ public class Resource {
 			"/common/selectbox1.png", "/common/selectbox2.png",
 			"/common/select2.png", "/common/star.png", "/common/number.png",
 			"/common/money.png", "/common/newbox.png", "/common/newtext.png",
+			"/common/chengjiupanle.png",
 
 			"/firstpage/awardbutton.png", "/firstpage/bg6.jpg",
 			"/firstpage/bg10.jpg", "/firstpage/bg11.jpg",
@@ -303,7 +324,8 @@ public class Resource {
 			"/firstpage/wujin.png", "/firstpage/awardtext.png",
 			"/firstpage/jbar.png", "/firstpage/nbar.png",
 			"/firstpage/help1.png", "/firstpage/help2.png",
-			"/firstpage/use.png",
+			"/firstpage/use.png", "/firstpage/attainment_icon.png",
+			"/firstpage/attainment_finish.png",
 
 			"/secondpage/bg0.jpg", "/secondpage/bg1.jpg",
 			"/secondpage/bg2.jpg", "/secondpage/bg3.jpg",
@@ -346,10 +368,10 @@ public class Resource {
 			"/secondpage/soldier33.png", "/secondpage/hero2skill.png",
 			"/secondpage/shenglishibai.png", "/secondpage/star1.png",
 			"/secondpage/buff.png", "/secondpage/herosay1.png",
-			"/secondpage/herosay2.png", "/secondpage/heroskillsrc.png",
+			"/secondpage/herosay2.png", "/secondpage/shanmove.png",
 
-			"/secondpage/soldier121.png", "/secondpage/soldier122.png",
-			"/secondpage/saybox.png"
+			"/secondpage/heroskillsrc.png", "/secondpage/soldier121.png",
+			"/secondpage/soldier122.png", "/secondpage/saybox.png"
 
 	};
 

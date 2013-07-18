@@ -4,9 +4,7 @@ import cn.ohyeah.itvgame.model.OwnProp;
 import cn.ohyeah.itvgame.model.Prop;
 import cn.ohyeah.stb.game.SGraphics;
 import cn.ohyeah.stb.game.ServiceWrapper;
-import cn.ohyeah.stb.game.StateRecharge;
 import cn.ohyeah.stb.res.UIResource;
-import cn.ohyeah.stb.ui.PopupConfirm;
 import cn.ohyeah.stb.ui.PopupText;
 
 public class PropManager {
