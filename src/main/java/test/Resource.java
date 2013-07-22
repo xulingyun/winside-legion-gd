@@ -23,9 +23,9 @@ public class Resource {
 			10, 10, 10, 10, 20, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
 	public final static int[] MonsterLevel = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-	public final static int[] MonsterImgIndex = { 91, 92, 93, 94, 95, 96, 97,
-			98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
-			131 };
+	public final static int[] MonsterImgIndex = { 93, 94, 95, 96, 97, 98, 99,
+			100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112,
+			113, 133 };
 
 	public final static byte[] heroAndSoldierLevel = { 1, 1, 1, 1, 0, 0, 0, 0,
 			0 };
@@ -42,6 +42,11 @@ public class Resource {
 			-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 			-1, -1, -1, -1, -1, -1, -1, -1 };
 
+	// public final static byte[] guanqiaLevel = { 3, 3, 3, 3, 3, 3, 3, 3, 3, 0,
+	// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+	// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+	// -1, -1, -1, -1, -1, -1 };
+
 	public final static int[][] heroValue = {
 			{ 400, 4, 1000, 50, 1, 4000, 100, 10 },
 			{ 500, 5, 2000, 60, 1, 4000, 10, 2 },
@@ -57,11 +62,12 @@ public class Resource {
 	public final static int[] goodsPrice = { 10, 10, 10, 10, 10, 10, 10, 10,
 			10, 10, 10, 1000, 1000, 1000 };
 
-	public final static long[] myProperty = { 1, 0, 100000, 20 };
+	public final static long[] myProperty = { 1, 0, 10000000, 20 };
 	public final static int[] goodsNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	public final static int[] prop2Localtion = { 150, -150, 0, 0, 250, 0, 0, 0,
 			350, 50, 0, 0, 300, 100, 0, 0, 200, 100, 0, 0, 200, 150, 0, 0, 250,
 			100, 0, 0 };
+	public final static long[] moneyAndJingyan = { 150, 60, 200, 40 };
 
 	public final static String[] shopInfo = { "血瓶", "恢复英雄的血量200点。（战斗中使用）",
 			"火球术", "召唤火球对场中的怪物造成200点伤害。", "狂暴术", "士兵的攻击力翻倍。（30秒）", "双倍经验卡",
@@ -95,13 +101,14 @@ public class Resource {
 			"在熔岩之岛的所有关卡取得3星评价", "英雄1升到20级", "英雄2升到20级", "英雄3升到20级", "英雄4升到20级",
 			"英雄5升到20级", "英雄6升到20级", "步兵升到20级", "骑士升到20级", "猎人升到20级", "锤兵升到20级",
 			"牧师升到20级", "狂战士升到20级", "魔法兵升到20级", "刺客升到20级", "火枪兵升到20级" };
-	public static int[] isFinishAttainment = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	public static int[] isFinishAttainment = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	public static int[] AttainmentMoney = { 5000, 5000, 5000, 5000, 5000,
 			10000, 10000, 10000, 10000, 5000, 5000, 10000, 10000, 10000, 10000,
 			10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,
 			10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000 };
 	public static int tongtiantafloor = 0;
+	public static long resumeNengliangTime;
 
 	public static short NUMS = 0;
 	public static final short soldier0 = NUMS++;
@@ -125,7 +132,7 @@ public class Resource {
 	public static final short newbox = NUMS++;
 	public static final short newtext = NUMS++;
 	public static final short chengjiupanel = NUMS++;
-	// 19
+	// 20
 	public static final short awardbutton = NUMS++;
 	public static final short bg6 = NUMS++;
 	public static final short bg10 = NUMS++;
@@ -187,6 +194,8 @@ public class Resource {
 	public static final short use = NUMS++;
 	public static final short attainment_icon = NUMS++;
 	public static final short attainment_finish = NUMS++;
+	public static final short stopandgo = NUMS++;
+	public static final short fight = NUMS++;
 	// 75
 	public static final short bg0 = NUMS++;
 	public static final short bg1 = NUMS++;
@@ -293,7 +302,7 @@ public class Resource {
 			"/common/selectbox1.png", "/common/selectbox2.png",
 			"/common/select2.png", "/common/star.png", "/common/number.png",
 			"/common/money.png", "/common/newbox.png", "/common/newtext.png",
-			"/common/chengjiupanle.png",
+			"/common/chengjiupanel.png",
 
 			"/firstpage/awardbutton.png", "/firstpage/bg6.jpg",
 			"/firstpage/bg10.jpg", "/firstpage/bg11.jpg",
@@ -325,7 +334,8 @@ public class Resource {
 			"/firstpage/jbar.png", "/firstpage/nbar.png",
 			"/firstpage/help1.png", "/firstpage/help2.png",
 			"/firstpage/use.png", "/firstpage/attainment_icon.png",
-			"/firstpage/attainment_finish.png",
+			"/firstpage/attainment_finish.png", "/firstpage/stopandgo.png",
+			"/firstpage/fight.png",
 
 			"/secondpage/bg0.jpg", "/secondpage/bg1.jpg",
 			"/secondpage/bg2.jpg", "/secondpage/bg3.jpg",

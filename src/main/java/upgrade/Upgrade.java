@@ -42,4 +42,14 @@ public class Upgrade {
 		return 20 + (level - 1) * 1;
 	}
 
+	public static long guanqiaMoney(int guanqiaIndex) {
+		return Resource.moneyAndJingyan[0] + (Resource.moneyAndJingyan[1] - 1)
+				* guanqiaIndex;
+	}
+
+	public static long guanqiaExp(int guanqiaIndex) {
+		return Resource.moneyAndJingyan[2] + (Resource.moneyAndJingyan[3] - 1)
+				* guanqiaIndex;
+	}
+
 }

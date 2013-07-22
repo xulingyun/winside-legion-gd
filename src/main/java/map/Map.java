@@ -8,10 +8,10 @@ public class Map {
 			for (int j = 0; j < map[i].length; j++) {
 				for (int k = 0; k < map[i][j].length; k++) {
 					for (int g = 0; g < map[i][j][k].length; g++) {
-						// System.out.println("******" + map[i].length +
-						// "%%%%%%%"
-						// + "&&&&&&&" + map[i][j].length + "########"
-						// + map[i][j][k].length + "$$$$$$$$"
+						// System.out.println("**" + map[i].length +
+						// "%%"
+						// + "&&&&&&&" + map[i][j].length + "##"
+						// + map[i][j][k].length + "$$"
 						// + map[i][j][k][g].length);
 					}
 				}
@@ -22,7 +22,7 @@ public class Map {
 	private static final int[][][][][] map = {
 			{
 					{
-							{ { 2, 0, 0, 0 }, { 2, 0, 0, 0 }, { 12, 0, 0, 0 },
+							{ { 2, 0, 0, 0 }, { 2, 0, 0, 0 }, { 0, 0, 0, 0 },
 									{ 0, 0, 0, 0 }, { 0, 0, 0, 0 },
 									{ 2, 0, 0, 0 }, { 2, 0, 0, 0 } },
 							{ { 2, 0, 0, 0 }, { 2, 0, 0, 0 }, { 2, 0, 0, 0 },
