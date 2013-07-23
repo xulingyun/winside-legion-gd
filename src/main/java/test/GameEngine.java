@@ -887,41 +887,65 @@ public class GameEngine extends GameCanvasEngine {
 
 	private void handleMainKey1(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK)) {
-			tongtiantaAndNormalSmallGuanqia = mainPageIndex[1];
-			if (Resource.guanqiaLevel[(tongtiantaAndNormalBigGuanqia - 1) * 10
-					+ tongtiantaAndNormalSmallGuanqia] >= 0
-					|| isDebugMode())
+			if (!isTongtianta) {
+				tongtiantaAndNormalSmallGuanqia = mainPageIndex[1];
+				if (Resource.guanqiaLevel[(tongtiantaAndNormalBigGuanqia - 1)
+						* 10 + tongtiantaAndNormalSmallGuanqia] >= 0
+						|| isDebugMode())
+					mainIndex = 2;
+			} else {
 				mainIndex = 2;
+			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
-			if (mainPageIndex[1] > 0) {
-				mainPageIndex[1]--;
-				tongtiantaAndNormalSmallGuanqia--;
+			if (!isTongtianta) {
+				if (mainPageIndex[1] > 0) {
+					mainPageIndex[1]--;
+					tongtiantaAndNormalSmallGuanqia--;
+				}
+			} else {
+				if (tongtiantaIndex == 1)
+					tongtiantaIndex = 0;
+				else
+					tongtiantaIndex = 1;
 			}
 		} else if (key.containsAndRemove(KeyCode.RIGHT)) {
-			if (mainPageIndex[1] < 9) {
-				mainPageIndex[1]++;
-				tongtiantaAndNormalSmallGuanqia++;
+			if (!isTongtianta) {
+				if (mainPageIndex[1] < 9) {
+					mainPageIndex[1]++;
+					tongtiantaAndNormalSmallGuanqia++;
+				}
+			} else {
+				if (tongtiantaIndex == 1)
+					tongtiantaIndex = 0;
+				else
+					tongtiantaIndex = 1;
 			}
 		} else if (key.containsAndRemove(KeyCode.UP)) {
-			if (mainPageIndex[1] < 5) {
-				mainPageIndex[1] += 5;
-				tongtiantaAndNormalSmallGuanqia += 5;
-			} else {
-				mainPageIndex[1] -= 5;
-				tongtiantaAndNormalSmallGuanqia -= 5;
+			if (!isTongtianta) {
+				if (mainPageIndex[1] < 5) {
+					mainPageIndex[1] += 5;
+					tongtiantaAndNormalSmallGuanqia += 5;
+				} else {
+					mainPageIndex[1] -= 5;
+					tongtiantaAndNormalSmallGuanqia -= 5;
+				}
 			}
 		} else if (key.containsAndRemove(KeyCode.DOWN)) {
-			if (mainPageIndex[1] < 5) {
-				mainPageIndex[1] += 5;
-				tongtiantaAndNormalSmallGuanqia += 5;
-			} else {
-				mainPageIndex[1] -= 5;
-				tongtiantaAndNormalSmallGuanqia -= 5;
+			if (!isTongtianta) {
+				if (mainPageIndex[1] < 5) {
+					mainPageIndex[1] += 5;
+					tongtiantaAndNormalSmallGuanqia += 5;
+				} else {
+					mainPageIndex[1] -= 5;
+					tongtiantaAndNormalSmallGuanqia -= 5;
+				}
 			}
 		} else if (key.containsAndRemove(KeyCode.NUM0)) {
-			mainIndex = 0;
-			mainPageIndex[1] = 0;
-			tongtiantaAndNormalSmallGuanqia = 0;
+			if (!isTongtianta) {
+				mainIndex = 0;
+				mainPageIndex[1] = 0;
+				tongtiantaAndNormalSmallGuanqia = 0;
+			}
 		}
 	}
 
@@ -980,7 +1004,8 @@ public class GameEngine extends GameCanvasEngine {
 					pt.setText("通关索米亚草原才能解锁！");
 					isTongtianta = false;
 					pt.popup();
-				} else {//mainIndex == 2
+				} else {
+					mainIndex = 1;
 					tongtiantaIndex = 1;
 					isTongtianta = true;
 				}
@@ -1722,11 +1747,14 @@ public class GameEngine extends GameCanvasEngine {
 							60 + tongtiantaAndNormalSmallGuanqia / 5 * 85);
 					g.drawImage(img[10], panle_x + 180, panle_y + 190, 20);
 				} else {
+					TextView.showMultiLineText(g, "你的最高层为"
+							+ (Resource.tongtiantafloor + 1) + "层，",
+							TextView.STYLE_ALIGN_CENTER, panle_x + 10,
+							panle_y + 30, 260, 60);
 					TextView.showMultiLineText(g,
 							"选择重新挑战，将从第一层开始战斗，选择继续游戏，将会从你以前在通天塔中获得的最高层开始战斗！",
 							TextView.STYLE_ALIGN_CENTER, panle_x + 10,
-							panle_y + 30, 260, 60);
-
+							panle_y + 60, 260, 60);
 					g.drawRegion(img[temp_img_distance1 - 6 + 16], 0, 0, 95,
 							29, 0, panle_x + 40, panle_y + 205, 20);
 					g.drawRegion(img[temp_img_distance1 - 6 + 16], 0, 0, 95,
@@ -1736,7 +1764,7 @@ public class GameEngine extends GameCanvasEngine {
 					g.drawRegion(img[temp_img_distance1 - 6 + 68], 0, 20, 80,
 							20, 0, panle_x + 167, panle_y + 210, 20);
 					DrawUtil.drawRect(g, panle_x + 40 + 120 * tongtiantaIndex,
-							panle_y + 205, 20, 80, 2, 0xff0000);
+							panle_y + 205, 80, 20, 2, 0xff0000);
 				}
 				roleInformation();
 			} else if (mainIndex == 2) {
