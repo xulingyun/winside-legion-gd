@@ -23,9 +23,9 @@ public class Resource {
 			10, 10, 10, 10, 20, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
 	public final static int[] MonsterLevel = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-	public final static int[] MonsterImgIndex = { 93, 94, 95, 96, 97, 98, 99,
-			100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112,
-			113, 133 };
+	public final static int[] MonsterImgIndex = { 92, 93, 94, 95, 96, 97, 98,
+			99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+			112, 113, 133 };
 
 	public final static byte[] heroAndSoldierLevel = { 1, 1, 1, 1, 0, 0, 0, 0,
 			0 };
@@ -37,16 +37,15 @@ public class Resource {
 	public final static long[] soldierMoney = { 0, 0, 0, 0, 1000, 5000, 5000,
 			10000, 10000 };
 
-	// public final static byte[] guanqiaLevel = { 0, -1, -1, -1, -1, -1, -1,
-	// -1,
-	// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-	// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-	// -1, -1, -1, -1, -1, -1, -1, -1 };
-
-	public final static byte[] guanqiaLevel = { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-			0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+	public final static byte[] guanqiaLevel = { 0, -1, -1, -1, -1, -1, -1, -1,
 			-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-			-1, -1, -1, -1, -1, -1 };
+			-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+			-1, -1, -1, -1, -1, -1, -1, -1 };
+
+	// public final static byte[] guanqiaLevel = { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+	// 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+	// -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+	// -1, -1, -1, -1, -1, -1 };
 
 	public final static int[][] heroValue = {
 			{ 400, 4, 1000, 50, 1, 4000, 100, 10 },
@@ -66,7 +65,7 @@ public class Resource {
 	public final static long[] myProperty = { 1, 0, 10000000, 20 };
 	public final static int[] goodsNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	public final static int[] prop2Localtion = { 150, -150, 0, 0, 250, 0, 0, 0,
-			350, 50, 0, 0, 300, 100, 0, 0, 200, 100, 0, 0, 200, 150, 0, 0, 250,
+			350, 50, 0, 0, 300, 100, 0, 0, 200, 100, 0, 0, 200, 50, 0, 0, 250,
 			100, 0, 0 };
 	public final static long[] moneyAndJingyan = { 150, 60, 200, 40 };
 
