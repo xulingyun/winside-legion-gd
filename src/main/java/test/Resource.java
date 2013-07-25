@@ -17,15 +17,15 @@ public class Resource {
 			-350, 0 };
 
 	public final static int[] stoneXY2 = { 20, 60, 0, 150, 80, 0, 70, 150, 0 };
-	public final static int[] MonsterAttack = { 15, 10, 25, 20, 35, 30, 45, 40,
-			50, 50, 0, 0, 0, 100, 100, 350, 400, 450, 0, 600, 700, 60 };
+	public final static int[] MonsterAttack = { 15, 300, 25, 20, 35, 30, 45,
+			40, 50, 50, 0, 0, 0, 100, 100, 350, 400, 450, 0, 600, 700, 60 };
 	public final static int[] MonsterSpeed = { 10, 10, 10, 10, 10, 10, 10, 10,
 			10, 10, 10, 10, 20, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
 	public final static int[] MonsterLevel = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-	public final static int[] MonsterImgIndex = { 92, 93, 94, 95, 96, 97, 98,
-			99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
-			112, 113, 133 };
+	public final static int[] MonsterImgIndex = { 94, 95, 96, 97, 98, 99, 100,
+			101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113,
+			114, 115, 135 };
 
 	public final static byte[] heroAndSoldierLevel = { 1, 1, 1, 1, 0, 0, 0, 0,
 			0 };
@@ -75,18 +75,20 @@ public class Resource {
 			"保护符文", "通天塔战斗失败避免损失。", "军团之力", "增加所有士兵10%攻击力。", "刚性护符",
 			"增加英雄20点防御力。", "生命谐音", "增加英雄20%生命。", "金币礼包", "兑换10000金币。" };
 
-	public final static String[] heroSkillInfo = {
-			"对一条线上的所有敌人造成伤害（优先最靠前敌人所在的位置）", "提升防御力", "对一条线上的敌人造成伤害，并昏迷3秒",
-			"恢复英雄生命", "对全部的敌人造成伤害", "对全部的敌人造成伤害，并恢复英雄生命" };
+	public final static String[] heroSkillInfo = { "对一条线上的所有敌人造成伤害", "提升防御力",
+			"对一条线上的敌人造成伤害，并昏迷3秒", "恢复英雄生命", "对全部的敌人造成伤害", "对全部的敌人造成伤害，并恢复英雄生命" };
 
-	public final static String[] heroSkillName = { "虹灵之刃", "钢铁壁垒", "震荡波",
-			"自然之助", "神秘之耀", "群星坠落" };
+	public final static String[] heroSkillName = { "严惩之风", "神盾加护", "凝魂波动",
+			"圣愈术", "星陨连击", "炼狱雷袭" };
 
-	public final static String[] soldierSkillDescribe = { "近战，只攻击同一条线上的第一个敌人。",
-			"近战，攻击同一条线上的所有敌人。", "远程，命中目标后会附带中毒效果，持续时间3秒。",
-			"近战，攻击同一条线上的第一个敌人，被攻击的敌人施法暂停。", "远程，攻击最前面的敌人，攻击伤害的部分会转化成HP恢复给英雄。",
-			"近战，攻击同一条线上的第一个敌人，被攻击敌人左右两边的敌人也会受到伤害。", "远程，召唤火球攻击敌人。",
-			"近战，攻击同一条线上的第一个敌人，连续攻击2次。", "远程，拥有最高的攻击力，并且有一定的几率产生爆击。" };
+	public final static String[] heroName = { "灾祸之刃-纳亚", "迅捷射手-奥拉尔", "战争堡垒—钢德",
+			"审判之剑-哥顿", "生命之光-莉莉丝", "龙法师-绯色" };
+
+	public final static String[] soldierNameAndSomething = { "步兵", "近战",
+			"最普通的兵种。", "骑兵", "近战", "攻击具有穿透效果。", "猎人", "远程", "攻击具有中毒效果。", "锤兵",
+			"近战", "可以打断敌人施法。", "牧师", "远程", "攻击具有回血效果。", "狂战士", "近战",
+			"攻击具有溅射效果", "魔法师", "远程", "召唤火球攻击敌人。", "刺客", "近战", "可以连续攻击两次。",
+			"火枪手", "远程", "有一定机率产生爆击。" };
 
 	public static String[] AttainmentName = { "牛刀小试", "出入草原", "草原征服者", "地底冒险",
 			"地心游记", "冰天雪地", "风雪之王", "炽热战场", "地狱之主", "探险者", "再接再厉", "优胜者",
@@ -101,6 +103,8 @@ public class Resource {
 			"在熔岩之岛的所有关卡取得3星评价", "英雄1升到20级", "英雄2升到20级", "英雄3升到20级", "英雄4升到20级",
 			"英雄5升到20级", "英雄6升到20级", "步兵升到20级", "骑士升到20级", "猎人升到20级", "锤兵升到20级",
 			"牧师升到20级", "狂战士升到20级", "魔法兵升到20级", "刺客升到20级", "火枪兵升到20级" };
+	public static String[] someUpGreatInfo = { "", "玩家升级到5级后解锁！",
+			"玩家升级到10级后解锁！", "玩家升级到20级后解锁！", "通关怨灵地窟后解锁！", "无尽之塔30层后解锁！" };
 	public static int[] isFinishAttainment = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	public static int[] AttainmentMoney = { 5000, 5000, 5000, 5000, 5000,
@@ -108,6 +112,7 @@ public class Resource {
 			10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,
 			10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000 };
 	public static int tongtiantafloor = 0;
+	public static byte[] count_c_t = { 1, 1 };
 	public static long resumeNengliangTime;
 
 	public static short NUMS = 0;
@@ -196,6 +201,8 @@ public class Resource {
 	public static final short attainment_finish = NUMS++;
 	public static final short stopandgo = NUMS++;
 	public static final short fight = NUMS++;
+	public static final short lock = NUMS++;
+	public static final short gongxini = NUMS++;
 	// 75
 	public static final short bg0 = NUMS++;
 	public static final short bg1 = NUMS++;
@@ -335,7 +342,8 @@ public class Resource {
 			"/firstpage/help1.png", "/firstpage/help2.png",
 			"/firstpage/use.png", "/firstpage/attainment_icon.png",
 			"/firstpage/attainment_finish.png", "/firstpage/stopandgo.png",
-			"/firstpage/fight.png",
+			"/firstpage/fight.png", "/firstpage/lock.png",
+			"/firstpage/gongxini.png",
 
 			"/secondpage/bg0.jpg", "/secondpage/bg1.jpg",
 			"/secondpage/bg2.jpg", "/secondpage/bg3.jpg",
