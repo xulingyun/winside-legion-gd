@@ -919,8 +919,6 @@ public class GameEngine extends GameCanvasEngine {
 		}
 	}
 
-	// PurchaseRecord[] pr;
-
 	public void handleMainKey0(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK)) {
 			tongtiantaAndNormalBigGuanqia = mainPageIndex[0];
@@ -1005,13 +1003,6 @@ public class GameEngine extends GameCanvasEngine {
 				Resource.UnloadMainInfo();
 				Resource.UnloadMain();
 				Resource.loadHelp();
-			} else if (mainPageIndex[0] == 13) {
-				ServiceWrapper sw = getServiceWrapper();
-				sw.addFavor();
-				PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-				pc.setText(sw.getMessage());
-				pc.popup();
-//				mainIndex = 0;
 			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
 			if (mainPageIndex[0] >= 1 && mainPageIndex[0] < 3) {
@@ -1027,9 +1018,6 @@ public class GameEngine extends GameCanvasEngine {
 				tongtiantaAndNormalBigGuanqia--;
 				arrowIndex = 0;
 			} else if (mainPageIndex[0] == 7) {
-				mainPageIndex[0] = 13;
-				arrowIndex = 0;
-			} else if (mainPageIndex[0] == 13) {
 				mainPageIndex[0] = 12;
 				tongtiantaAndNormalBigGuanqia = 12;
 				arrowIndex = 0;
@@ -1048,9 +1036,6 @@ public class GameEngine extends GameCanvasEngine {
 				tongtiantaAndNormalBigGuanqia++;
 				arrowIndex = 0;
 			} else if (mainPageIndex[0] == 12) {
-				mainPageIndex[0] = 13;
-				arrowIndex = 0;
-			} else if (mainPageIndex[0] == 13) {
 				mainPageIndex[0] = 7;
 				tongtiantaAndNormalBigGuanqia = 7;
 				arrowIndex = 0;
@@ -1839,19 +1824,17 @@ public class GameEngine extends GameCanvasEngine {
 			} else if (mainPageIndex[0] == 6) {
 				arrowAnim(9, 520, 85, 0, 0, 0);
 			} else if (mainPageIndex[0] == 7) {
-				arrowAnim(9, 260, 475, 3, 0, 0);
+				arrowAnim(9, 215, 475, 3, 0, 0);
 			} else if (mainPageIndex[0] == 8) {
-				arrowAnim(9, 340, 475, 3, 0, 0);
+				arrowAnim(9, 305, 475, 3, 0, 0);
 			} else if (mainPageIndex[0] == 9) {
-				arrowAnim(9, 420, 475, 3, 0, 0);
+				arrowAnim(9, 395, 475, 3, 0, 0);
 			} else if (mainPageIndex[0] == 10) {
-				arrowAnim(9, 500, 475, 3, 0, 0);
+				arrowAnim(9, 485, 475, 3, 0, 0);
 			} else if (mainPageIndex[0] == 11) {
 				arrowAnim(9, 575, 475, 3, 0, 0);
 			} else if (mainPageIndex[0] == 12) {
 				arrowAnim(9, 50, 480, 3, 0, 0);
-			} else if (mainPageIndex[0] == 13) {
-				arrowAnim(9, 150, 480, 3, 0, 0);
 			}
 			roleInformation();
 		} else {
@@ -6616,9 +6599,12 @@ public class GameEngine extends GameCanvasEngine {
 			return kk;
 		}
 		id.setStartTime(id.getStartTime() + alertSumTime);
-		if (!Collision.checkCircularCollision(id.getX(), id.getY(), IceDrow.img1.getWidth() / 4,
-				IceDrow.img1.getHeight(), id.getS().getY() * 60 + 17, id.getS().getX() * 60 + 11,
-				id.getS().getSrc().getWidth() / 3, id.getS().getSrc().getHeight())
+		Image img1 = Resource.images[Resource.soldier121];
+		Image img2 = Resource.images[Resource.soldier122];
+		int img1_width = img1.getWidth();
+		int img1_height = img1.getHeight();
+		if (!Collision.checkCircularCollision(id.getX(), id.getY(), img1_width / 4, img1_height, id
+				.getS().getY() * 60 + 17, id.getS().getX() * 60 + 11, 62, 62)
 				&& id.getIndex() == 0) {
 			if (id.getFirst() == 0) {
 				id.set_x(id.getX() - (id.getS().getY() * 60 + 17));
@@ -6631,16 +6617,12 @@ public class GameEngine extends GameCanvasEngine {
 				id.setX(id.getX() - id.getXx());
 				id.setY(id.getY() - id.getYy());
 			}
-			g.drawRegion(IceDrow.img1, 0, 0, IceDrow.img1.getWidth() / 4, IceDrow.img1.getHeight(),
-					0, id.getX(), id.getY(), 20);
+			g.drawRegion(img1, 0, 0, img1_width / 4, img1_height, 0, id.getX(), id.getY(), 20);
 			kk++;
-		} else if (Collision.checkCircularCollision(id.getX(), id.getY(),
-				IceDrow.img1.getWidth() / 4, IceDrow.img1.getHeight(), id.getS().getY() * 60 + 17,
-				id.getS().getX() * 60 + 11, id.getS().getSrc().getWidth() / 3, id.getS().getSrc()
-						.getHeight())
+		} else if (Collision.checkCircularCollision(id.getX(), id.getY(), img1_width / 4,
+				img1_height, id.getS().getY() * 60 + 17, id.getS().getX() * 60 + 11, 62, 62)
 				&& id.getIndex() < 4) {
-			g.drawRegion(IceDrow.img1, IceDrow.img1.getWidth() / 4 * id.getIndex(), 0,
-					IceDrow.img1.getWidth() / 4, IceDrow.img1.getHeight(), 0,
+			g.drawRegion(img1, img1_width / 4 * id.getIndex(), 0, img1_width / 4, img1_height, 0,
 					id.getS().getY() * 60 + 19, id.getS().getX() * 60 + 35, 20);
 			if (!stopState && !isSuggest) {
 				id.setIndex(id.getIndex() + 1);
@@ -6648,8 +6630,7 @@ public class GameEngine extends GameCanvasEngine {
 			kk++;
 		} else {
 			if (System.currentTimeMillis() - id.getStartTime() < IceDrow.lastTime * 1000) {
-				g.drawImage(IceDrow.img2, id.getS().getY() * 60 + 19, id.getS().getX() * 60 + 35,
-						20);
+				g.drawImage(img2, id.getS().getY() * 60 + 19, id.getS().getX() * 60 + 35, 20);
 				kk++;
 			} else {
 				id.getS().setIceNoMove(false);

@@ -1,9 +1,5 @@
 package hero;
 
-import javax.microedition.lcdui.Image;
-
-import test.Resource;
-
 public class IceDrow {
 
 	public int getFirst() {
@@ -19,8 +15,6 @@ public class IceDrow {
 	int y = -100;
 	Soldier s;
 	int index;
-	public static final Image img1 = Resource.loadImage(Resource.soldier121);
-	public static final Image img2 = Resource.loadImage(Resource.soldier122);
 	public static final int lastTime = 10;
 	long startTime;
 	int _x;
