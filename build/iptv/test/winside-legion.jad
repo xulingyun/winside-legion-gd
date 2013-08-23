@@ -1,0 +1,24 @@
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: MIDlet Suite Vendor
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Jar-URL: winside-legion.jar
+MIDlet-Name: winside-legion MIDlet Suite
+MIDlet-1: winside-legionMIDlet,,test.TestG
+MIDlet-Jar-Size: 1379221
+price:  5/10
+iptvname: 075512345678
+userid: 284583167
+product: totoro
+checkKey: rkONetpI5N1amFCGRbPHHq0zZQajmvep
+w_server: http://183.60.27.111:8210/itvsrv/totoro/
+buyURL: http://113.106.54.36:8001/games/newsanguo
+zyUserToken: 111
+gameid: 111
+spid: 100006
+stbType: 222
+enterURL: xxxxx
+myDXScore: 11111
+hosturl: http://183.60.27.34:8080
+gameCode: ED28B2745B5CC1D072005BFDB86EE461
+timeStmp: 1359425501952

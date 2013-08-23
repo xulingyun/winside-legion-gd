@@ -919,8 +919,6 @@ public class GameEngine extends GameCanvasEngine {
 		}
 	}
 
-	// PurchaseRecord[] pr;
-
 	public void handleMainKey0(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK)) {
 			tongtiantaAndNormalBigGuanqia = mainPageIndex[0];
@@ -1011,7 +1009,7 @@ public class GameEngine extends GameCanvasEngine {
 				PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
 				pc.setText(sw.getMessage());
 				pc.popup();
-//				mainIndex = 0;
+				// mainIndex = 0;
 			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
 			if (mainPageIndex[0] >= 1 && mainPageIndex[0] < 3) {
@@ -1338,7 +1336,7 @@ public class GameEngine extends GameCanvasEngine {
 				TextView.showMultiLineText(g, "在英雄界面中可以招募，升级和替换英雄。", TextView.STYLE_NORMAL,
 						newGuide_x + 80, newGuide_y + 110, 280, 100);
 				TextView.showSingleLineText(g, "点击确认键", newGuide_x + 270, newGuide_y + 195);
-				arrowAnim(9, 215, 475, 3, 0, 0);
+				arrowAnim(9, 260, 475, 3, 0, 0);
 			} else if (newGuideIndex == 20) {
 				g.drawImage(Resource.images[Resource.newbox], newGuide_x + 60, newGuide_y + 60, 20);
 				g.drawRegion(Resource.images[Resource.newtext], 0, 0 * 25, 91, 25, 0,
@@ -1346,7 +1344,7 @@ public class GameEngine extends GameCanvasEngine {
 				TextView.showMultiLineText(g, "在兵营界面中可以招募，升级和替换士兵。", TextView.STYLE_NORMAL,
 						newGuide_x + 80, newGuide_y + 110, 280, 100);
 				TextView.showSingleLineText(g, "点击确认键", newGuide_x + 270, newGuide_y + 195);
-				arrowAnim(9, 305, 475, 3, 0, 0);
+				arrowAnim(9, 340, 475, 3, 0, 0);
 			} else if (newGuideIndex == 21) {
 				g.drawImage(Resource.images[Resource.newbox], newGuide_x + 60, newGuide_y + 60, 20);
 				g.drawRegion(Resource.images[Resource.newtext], 0, 0 * 25, 91, 25, 0,
@@ -1354,7 +1352,7 @@ public class GameEngine extends GameCanvasEngine {
 				TextView.showMultiLineText(g, "在商城中可以购买能量，金币以及各种增益道具。", TextView.STYLE_NORMAL,
 						newGuide_x + 80, newGuide_y + 110, 280, 100);
 				TextView.showSingleLineText(g, "点击确认键", newGuide_x + 270, newGuide_y + 195);
-				arrowAnim(9, 395, 475, 3, 0, 0);
+				arrowAnim(9, 420, 475, 3, 0, 0);
 			} else if (newGuideIndex == 22) {
 				g.drawImage(Resource.images[Resource.newbox], newGuide_x + 60, newGuide_y + 60, 20);
 				g.drawRegion(Resource.images[Resource.newtext], 0, 0 * 25, 91, 25, 0,
@@ -1362,7 +1360,7 @@ public class GameEngine extends GameCanvasEngine {
 				TextView.showMultiLineText(g, "完成成就会获得金币的奖励。", TextView.STYLE_NORMAL,
 						newGuide_x + 80, newGuide_y + 110, 280, 100);
 				TextView.showSingleLineText(g, "点击确认键", newGuide_x + 270, newGuide_y + 195);
-				arrowAnim(9, 485, 475, 3, 0, 0);
+				arrowAnim(9, 500, 475, 3, 0, 0);
 			} else if (newGuideIndex == 23) {
 				g.drawImage(Resource.images[Resource.newbox], newGuide_x + 60, newGuide_y + 60, 20);
 				g.drawRegion(Resource.images[Resource.newtext], 0, 0 * 25, 91, 25, 0,
