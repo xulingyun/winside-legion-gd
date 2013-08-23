@@ -254,21 +254,25 @@ public class GameEngine extends GameCanvasEngine {
 			if (my.getNengliang() >= 2) {
 				my.setNengliang(my.getNengliang() - 2);
 			} else {
-				setFont(20, false);
-				PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-				pc.setText("您是否确认花费" + pm.props[5].getPrice() + moneyUnit + "购买"
-						+ pm.props[5].getName() + "?");
-				alertTime = System.currentTimeMillis();
-				isAllStop = true;
-				if (pc.popup() == 0) {
-					boolean flag = pm.buyProp(140, 1, g);
-					if (flag) {
-						my.setNengliang(my.getNengliang() + 20);
-						if (my.getNengliang() > Upgrade.upgradeLeaderNengliang(my.getLevel())) {
-							my.setNengliang(Upgrade.upgradeLeaderNengliang(my.getLevel()));
-						}
-					}
-				}
+				testPopupText();
+				// setFont(20, false);
+				// PopupConfirm pc =
+				// UIResource.getInstance().buildDefaultPopupConfirm();
+				// pc.setText("您是否确认花费" + pm.props[5].getPrice() + moneyUnit +
+				// "购买"
+				// + pm.props[5].getName() + "?");
+				// alertTime = System.currentTimeMillis();
+				// isAllStop = true;
+				// if (pc.popup() == 0) {
+				// boolean flag = pm.buyProp(140, 1, g);
+				// if (flag) {
+				// my.setNengliang(my.getNengliang() + 20);
+				// if (my.getNengliang() >
+				// Upgrade.upgradeLeaderNengliang(my.getLevel())) {
+				// my.setNengliang(Upgrade.upgradeLeaderNengliang(my.getLevel()));
+				// }
+				// }
+				// }
 				return;
 			}
 		}
@@ -400,19 +404,22 @@ public class GameEngine extends GameCanvasEngine {
 					}
 					alertTimeFn(pt);
 				} else {
-					setFont(20, false);
-					PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-					pc.setText("您是否确认花费" + pm.props[10].getPrice() + moneyUnit + "购买"
-							+ pm.props[10].getName() + "?");
-
-					alertTime = System.currentTimeMillis();
-					isAllStop = true;
-					if (pc.popup() == 0) {
-						boolean flag = pm.buyProp(145, 1, g);
-						if (flag) {
-							my.setMoney(my.getMoney() + 10000);
-						}
-					}
+					testPopupText();
+					// setFont(20, false);
+					// PopupConfirm pc =
+					// UIResource.getInstance().buildDefaultPopupConfirm();
+					// pc.setText("您是否确认花费" + pm.props[10].getPrice() +
+					// moneyUnit + "购买"
+					// + pm.props[10].getName() + "?");
+					//
+					// alertTime = System.currentTimeMillis();
+					// isAllStop = true;
+					// if (pc.popup() == 0) {
+					// boolean flag = pm.buyProp(145, 1, g);
+					// if (flag) {
+					// my.setMoney(my.getMoney() + 10000);
+					// }
+					// }
 				}
 			} else if (mainPage3Index == 1) {
 				if (Resource.isBelongMyOfHero[mainPageIndex[3]] == 0) {
@@ -461,6 +468,13 @@ public class GameEngine extends GameCanvasEngine {
 			}
 			sag.saveData();
 		}
+	}
+
+	private void testPopupText() {
+		setFont(20, false);
+		PopupText pt = UIResource.getInstance().buildDefaultPopupText();
+		pt.setText("此版本为测试版，暂时不支持购买道具");
+		alertTimeFn(pt);
 	}
 
 	private void alertTimeFn(PopupText pt) {
@@ -518,18 +532,21 @@ public class GameEngine extends GameCanvasEngine {
 							alertTimeFn(pt);
 						}
 					} else {
-						setFont(20, false);
-						PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-						pc.setText("您是否确认花费" + pm.props[10].getPrice() + moneyUnit + "购买"
-								+ pm.props[10].getName() + "?");
-						alertTime = System.currentTimeMillis();
-						isAllStop = true;
-						if (pc.popup() == 0) {
-							boolean flag = pm.buyProp(145, 1, g);
-							if (flag) {
-								my.setMoney(my.getMoney() + 10000);
-							}
-						}
+						testPopupText();
+						// setFont(20, false);
+						// PopupConfirm pc =
+						// UIResource.getInstance().buildDefaultPopupConfirm();
+						// pc.setText("您是否确认花费" + pm.props[10].getPrice() +
+						// moneyUnit + "购买"
+						// + pm.props[10].getName() + "?");
+						// alertTime = System.currentTimeMillis();
+						// isAllStop = true;
+						// if (pc.popup() == 0) {
+						// boolean flag = pm.buyProp(145, 1, g);
+						// if (flag) {
+						// my.setMoney(my.getMoney() + 10000);
+						// }
+						// }
 					}
 				} else {// 购买
 					if (my.getMoney() >= Resource.soldierMoney[selectSoldierindex]) {
@@ -539,18 +556,21 @@ public class GameEngine extends GameCanvasEngine {
 						Resource.heroAndSoldierLevel[selectSoldierindex]++;
 						alertTimeFn(pt);
 					} else {
-						setFont(20, false);
-						PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-						pc.setText("您是否确认花费" + pm.props[10].getPrice() + moneyUnit + "购买"
-								+ pm.props[10].getName() + "?");
-						alertTime = System.currentTimeMillis();
-						isAllStop = true;
-						if (pc.popup() == 0) {
-							boolean flag = pm.buyProp(145, 1, g);
-							if (flag) {
-								my.setMoney(my.getMoney() + 10000);
-							}
-						}
+						testPopupText();
+						// setFont(20, false);
+						// PopupConfirm pc =
+						// UIResource.getInstance().buildDefaultPopupConfirm();
+						// pc.setText("您是否确认花费" + pm.props[10].getPrice() +
+						// moneyUnit + "购买"
+						// + pm.props[10].getName() + "?");
+						// alertTime = System.currentTimeMillis();
+						// isAllStop = true;
+						// if (pc.popup() == 0) {
+						// boolean flag = pm.buyProp(145, 1, g);
+						// if (flag) {
+						// my.setMoney(my.getMoney() + 10000);
+						// }
+						// }
 					}
 				}
 			}
@@ -635,24 +655,28 @@ public class GameEngine extends GameCanvasEngine {
 							saodangTime = System.currentTimeMillis();
 							Resource.loadSaodang();
 						} else {
-							setFont(20, false);
-							PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-							pc.setText("您是否确认花费" + pm.props[5].getPrice() + moneyUnit + "购买"
-									+ pm.props[5].getName() + "?");
-							alertTime = System.currentTimeMillis();
-							isAllStop = true;
-							if (pc.popup() == 0) {
-								boolean flag = pm.buyProp(140, 1, g);
-								if (flag) {
-									my.setNengliang(my.getNengliang() + 20);
-									if (my.getNengliang() > Upgrade.upgradeLeaderNengliang(my
-											.getLevel())) {
-										my.setNengliang(Upgrade.upgradeLeaderNengliang(my
-												.getLevel()));
-									}
-								}
-							}
-							return;
+							testPopupText();
+							// setFont(20, false);
+							// PopupConfirm pc =
+							// UIResource.getInstance().buildDefaultPopupConfirm();
+							// pc.setText("您是否确认花费" + pm.props[5].getPrice() +
+							// moneyUnit + "购买"
+							// + pm.props[5].getName() + "?");
+							// alertTime = System.currentTimeMillis();
+							// isAllStop = true;
+							// if (pc.popup() == 0) {
+							// boolean flag = pm.buyProp(140, 1, g);
+							// if (flag) {
+							// my.setNengliang(my.getNengliang() + 20);
+							// if (my.getNengliang() >
+							// Upgrade.upgradeLeaderNengliang(my
+							// .getLevel())) {
+							// my.setNengliang(Upgrade.upgradeLeaderNengliang(my
+							// .getLevel()));
+							// }
+							// }
+							// }
+							// return;
 						}
 					} else {
 						PopupText pt = UIResource.getInstance().buildDefaultPopupText();
@@ -687,18 +711,21 @@ public class GameEngine extends GameCanvasEngine {
 					}
 					alertSumTime = System.currentTimeMillis() - alertTime;
 				} else if (saodangIndex == 1) {
-					setFont(20, false);
-					PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-					pc.setText("您是否确认花费" + pm.props[12].getPrice() + moneyUnit + "购买"
-							+ pm.props[12].getName() + "?");
-					alertTime = System.currentTimeMillis();
-					if (pc.popup() == 0) {
-						enterBuy = 3;
-						boolean flag = pm.buyProp(147, 1, g);
-						if (flag) {
-							saodangTime = 300;
-						}
-					}
+					testPopupText();
+					// setFont(20, false);
+					// PopupConfirm pc =
+					// UIResource.getInstance().buildDefaultPopupConfirm();
+					// pc.setText("您是否确认花费" + pm.props[12].getPrice() +
+					// moneyUnit + "购买"
+					// + pm.props[12].getName() + "?");
+					// alertTime = System.currentTimeMillis();
+					// if (pc.popup() == 0) {
+					// enterBuy = 3;
+					// boolean flag = pm.buyProp(147, 1, g);
+					// if (flag) {
+					// saodangTime = 300;
+					// }
+					// }
 					alertSumTime = System.currentTimeMillis() - alertTime;
 				} else if (saodangIndex == 2) {
 					changeLeaderOfProperty(winMoney, winExp);
@@ -844,19 +871,22 @@ public class GameEngine extends GameCanvasEngine {
 						tongtiantaAndNormalSmallGuanqia = Resource.tongtiantafloor % 10;
 					}
 				} else {
-					setFont(20, false);
-					PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-					pc.setText("您是否确认花费" + pm.props[14].getPrice() + moneyUnit + "购买"
-							+ pm.props[14].getName() + "?");
-					alertTime = System.currentTimeMillis();
-					isAllStop = true;
-					if (pc.popup() == 0) {
-						boolean flag = pm.buyProp(149, 1, g);
-						enterBuy = 2;
-						if (flag) {
-							my.setCountTongtianta(1);
-						}
-					}
+					testPopupText();
+					// setFont(20, false);
+					// PopupConfirm pc =
+					// UIResource.getInstance().buildDefaultPopupConfirm();
+					// pc.setText("您是否确认花费" + pm.props[14].getPrice() +
+					// moneyUnit + "购买"
+					// + pm.props[14].getName() + "?");
+					// alertTime = System.currentTimeMillis();
+					// isAllStop = true;
+					// if (pc.popup() == 0) {
+					// boolean flag = pm.buyProp(149, 1, g);
+					// enterBuy = 2;
+					// if (flag) {
+					// my.setCountTongtianta(1);
+					// }
+					// }
 				}
 			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
@@ -2519,44 +2549,47 @@ public class GameEngine extends GameCanvasEngine {
 					isAlertAward = false;
 				} else {
 					if (my.getCountAward() == 0) {
-						setFont(20, false);
-						PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-						pc.setText("您是否确认花费" + pm.props[11].getPrice() + moneyUnit + "购买"
-								+ pm.props[11].getName() + "?");
-						alertTime = System.currentTimeMillis();
-						isAllStop = true;
-						if (pc.popup() == 0) {
-							enterBuy = 4;
-							boolean flag = pm.buyProp(146, 1, g);
-							if (flag) {
-								startAward = true;
-								winNum = probability();
-								int temp = winNum - tempWinNum;
-								if (temp < 0) {
-									temp = 12 - (tempWinNum - winNum);
-								}
-								sumCircleNum = 24 + temp;
-								if (winNum == 0 || winNum == 4 || winNum == 8) {
-									my.setMoney(my.getMoney() + 1000);
-								} else if (winNum == 2 || winNum == 6) {
-									my.setMoney(my.getMoney() + 10000);
-								} else if (winNum == 10) {
-									my.setMoney(my.getMoney() + 99999);
-								} else if (winNum == 1) {
-									props[4].setNumsAdd();
-								} else if (winNum == 3) {
-									props[3].setNumsAdd();
-								} else if (winNum == 5) {
-									props[9].setNumsAdd();
-								} else if (winNum == 7) {
-									props[6].setNumsAdd();
-								} else if (winNum == 9) {
-									props[7].setNumsAdd();
-								} else if (winNum == 11) {
-									props[8].setNumsAdd();
-								}
-							}
-						}
+						testPopupText();
+						// setFont(20, false);
+						// PopupConfirm pc =
+						// UIResource.getInstance().buildDefaultPopupConfirm();
+						// pc.setText("您是否确认花费" + pm.props[11].getPrice() +
+						// moneyUnit + "购买"
+						// + pm.props[11].getName() + "?");
+						// alertTime = System.currentTimeMillis();
+						// isAllStop = true;
+						// if (pc.popup() == 0) {
+						// enterBuy = 4;
+						// boolean flag = pm.buyProp(146, 1, g);
+						// if (flag) {
+						// startAward = true;
+						// winNum = probability();
+						// int temp = winNum - tempWinNum;
+						// if (temp < 0) {
+						// temp = 12 - (tempWinNum - winNum);
+						// }
+						// sumCircleNum = 24 + temp;
+						// if (winNum == 0 || winNum == 4 || winNum == 8) {
+						// my.setMoney(my.getMoney() + 1000);
+						// } else if (winNum == 2 || winNum == 6) {
+						// my.setMoney(my.getMoney() + 10000);
+						// } else if (winNum == 10) {
+						// my.setMoney(my.getMoney() + 99999);
+						// } else if (winNum == 1) {
+						// props[4].setNumsAdd();
+						// } else if (winNum == 3) {
+						// props[3].setNumsAdd();
+						// } else if (winNum == 5) {
+						// props[9].setNumsAdd();
+						// } else if (winNum == 7) {
+						// props[6].setNumsAdd();
+						// } else if (winNum == 9) {
+						// props[7].setNumsAdd();
+						// } else if (winNum == 11) {
+						// props[8].setNumsAdd();
+						// }
+						// }
+						// }
 					} else if (my.getCountAward() >= 1) {
 						startAward = true;
 						winNum = probability();
@@ -2895,138 +2928,141 @@ public class GameEngine extends GameCanvasEngine {
 
 	private void handleMainKey7(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK)) {
-			enterBuy = 1;
-			if (shopArea == 1) {
-				setFont(20, false);
-				PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-				pc.setText("您是否确认花费" + pm.props[selectShopSmallIndex].getPrice() + moneyUnit + "购买"
-						+ pm.props[selectShopSmallIndex].getName() + "?");
-				alertTime = System.currentTimeMillis();
-				isAllStop = true;
-				if (pc.popup() == 0) {
-					boolean flag = pm.buyProp(135 + selectShopSmallIndex, 1, g);
-					if (flag) {
-						if (selectShopSmallIndex == 10)
-							my.setMoney(my.getMoney() + 10000);
-						else
-							props[selectShopSmallIndex].setNumsAdd();
-					}
-				}
-			} else if (shopArea == 2) {
-				if (canGoodsIndex >= 0 && canGoodsIndex <= 2) {
-					PopupText pt = UIResource.getInstance().buildDefaultPopupText();
-					pt.setText("该物品在战斗中才能使用！");
-					alertTimeFn(pt);
-				} else if (canGoodsIndex == 3) {
-					PopupText pt = UIResource.getInstance().buildDefaultPopupText();
-					if (isDoubleMoney) {
-						pt.setText("你现在已经拥有双倍经验的状态了，请不要再次使用！");
-						alertTimeFn(pt);
-					} else {
-						if (props[3].getNums() > 0) {
-							pt.setText("你使用了双倍经验卡，在接下来一场战斗中，你将会获得双倍的经验！");
-							alertTimeFn(pt);
-							props[3].setNumsReduce();
-							heroStateLength++;
-							isDoubleExp = true;
-							drawUseProp4();
-						} else {
-							pt.setText("你还没有该道具，请购买后使用！");
-							alertTimeFn(pt);
-						}
-					}
-				} else if (canGoodsIndex == 4) {
-					PopupText pt = UIResource.getInstance().buildDefaultPopupText();
-					if (isDoubleMoney) {
-						pt.setText("你现在已经拥有双倍金币的状态了，请不要再次使用！");
-						alertTimeFn(pt);
-					} else {
-						if (props[4].getNums() > 0) {
-							pt.setText("你使用了双倍金币卡，在接下来一场战斗中，你将会获得双倍的金币！");
-							alertTimeFn(pt);
-							props[4].setNumsReduce();
-							heroStateLength++;
-							isDoubleMoney = true;
-							drawUseProp5();
-						} else {
-							pt.setText("你还没有该道具，请购买后使用！");
-							alertTimeFn(pt);
-						}
-					}
-				} else if (canGoodsIndex == 5) {
-					PopupText pt = UIResource.getInstance().buildDefaultPopupText();
-					if (props[5].getNums() > 0) {
-						pt.setText("你使用了能量石道具，使你的能量增加，能更好的去战斗！！");
-						alertTimeFn(pt);
-						props[5].setNumsReduce();
-						drawUseProp6();
-					} else {
-						pt.setText("你还没有该道具，请购买后使用！");
-						alertTimeFn(pt);
-					}
-				} else if (canGoodsIndex == 7) {
-					PopupText pt = UIResource.getInstance().buildDefaultPopupText();
-					if (isDoubleMoney) {
-						pt.setText("你已经使用了军团之力，请不要再次使用！");
-						alertTimeFn(pt);
-					} else {
-						if (props[7].getNums() > 0) {
-							pt.setText("你使用了军团之力道具，在接下来一场战斗中，士兵的攻击力将提高20%！");
-							alertTimeFn(pt);
-							props[7].setNumsReduce();
-							heroStateLength++;
-							isEnhanceSoldierATK = true;
-						} else {
-							pt.setText("你还没有该道具，请购买后使用！");
-							alertTimeFn(pt);
-						}
-					}
-				} else if (canGoodsIndex == 8) {
-					PopupText pt = UIResource.getInstance().buildDefaultPopupText();
-					if (isDoubleMoney) {
-						pt.setText("你已经使用了刚性护虎，请不要再次使用！");
-						alertTimeFn(pt);
-					} else {
-						if (props[8].getNums() > 0) {
-							pt.setText("你使用了刚性护符道具，在接下来一场战斗中，你将会增加20点的防御力！");
-							alertTimeFn(pt);
-							props[8].setNumsReduce();
-							heroStateLength++;
-							isEnhanceArmor = true;
-						} else {
-							pt.setText("你还没有该道具，请购买后使用！");
-							alertTimeFn(pt);
-						}
-					}
-				} else if (canGoodsIndex == 9) {
-					PopupText pt = UIResource.getInstance().buildDefaultPopupText();
-					if (isDoubleMoney) {
-						pt.setText("你已经使用了生命谐音，请不要再次使用！");
-						alertTimeFn(pt);
-					} else {
-						if (props[9].getNums() > 0) {
-							pt.setText("你使用了生命谐音道具，在接下来一场战斗中，你将会增加20%的生命值！");
-							alertTimeFn(pt);
-							props[9].setNumsReduce();
-							heroStateLength++;
-							isEnhanceBoold = true;
-						} else {
-							pt.setText("你还没有该道具，请购买后使用！");
-							alertTimeFn(pt);
-						}
-					}
-				} else if (canGoodsIndex == 10) {
-					PopupText pt = UIResource.getInstance().buildDefaultPopupText();
-					if (props[10].getNums() > 0) {
-						pt.setText("你获得了10000金币！");
-						alertTimeFn(pt);
-						drawUseProp11();
-					} else {
-						pt.setText("你还没有该道具，请购买后使用！");
-						alertTimeFn(pt);
-					}
-				}
-			}
+			testPopupText();
+			// enterBuy = 1;
+			// if (shopArea == 1) {
+			// setFont(20, false);
+			// PopupConfirm pc =
+			// UIResource.getInstance().buildDefaultPopupConfirm();
+			// pc.setText("您是否确认花费" + pm.props[selectShopSmallIndex].getPrice()
+			// + moneyUnit + "购买"
+			// + pm.props[selectShopSmallIndex].getName() + "?");
+			// alertTime = System.currentTimeMillis();
+			// isAllStop = true;
+			// if (pc.popup() == 0) {
+			// boolean flag = pm.buyProp(135 + selectShopSmallIndex, 1, g);
+			// if (flag) {
+			// if (selectShopSmallIndex == 10)
+			// my.setMoney(my.getMoney() + 10000);
+			// else
+			// props[selectShopSmallIndex].setNumsAdd();
+			// }
+			// }
+			// } else if (shopArea == 2) {
+			// if (canGoodsIndex >= 0 && canGoodsIndex <= 2) {
+			// PopupText pt = UIResource.getInstance().buildDefaultPopupText();
+			// pt.setText("该物品在战斗中才能使用！");
+			// alertTimeFn(pt);
+			// } else if (canGoodsIndex == 3) {
+			// PopupText pt = UIResource.getInstance().buildDefaultPopupText();
+			// if (isDoubleMoney) {
+			// pt.setText("你现在已经拥有双倍经验的状态了，请不要再次使用！");
+			// alertTimeFn(pt);
+			// } else {
+			// if (props[3].getNums() > 0) {
+			// pt.setText("你使用了双倍经验卡，在接下来一场战斗中，你将会获得双倍的经验！");
+			// alertTimeFn(pt);
+			// props[3].setNumsReduce();
+			// heroStateLength++;
+			// isDoubleExp = true;
+			// drawUseProp4();
+			// } else {
+			// pt.setText("你还没有该道具，请购买后使用！");
+			// alertTimeFn(pt);
+			// }
+			// }
+			// } else if (canGoodsIndex == 4) {
+			// PopupText pt = UIResource.getInstance().buildDefaultPopupText();
+			// if (isDoubleMoney) {
+			// pt.setText("你现在已经拥有双倍金币的状态了，请不要再次使用！");
+			// alertTimeFn(pt);
+			// } else {
+			// if (props[4].getNums() > 0) {
+			// pt.setText("你使用了双倍金币卡，在接下来一场战斗中，你将会获得双倍的金币！");
+			// alertTimeFn(pt);
+			// props[4].setNumsReduce();
+			// heroStateLength++;
+			// isDoubleMoney = true;
+			// drawUseProp5();
+			// } else {
+			// pt.setText("你还没有该道具，请购买后使用！");
+			// alertTimeFn(pt);
+			// }
+			// }
+			// } else if (canGoodsIndex == 5) {
+			// PopupText pt = UIResource.getInstance().buildDefaultPopupText();
+			// if (props[5].getNums() > 0) {
+			// pt.setText("你使用了能量石道具，使你的能量增加，能更好的去战斗！！");
+			// alertTimeFn(pt);
+			// props[5].setNumsReduce();
+			// drawUseProp6();
+			// } else {
+			// pt.setText("你还没有该道具，请购买后使用！");
+			// alertTimeFn(pt);
+			// }
+			// } else if (canGoodsIndex == 7) {
+			// PopupText pt = UIResource.getInstance().buildDefaultPopupText();
+			// if (isDoubleMoney) {
+			// pt.setText("你已经使用了军团之力，请不要再次使用！");
+			// alertTimeFn(pt);
+			// } else {
+			// if (props[7].getNums() > 0) {
+			// pt.setText("你使用了军团之力道具，在接下来一场战斗中，士兵的攻击力将提高20%！");
+			// alertTimeFn(pt);
+			// props[7].setNumsReduce();
+			// heroStateLength++;
+			// isEnhanceSoldierATK = true;
+			// } else {
+			// pt.setText("你还没有该道具，请购买后使用！");
+			// alertTimeFn(pt);
+			// }
+			// }
+			// } else if (canGoodsIndex == 8) {
+			// PopupText pt = UIResource.getInstance().buildDefaultPopupText();
+			// if (isDoubleMoney) {
+			// pt.setText("你已经使用了刚性护虎，请不要再次使用！");
+			// alertTimeFn(pt);
+			// } else {
+			// if (props[8].getNums() > 0) {
+			// pt.setText("你使用了刚性护符道具，在接下来一场战斗中，你将会增加20点的防御力！");
+			// alertTimeFn(pt);
+			// props[8].setNumsReduce();
+			// heroStateLength++;
+			// isEnhanceArmor = true;
+			// } else {
+			// pt.setText("你还没有该道具，请购买后使用！");
+			// alertTimeFn(pt);
+			// }
+			// }
+			// } else if (canGoodsIndex == 9) {
+			// PopupText pt = UIResource.getInstance().buildDefaultPopupText();
+			// if (isDoubleMoney) {
+			// pt.setText("你已经使用了生命谐音，请不要再次使用！");
+			// alertTimeFn(pt);
+			// } else {
+			// if (props[9].getNums() > 0) {
+			// pt.setText("你使用了生命谐音道具，在接下来一场战斗中，你将会增加20%的生命值！");
+			// alertTimeFn(pt);
+			// props[9].setNumsReduce();
+			// heroStateLength++;
+			// isEnhanceBoold = true;
+			// } else {
+			// pt.setText("你还没有该道具，请购买后使用！");
+			// alertTimeFn(pt);
+			// }
+			// }
+			// } else if (canGoodsIndex == 10) {
+			// PopupText pt = UIResource.getInstance().buildDefaultPopupText();
+			// if (props[10].getNums() > 0) {
+			// pt.setText("你获得了10000金币！");
+			// alertTimeFn(pt);
+			// drawUseProp11();
+			// } else {
+			// pt.setText("你还没有该道具，请购买后使用！");
+			// alertTimeFn(pt);
+			// }
+			// }
+			// }
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
 			if (shopArea == 1) {
 				if (selectShopSmallIndex == 1 || selectShopSmallIndex == 3
@@ -6614,9 +6650,12 @@ public class GameEngine extends GameCanvasEngine {
 			return kk;
 		}
 		id.setStartTime(id.getStartTime() + alertSumTime);
-		if (!Collision.checkCircularCollision(id.getX(), id.getY(), IceDrow.img1.getWidth() / 4,
-				IceDrow.img1.getHeight(), id.getS().getY() * 60 + 17, id.getS().getX() * 60 + 11,
-				id.getS().getSrc().getWidth() / 3, id.getS().getSrc().getHeight())
+		Image img1 = Resource.images[Resource.soldier121];
+		Image img2 = Resource.images[Resource.soldier122];
+		int img1_width = img1.getWidth();
+		int img1_height = img1.getHeight();
+		if (!Collision.checkCircularCollision(id.getX(), id.getY(), img1_width / 4, img1_height, id
+				.getS().getY() * 60 + 17, id.getS().getX() * 60 + 11, 62, 62)
 				&& id.getIndex() == 0) {
 			if (id.getFirst() == 0) {
 				id.set_x(id.getX() - (id.getS().getY() * 60 + 17));
@@ -6629,16 +6668,12 @@ public class GameEngine extends GameCanvasEngine {
 				id.setX(id.getX() - id.getXx());
 				id.setY(id.getY() - id.getYy());
 			}
-			g.drawRegion(IceDrow.img1, 0, 0, IceDrow.img1.getWidth() / 4, IceDrow.img1.getHeight(),
-					0, id.getX(), id.getY(), 20);
+			g.drawRegion(img1, 0, 0, img1_width / 4, img1_height, 0, id.getX(), id.getY(), 20);
 			kk++;
-		} else if (Collision.checkCircularCollision(id.getX(), id.getY(),
-				IceDrow.img1.getWidth() / 4, IceDrow.img1.getHeight(), id.getS().getY() * 60 + 17,
-				id.getS().getX() * 60 + 11, id.getS().getSrc().getWidth() / 3, id.getS().getSrc()
-						.getHeight())
+		} else if (Collision.checkCircularCollision(id.getX(), id.getY(), img1_width / 4,
+				img1_height, id.getS().getY() * 60 + 17, id.getS().getX() * 60 + 11, 62, 62)
 				&& id.getIndex() < 4) {
-			g.drawRegion(IceDrow.img1, IceDrow.img1.getWidth() / 4 * id.getIndex(), 0,
-					IceDrow.img1.getWidth() / 4, IceDrow.img1.getHeight(), 0,
+			g.drawRegion(img1, img1_width / 4 * id.getIndex(), 0, img1_width / 4, img1_height, 0,
 					id.getS().getY() * 60 + 19, id.getS().getX() * 60 + 35, 20);
 			if (!stopState && !isSuggest) {
 				id.setIndex(id.getIndex() + 1);
@@ -6646,8 +6681,7 @@ public class GameEngine extends GameCanvasEngine {
 			kk++;
 		} else {
 			if (System.currentTimeMillis() - id.getStartTime() < IceDrow.lastTime * 1000) {
-				g.drawImage(IceDrow.img2, id.getS().getY() * 60 + 19, id.getS().getX() * 60 + 35,
-						20);
+				g.drawImage(img2, id.getS().getY() * 60 + 19, id.getS().getX() * 60 + 35, 20);
 				kk++;
 			} else {
 				id.getS().setIceNoMove(false);
@@ -6816,8 +6850,6 @@ public class GameEngine extends GameCanvasEngine {
 				handleMainKey8(key);
 			else if (mainIndex == 12)
 				handleMainKey12(key);
-			// else if (mainIndex == 13)
-			// handleMainKey13(key);
 			else if (mainIndex == 21)
 				// recharge.update(key);
 				;
@@ -6866,85 +6898,92 @@ public class GameEngine extends GameCanvasEngine {
 	private void handeGameOver9(KeyState key) {
 		if (key.containsAndRemove(KeyCode.OK)) {
 			if (WinAndFailIndex == 1) {
-				setFont(20, false);
-				PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-				pc.setText("您是否确认花费" + pm.props[13].getPrice() + moneyUnit + "购买"
-						+ pm.props[13].getName() + "?");
-				alertTime = System.currentTimeMillis();
-				if (pc.popup() == 0) {
-					enterBuy = 13;
-					boolean flag = pm.buyProp(148, 1, g);
-					if (flag) {
-						hero.setBoold(hero.getBoolds());
-						gameIndex = 0;
-						win1 = 0;
-						stopState = false;
-					}
-				}
+				testPopupText();
+				// setFont(20, false);
+				// PopupConfirm pc =
+				// UIResource.getInstance().buildDefaultPopupConfirm();
+				// pc.setText("您是否确认花费" + pm.props[13].getPrice() + moneyUnit +
+				// "购买"
+				// + pm.props[13].getName() + "?");
+				// alertTime = System.currentTimeMillis();
+				// if (pc.popup() == 0) {
+				// enterBuy = 13;
+				// boolean flag = pm.buyProp(148, 1, g);
+				// if (flag) {
+				// hero.setBoold(hero.getBoolds());
+				// gameIndex = 0;
+				// win1 = 0;
+				// stopState = false;
+				// }
+				// }
 				alertSumTime = System.currentTimeMillis() - alertTime;
 			} else if (WinAndFailIndex == 0) {
-				setFont(20, false);
-				PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-				pc.setText("您是否确认花费" + pm.props[6].getPrice() + moneyUnit + "购买"
-						+ pm.props[6].getName() + "?");
-				alertTime = System.currentTimeMillis();
-				if (pc.popup() == 0) {
-					enterBuy = 13;
-					boolean flag = pm.buyProp(141, 1, g);
-					if (flag) {
-						changeLeaderOfProperty(tongtiantaMoney, tongtiantaExp);
-						gameIndex = 0;
-						win1 = 0;
-						stopState = false;
-						isTongtianta = false;
-						mainIndex = 0;
-						gameIndex = 0;
-						stopState = false;
-						isEnhanceBoold = false;
-						isEnhanceArmor = false;
-						isEnhanceSoldierATK = false;
-						Soldier.setAtkCoefficient(1.0f);
-						page = Resource.PAGE_INDEX[1];
-						mapIndexOfIndex = 0;
-						stopState = false;
-						Resource.UnloadGameSoldier(Resource.savaSelcetSoldier);
-						Resource.UnloadGameHero(Resource.saveSelectHero);
-						Resource.UnloadBg(tongtiantaAndNormalBigGuanqia);
-						Resource.UnloadMonster(monsterKind);
-						Resource.UnloadWinAndFail();
-						Resource.loadMain();
-						Resource.loadMainInfo();
-						tongtiantaExp = 0;
-						tongtiantaMoney = 0;
-						my.setCountTongtianta(0);
-					} else {
-						changeLeaderOfProperty(tongtiantaMoney / 2, tongtiantaExp / 2);
-					}
-					alertSumTime = System.currentTimeMillis() - alertTime;
-				} else {
-					changeLeaderOfProperty(tongtiantaMoney / 2, tongtiantaExp / 2);
-					isTongtianta = false;
-					mainIndex = 0;
-					gameIndex = 0;
-					stopState = false;
-					isEnhanceBoold = false;
-					isEnhanceArmor = false;
-					isEnhanceSoldierATK = false;
-					Soldier.setAtkCoefficient(1.0f);
-					page = Resource.PAGE_INDEX[1];
-					mapIndexOfIndex = 0;
-					stopState = false;
-					Resource.UnloadGameSoldier(Resource.savaSelcetSoldier);
-					Resource.UnloadGameHero(Resource.saveSelectHero);
-					Resource.UnloadBg(tongtiantaAndNormalBigGuanqia);
-					Resource.UnloadMonster(monsterKind);
-					Resource.UnloadWinAndFail();
-					Resource.loadMain();
-					Resource.loadMainInfo();
-					tongtiantaExp = 0;
-					tongtiantaMoney = 0;
-					my.setCountTongtianta(0);
-				}
+				testPopupText();
+				// setFont(20, false);
+				// PopupConfirm pc =
+				// UIResource.getInstance().buildDefaultPopupConfirm();
+				// pc.setText("您是否确认花费" + pm.props[6].getPrice() + moneyUnit +
+				// "购买"
+				// + pm.props[6].getName() + "?");
+				// alertTime = System.currentTimeMillis();
+				// if (pc.popup() == 0) {
+				// enterBuy = 13;
+				// boolean flag = pm.buyProp(141, 1, g);
+				// if (flag) {
+				// changeLeaderOfProperty(tongtiantaMoney, tongtiantaExp);
+				// gameIndex = 0;
+				// win1 = 0;
+				// stopState = false;
+				// isTongtianta = false;
+				// mainIndex = 0;
+				// gameIndex = 0;
+				// stopState = false;
+				// isEnhanceBoold = false;
+				// isEnhanceArmor = false;
+				// isEnhanceSoldierATK = false;
+				// Soldier.setAtkCoefficient(1.0f);
+				// page = Resource.PAGE_INDEX[1];
+				// mapIndexOfIndex = 0;
+				// stopState = false;
+				// Resource.UnloadGameSoldier(Resource.savaSelcetSoldier);
+				// Resource.UnloadGameHero(Resource.saveSelectHero);
+				// Resource.UnloadBg(tongtiantaAndNormalBigGuanqia);
+				// Resource.UnloadMonster(monsterKind);
+				// Resource.UnloadWinAndFail();
+				// Resource.loadMain();
+				// Resource.loadMainInfo();
+				// tongtiantaExp = 0;
+				// tongtiantaMoney = 0;
+				// my.setCountTongtianta(0);
+				// } else {
+				// changeLeaderOfProperty(tongtiantaMoney / 2, tongtiantaExp /
+				// 2);
+				// }
+				// alertSumTime = System.currentTimeMillis() - alertTime;
+				// } else {
+				changeLeaderOfProperty(tongtiantaMoney / 2, tongtiantaExp / 2);
+				isTongtianta = false;
+				mainIndex = 0;
+				gameIndex = 0;
+				stopState = false;
+				isEnhanceBoold = false;
+				isEnhanceArmor = false;
+				isEnhanceSoldierATK = false;
+				Soldier.setAtkCoefficient(1.0f);
+				page = Resource.PAGE_INDEX[1];
+				mapIndexOfIndex = 0;
+				stopState = false;
+				Resource.UnloadGameSoldier(Resource.savaSelcetSoldier);
+				Resource.UnloadGameHero(Resource.saveSelectHero);
+				Resource.UnloadBg(tongtiantaAndNormalBigGuanqia);
+				Resource.UnloadMonster(monsterKind);
+				Resource.UnloadWinAndFail();
+				Resource.loadMain();
+				Resource.loadMainInfo();
+				tongtiantaExp = 0;
+				tongtiantaMoney = 0;
+				my.setCountTongtianta(0);
+				// }
 			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
 			if (WinAndFailIndex == 1) {
@@ -7082,20 +7121,23 @@ public class GameEngine extends GameCanvasEngine {
 				Resource.loadSelectGuanqia();
 				Resource.loadMainInfo();
 			} else {
-				setFont(20, false);
-				PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-				pc.setText("您是否确认花费" + pm.props[13].getPrice() + moneyUnit + "购买"
-						+ pm.props[13].getName() + "?");
-				if (pc.popup() == 0) {
-					enterBuy = 12;
-					boolean flag = pm.buyProp(148, 1, g);
-					if (flag) {
-						hero.setBoold(hero.getBoolds());
-						gameIndex = 0;
-						win1 = 0;
-						stopState = false;
-					}
-				}
+				testPopupText();
+				// setFont(20, false);
+				// PopupConfirm pc =
+				// UIResource.getInstance().buildDefaultPopupConfirm();
+				// pc.setText("您是否确认花费" + pm.props[13].getPrice() + moneyUnit +
+				// "购买"
+				// + pm.props[13].getName() + "?");
+				// if (pc.popup() == 0) {
+				// enterBuy = 12;
+				// boolean flag = pm.buyProp(148, 1, g);
+				// if (flag) {
+				// hero.setBoold(hero.getBoolds());
+				// gameIndex = 0;
+				// win1 = 0;
+				// stopState = false;
+				// }
+				// }
 				alertSumTime = System.currentTimeMillis() - alertTime;
 			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
@@ -7291,21 +7333,24 @@ public class GameEngine extends GameCanvasEngine {
 		if (key.containsAndRemove(KeyCode.OK)) {
 			if (suggestIndex == 0) {
 				if (props[7].getNums() == 0) {
-					setFont(20, false);
-					PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-					pc.setText("您是否确认花费" + pm.props[7].getPrice() + moneyUnit + "购买"
-							+ pm.props[7].getName() + "?");
-					if (pc.popup() == 0) {
-						enterBuy = 10;
-						boolean flag = pm.buyProp(142, 1, g);
-						if (flag) {
-							heroStateLength++;
-							isEnhanceSoldierATK = true;
-							if (isEnhanceSoldierATK) {
-								drawUseProp8();
-							}
-						}
-					}
+					testPopupText();
+					// setFont(20, false);
+					// PopupConfirm pc =
+					// UIResource.getInstance().buildDefaultPopupConfirm();
+					// pc.setText("您是否确认花费" + pm.props[7].getPrice() + moneyUnit
+					// + "购买"
+					// + pm.props[7].getName() + "?");
+					// if (pc.popup() == 0) {
+					// enterBuy = 10;
+					// boolean flag = pm.buyProp(142, 1, g);
+					// if (flag) {
+					// heroStateLength++;
+					// isEnhanceSoldierATK = true;
+					// if (isEnhanceSoldierATK) {
+					// drawUseProp8();
+					// }
+					// }
+					// }
 				} else {
 					heroStateLength++;
 					isEnhanceSoldierATK = true;
@@ -7316,21 +7361,24 @@ public class GameEngine extends GameCanvasEngine {
 				}
 			} else if (suggestIndex == 1) {
 				if (props[8].getNums() == 0) {
-					setFont(20, false);
-					PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-					pc.setText("您是否确认花费" + pm.props[8].getPrice() + moneyUnit + "购买"
-							+ pm.props[8].getName() + "?");
-					if (pc.popup() == 0) {
-						enterBuy = 10;
-						boolean flag = pm.buyProp(143, 1, g);
-						if (flag) {
-							heroStateLength++;
-							isEnhanceArmor = true;
-							if (isEnhanceArmor) {
-								drawUseProp9();
-							}
-						}
-					}
+					testPopupText();
+					// setFont(20, false);
+					// PopupConfirm pc =
+					// UIResource.getInstance().buildDefaultPopupConfirm();
+					// pc.setText("您是否确认花费" + pm.props[8].getPrice() + moneyUnit
+					// + "购买"
+					// + pm.props[8].getName() + "?");
+					// if (pc.popup() == 0) {
+					// enterBuy = 10;
+					// boolean flag = pm.buyProp(143, 1, g);
+					// if (flag) {
+					// heroStateLength++;
+					// isEnhanceArmor = true;
+					// if (isEnhanceArmor) {
+					// drawUseProp9();
+					// }
+					// }
+					// }
 				} else {
 					heroStateLength++;
 					isEnhanceArmor = true;
@@ -7341,21 +7389,24 @@ public class GameEngine extends GameCanvasEngine {
 				}
 			} else if (suggestIndex == 2) {
 				if (props[9].getNums() == 0) {
-					setFont(20, false);
-					PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-					pc.setText("您是否确认花费" + pm.props[9].getPrice() + moneyUnit + "购买"
-							+ pm.props[9].getName() + "?");
-					if (pc.popup() == 0) {
-						enterBuy = 10;
-						boolean flag = pm.buyProp(144, 1, g);
-						if (flag) {
-							heroStateLength++;
-							isEnhanceBoold = true;
-							if (isEnhanceBoold) {
-								drawUseProp10();
-							}
-						}
-					}
+					testPopupText();
+					// setFont(20, false);
+					// PopupConfirm pc =
+					// UIResource.getInstance().buildDefaultPopupConfirm();
+					// pc.setText("您是否确认花费" + pm.props[9].getPrice() + moneyUnit
+					// + "购买"
+					// + pm.props[9].getName() + "?");
+					// if (pc.popup() == 0) {
+					// enterBuy = 10;
+					// boolean flag = pm.buyProp(144, 1, g);
+					// if (flag) {
+					// heroStateLength++;
+					// isEnhanceBoold = true;
+					// if (isEnhanceBoold) {
+					// drawUseProp10();
+					// }
+					// }
+					// }
 				} else {
 					heroStateLength++;
 					isEnhanceBoold = true;
@@ -7365,17 +7416,20 @@ public class GameEngine extends GameCanvasEngine {
 					}
 				}
 			} else if (suggestIndex == 3) {
-				setFont(20, false);
-				PopupConfirm pc = UIResource.getInstance().buildDefaultPopupConfirm();
-				pc.setText("您是否确认花费" + pm.props[10].getPrice() + moneyUnit + "购买"
-						+ pm.props[10].getName() + "?");
-				if (pc.popup() == 0) {
-					enterBuy = 10;
-					boolean flag = pm.buyProp(145, 1, g);
-					if (flag) {
-						drawUseProp11();
-					}
-				}
+				testPopupText();
+				// setFont(20, false);
+				// PopupConfirm pc =
+				// UIResource.getInstance().buildDefaultPopupConfirm();
+				// pc.setText("您是否确认花费" + pm.props[10].getPrice() + moneyUnit +
+				// "购买"
+				// + pm.props[10].getName() + "?");
+				// if (pc.popup() == 0) {
+				// enterBuy = 10;
+				// boolean flag = pm.buyProp(145, 1, g);
+				// if (flag) {
+				// drawUseProp11();
+				// }
+				// }
 			}
 		} else if (key.containsAndRemove(KeyCode.LEFT)) {
 			if (suggestIndex > 0) {
@@ -7521,19 +7575,21 @@ public class GameEngine extends GameCanvasEngine {
 				props[0].setNumsReduce();
 				useProp[0] = 1;
 			} else {
-				setFont(20, false);
-				pcGame = UIResource.getInstance().buildDefaultPopupConfirm();
-				pcGame.setText("您是否确认花费" + pm.props[0].getPrice() + moneyUnit + "购买"
-						+ pm.props[0].getName() + "?");
-				alertTime = System.currentTimeMillis();
-				isAllStop = true;
-				if (pcGame.popup() == 0) {
-					enterBuy = 11;
-					boolean flag = pm.buyProp(135, 1, g);
-					if (flag) {
-						useProp[0] = 1;
-					}
-				}
+				testPopupText();
+				// setFont(20, false);
+				// pcGame = UIResource.getInstance().buildDefaultPopupConfirm();
+				// pcGame.setText("您是否确认花费" + pm.props[0].getPrice() + moneyUnit
+				// + "购买"
+				// + pm.props[0].getName() + "?");
+				// alertTime = System.currentTimeMillis();
+				// isAllStop = true;
+				// if (pcGame.popup() == 0) {
+				// enterBuy = 11;
+				// boolean flag = pm.buyProp(135, 1, g);
+				// if (flag) {
+				// useProp[0] = 1;
+				// }
+				// }
 			}
 		} else if (key.containsAndRemove(KeyCode.NUM2)) {
 			if (props[1].getNums() > 0) {
@@ -7541,20 +7597,22 @@ public class GameEngine extends GameCanvasEngine {
 				useProp[1] = 2;
 				prop2Index = 0;
 			} else {
-				setFont(20, false);
-				pcGame = UIResource.getInstance().buildDefaultPopupConfirm();
-				pcGame.setText("您是否确认花费" + pm.props[1].getPrice() + moneyUnit + "购买"
-						+ pm.props[1].getName() + "?");
-				alertTime = System.currentTimeMillis();
-				isAllStop = true;
-				if (pcGame.popup() == 0) {
-					enterBuy = 11;
-					boolean flag = pm.buyProp(136, 1, g);
-					if (flag) {
-						useProp[1] = 2;
-						prop2Index = 0;
-					}
-				}
+				testPopupText();
+				// setFont(20, false);
+				// pcGame = UIResource.getInstance().buildDefaultPopupConfirm();
+				// pcGame.setText("您是否确认花费" + pm.props[1].getPrice() + moneyUnit
+				// + "购买"
+				// + pm.props[1].getName() + "?");
+				// alertTime = System.currentTimeMillis();
+				// isAllStop = true;
+				// if (pcGame.popup() == 0) {
+				// enterBuy = 11;
+				// boolean flag = pm.buyProp(136, 1, g);
+				// if (flag) {
+				// useProp[1] = 2;
+				// prop2Index = 0;
+				// }
+				// }
 			}
 		} else if (key.containsAndRemove(KeyCode.NUM3)) {
 			if (!isDoubleAtk) {
@@ -7566,23 +7624,26 @@ public class GameEngine extends GameCanvasEngine {
 					heroStateLength++;
 					isDoubleAtk = true;
 				} else {
-					setFont(20, false);
-					pcGame = UIResource.getInstance().buildDefaultPopupConfirm();
-					pcGame.setText("您是否确认花费" + pm.props[2].getPrice() + moneyUnit + "购买"
-							+ pm.props[2].getName() + "?");
-					alertTime = System.currentTimeMillis();
-					isAllStop = true;
-					if (pcGame.popup() == 0) {
-						enterBuy = 11;
-						boolean flag = pm.buyProp(137, 1, g);
-						if (flag) {
-							prop3StartTime = System.currentTimeMillis();
-							useProp[2] = 3;
-							soldierATkTimes = 2;
-							heroStateLength++;
-							isDoubleAtk = true;
-						}
-					}
+					testPopupText();
+					// setFont(20, false);
+					// pcGame =
+					// UIResource.getInstance().buildDefaultPopupConfirm();
+					// pcGame.setText("您是否确认花费" + pm.props[2].getPrice() +
+					// moneyUnit + "购买"
+					// + pm.props[2].getName() + "?");
+					// alertTime = System.currentTimeMillis();
+					// isAllStop = true;
+					// if (pcGame.popup() == 0) {
+					// enterBuy = 11;
+					// boolean flag = pm.buyProp(137, 1, g);
+					// if (flag) {
+					// prop3StartTime = System.currentTimeMillis();
+					// useProp[2] = 3;
+					// soldierATkTimes = 2;
+					// heroStateLength++;
+					// isDoubleAtk = true;
+					// }
+					// }
 				}
 			}
 		} else if (key.containsAndRemove(KeyCode.NUM5)) {

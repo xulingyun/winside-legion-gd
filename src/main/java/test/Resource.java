@@ -18,7 +18,7 @@ public class Resource {
 	public final static int[] stoneXY2 = { 20, 60, 0, 150, 80, 0, 70, 150, 0 };
 	public final static int[] MonsterAttack = { 15, 1, 10, 1, 25, 1, 20, 1, 35, 1, 30, 1, 50, 1,
 			45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 150, 0, 350, 0, 400, 0, 450, 0, 0, 0, 600,
-			0, 700, 0, 60, 0 };
+			0, 700, 0, 400, 0 };
 	public final static int[] MonsterSpeed = { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 20,
 			15, 15, 15, 15, 10, 15, 15, 15, 10 };
 	public final static int[] MonsterLevel = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -823,7 +823,6 @@ public class Resource {
 		} else if (index == 2) {
 			loadImage(hero3skill);
 		} else if (index == 3) {
-			loadImage(hero4skill);
 		} else if (index == 4) {
 			loadImage(hero5skill);
 		} else if (index == 5) {
@@ -843,6 +842,7 @@ public class Resource {
 		loadImage(bmbar);
 		loadImage(buff);
 		loadImage(select2);
+		loadImage(soldier33);
 		loadImage(hero4skill);
 		loadImage(soldier71);
 	}
@@ -856,7 +856,6 @@ public class Resource {
 		} else if (index == 2) {
 			releaseImage(hero3skill);
 		} else if (index == 3) {
-			releaseImage(hero4skill);
 		} else if (index == 4) {
 			releaseImage(hero5skill);
 		} else if (index == 5) {
@@ -877,17 +876,18 @@ public class Resource {
 		releaseImage(buff);
 		releaseImage(select2);
 		releaseImage(hero4skill);
+		releaseImage(soldier33);
 		releaseImage(soldier71);
 	}
 
 	public static void loadGameSoldier(byte[] selectS) {
+		loadImage(soldier22);
 		for (int i = 0; i < selectS.length; i++) {
 			if (selectS[i] == 0) {
 				loadImage(soldier0);
 			} else if (selectS[i] == 1) {
 				loadImage(soldier1);
 				loadImage(soldier21);
-				loadImage(soldier22);
 			} else if (selectS[i] == 2) {
 				loadImage(soldier2);
 				loadImage(soldier31);
@@ -906,6 +906,7 @@ public class Resource {
 			} else if (selectS[i] == 6) {
 				loadImage(soldier6);
 				loadImage(soldier71);
+				loadImage(soldier32);
 			} else if (selectS[i] == 7) {
 				loadImage(soldier7);
 				loadImage(soldier81);
@@ -922,13 +923,13 @@ public class Resource {
 	}
 
 	public static void UnloadGameSoldier(byte[] selectS) {
+		releaseImage(soldier22);
 		for (int i = 0; i < selectS.length; i++) {
 			if (selectS[i] == 0) {
 				releaseImage(soldier0);
 			} else if (selectS[i] == 1) {
 				releaseImage(soldier1);
 				releaseImage(soldier21);
-				releaseImage(soldier22);
 			} else if (selectS[i] == 2) {
 				releaseImage(soldier2);
 				releaseImage(soldier31);
@@ -947,6 +948,7 @@ public class Resource {
 			} else if (selectS[i] == 6) {
 				releaseImage(soldier6);
 				releaseImage(soldier71);
+				releaseImage(soldier32);
 			} else if (selectS[i] == 7) {
 				releaseImage(soldier7);
 				releaseImage(soldier81);
@@ -1030,6 +1032,8 @@ public class Resource {
 					loadImage(boss6);
 					loadImage(boss6m);
 					loadImage(boss6mattack);
+					loadImage(powerbar);
+					loadImage(powerbarbg);
 				} else if (v[i] == 20) {
 					loadImage(boss7);
 					loadImage(boss78attack);
@@ -1110,6 +1114,8 @@ public class Resource {
 					releaseImage(boss6);
 					releaseImage(boss6m);
 					releaseImage(boss6mattack);
+					releaseImage(powerbar);
+					releaseImage(powerbarbg);
 				} else if (v[i] == 20) {
 					releaseImage(boss7);
 					releaseImage(boss78attack);
