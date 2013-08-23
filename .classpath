@@ -2,8 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry exported="true" kind="lib" path="D:/repos/gradle/caches/artifacts-13/filestore/ohyeah/winside-common/1.8.9/jar/eea8654c5133fc6b3cdbab3181967d6c30ac690d/winside-common-1.8.9.jar" sourcepath="D:/repos/gradle/caches/artifacts-13/filestore/ohyeah/winside-common/1.8.9/source/a16a7071c10057faea087a9a190f2ba8af61dab0/winside-common-1.8.9-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/WTK2.5.2_01/lib/cldcapi11.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/WTK2.5.2_01/lib/midpapi20.jar"/>
+	<classpathentry kind="con" path="org.elipse.mtj.JavaMEContainer/Sun Java(TM) Wireless Toolkit 2.5.2_01 for CLDC/DefaultColorPhone"/>
 	<classpathentry kind="output" path="bin"/>
-	<classpathentry sourcepath="D:/repos/gradle/caches/artifacts-13/filestore/ohyeah/itvgame-common/1.5.0.5/source/2f07caed021dfc64840dffad62285a411071165d/itvgame-common-1.5.0.5-sources.jar" kind="lib" path="D:/repos/gradle/caches/artifacts-13/filestore/ohyeah/itvgame-common/1.5.0.5/jar/b7569732fce7356b162fd1111fc763fb13013474/itvgame-common-1.5.0.5.jar" exported="true"/>
-	<classpathentry kind="lib" path="C:/WTK2.5.2_01/lib/cldcapi11.jar" exported="true"/>
-	<classpathentry kind="lib" path="C:/WTK2.5.2_01/lib/midpapi20.jar" exported="true"/>
 </classpath>

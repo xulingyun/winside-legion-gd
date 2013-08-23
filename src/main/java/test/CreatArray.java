@@ -3,7 +3,6 @@ package test;
 import hero.Hero;
 import hero.Soldier;
 import java.util.Vector;
-import javax.microedition.lcdui.Image;
 import cn.ohyeah.stb.util.RandomValue;
 import skill.SkillEffectSoldier5;
 import array.DataHandle;
@@ -12,7 +11,6 @@ public class CreatArray {
 
 	Thread th1;
 	int state;
-	Image[] img = new Image[9];
 	Vector v1 = new Vector();
 	Vector v2 = new Vector();
 	Vector v3 = new Vector();
@@ -22,7 +20,6 @@ public class CreatArray {
 	Vector v6 = new Vector();
 	Vector v7 = new Vector();
 	Vector v8 = new Vector();
-	static int[] selcetSoldier = { 0, 1, 2, 3 };
 
 	int row = 7;
 	int col = 4;
@@ -38,10 +35,7 @@ public class CreatArray {
 		return ss;
 	}
 
-	public CreatArray(Image[] img, Hero hero) {
-		for (int i = 0; i < 9; i++) {
-			this.img[i] = img[i];
-		}
+	public CreatArray(Hero hero) {
 		this.hero = hero;
 		ssIndex = 0;
 		ss = new Soldier[5][][];
@@ -55,21 +49,20 @@ public class CreatArray {
 	public boolean sss() {
 		sum = 0;
 		vectorArray();
-		des(v1, "v1");
-		des(v2, "v2");
-		des(v3, "v3");
-		des(v4, "v4");
 		if (v1.isEmpty() && v2.isEmpty() && v3.isEmpty() && v4.isEmpty()) {
 			canMove = false;
 			GameEngine.state = true;
+			GameEngine.tishi = System.currentTimeMillis();
+			GameEngine.tishiIndex = 0;
+			GameEngine.youle = null;
 			return canMove;
 		} else {
 			GameEngine.state = false;
-			if ((v1.size() >= 5 || v2.size() >= 5 || v3.size() >= 5 || v4
-					.size() >= 5) && (!GameEngine.isNowSoldierSay)) {
+			GameEngine.youle = null;
+			if ((v1.size() >= 5 || v2.size() >= 5 || v3.size() >= 5 || v4.size() >= 5)
+					&& (!GameEngine.isNowSoldierSay)) {
 				GameEngine.isNowSoldierSay = true;
-				GameEngine.randomSoldierSayLocaltion = RandomValue.getRandInt(
-						0, 5);
+				GameEngine.randomSoldierSayLocaltion = RandomValue.getRandInt(0, 5);
 				GameEngine.randomSoldierSayIndex = 0;
 			}
 			canMove = true;
@@ -80,8 +73,7 @@ public class CreatArray {
 		hero.setMagic(hero.getMagic(), v3.size());
 		hero.setMagic(hero.getMagic(), v4.size());
 		soldierKindArray = dh.getSoldierKindArray();
-		SkillEffectSoldier5 sef = new SkillEffectSoldier5(soldierKindArray,
-				this);
+		SkillEffectSoldier5 sef = new SkillEffectSoldier5(soldierKindArray, this);
 		ss[ssIndex] = sef.activity();
 		ssIndex++;
 		if (ssIndex == 5) {
@@ -92,15 +84,6 @@ public class CreatArray {
 		return canMove;
 	}
 
-	public void des(Vector v, String ss) {
-		String s = ss + "***";
-		for (int i = 0; i < v.size(); i++) {
-			s += "(" + ((Soldier) v.elementAt(i)).getX()
-					+ ((Soldier) v.elementAt(i)).getY() + ")";
-		}
-		System.out.println(s);
-	}
-
 	public void setIdPic(Soldier[][] idPic) {
 		this.idPic = idPic;
 	}
@@ -109,19 +92,115 @@ public class CreatArray {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 4; j++) {
 				int imgIndex = RandomValue.getRandInt(1, 5);
-				idPic[i][j] = new Soldier(
-						"Soldier",
-						img[imgIndex - 1],
-						Resource.heroAndSoldierLevel[selcetSoldier[imgIndex - 1]],
-						i, j, imgIndex, 0, 0, 0, selcetSoldier[imgIndex - 1], 0);
+				idPic[i][j] = new Soldier("Soldier", Resource.images[Resource.soldier0 + imgIndex
+						- 1],
+						Resource.heroAndSoldierLevel[Resource.savaSelcetSoldier[imgIndex - 1]], i,
+						j, imgIndex, 0, 0, 0, Resource.savaSelcetSoldier[imgIndex - 1], 0);
 			}
 		}
-		pppp();
 		return idPic;
 	}
 
 	public Soldier[][] getIdPic() {
 		return idPic;
+	}
+
+	public int[] vectorArray1(Soldier[][] s) {
+		Vector v = new Vector();
+		int[] temp_xy = new int[2];
+		for (int ii = 0; ii < row; ii++) {
+			for (int jj = 0; jj < col - 1; jj++) {
+				int temp = s[ii][jj].getKind();
+				s[ii][jj].setKind(s[ii][jj + 1].getKind());
+				s[ii][jj + 1].setKind(temp);
+				for (int i = 0; i < row; i++) {
+					for (int j = 0; j < col; j++) {
+						v = addvector1(i, j, v, s);
+						if (v.size() != 0) {
+							temp = s[ii][jj].getKind();
+							s[ii][jj].setKind(s[ii][jj + 1].getKind());
+							s[ii][jj + 1].setKind(temp);
+							temp_xy[0] = ii;
+							temp_xy[1] = jj;
+							return temp_xy;
+						} else if (i == row - 1 && j == col - 1) {
+							temp = s[ii][jj].getKind();
+							s[ii][jj].setKind(s[ii][jj + 1].getKind());
+							s[ii][jj + 1].setKind(temp);
+						}
+					}
+				}
+			}
+		}
+		for (int ii = 0; ii < row - 1; ii++) {
+			for (int jj = 0; jj < col; jj++) {
+				int temp = s[ii][jj].getKind();
+				s[ii][jj].setKind(s[ii + 1][jj].getKind());
+				s[ii + 1][jj].setKind(temp);
+				for (int i = 0; i < row; i++) {
+					for (int j = 0; j < col; j++) {
+						v = addvector1(i, j, v, s);
+						if (v.size() != 0) {
+							temp = s[ii][jj].getKind();
+							s[ii][jj].setKind(s[ii + 1][jj].getKind());
+							s[ii + 1][jj].setKind(temp);
+							temp_xy[0] = ii;
+							temp_xy[1] = jj;
+							return temp_xy;
+						} else if (i == row - 1 && j == col - 1) {
+							temp = s[ii][jj].getKind();
+							s[ii][jj].setKind(s[ii + 1][jj].getKind());
+							s[ii + 1][jj].setKind(temp);
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	private Vector addvector1(int i, int j, Vector v, Soldier[][] s) {
+		int k = j + 1;
+		if (k < col) {
+			for (; k < col; k++) {
+				if (s[i][j] != null && s[i][k] != null) {
+					if (s[i][j].getKind() != s[i][k].getKind()) {
+						break;
+					}
+				} else {
+					break;
+				}
+			}
+			if (k - j >= 3) {
+				for (int m = j; m < k; m++) {
+					if (!v.contains(s[i][m])) {
+						s[i][m].setState(1);
+						v.addElement(s[i][m]);
+					}
+				}
+			}
+		}
+		k = i + 1;
+		if (k < row) {
+			for (; k < row; k++) {
+				if (s[i][j] != null && s[k][j] != null) {
+					if (s[i][j].getKind() != s[k][j].getKind()) {
+						break;
+					}
+				} else {
+					break;
+				}
+			}
+			if (k - i >= 3) {
+				for (int m = i; m < k; m++) {
+					if (!v.contains(s[m][j])) {
+						s[m][j].setState(1);
+						v.addElement(s[m][j]);
+					}
+				}
+			}
+		}
+		return v;
 	}
 
 	public void vectorArray() {
@@ -248,19 +327,16 @@ public class CreatArray {
 						}
 					}
 					int imgIndex = RandomValue.getRandInt(1, 5);
-					idPic[i][j] = new Soldier(
-							"Soldier",
-							img[imgIndex - 1],
-							Resource.heroAndSoldierLevel[selcetSoldier[imgIndex - 1]],
-							i, j, imgIndex, 0, 0, 0,
-							selcetSoldier[imgIndex - 1], 0);
+					idPic[i][j] = new Soldier("Soldier", Resource.images[Resource.soldier0
+							+ imgIndex - 1],
+							Resource.heroAndSoldierLevel[Resource.savaSelcetSoldier[imgIndex - 1]],
+							i, j, imgIndex, 0, 0, 0, Resource.savaSelcetSoldier[imgIndex - 1], 0);
 					idPic[i][j].setOffX(-(j + h) * 60);
 					h++;
 				}
 			}
 			CreatArray.sum = 0;
 		}
-		pppp();
 		GameEngine.add = 0;
 	}
 
@@ -274,22 +350,5 @@ public class CreatArray {
 		v7.removeAllElements();
 		v8.removeAllElements();
 		soldierKindArray = null;
-	}
-
-	public void pppp() {
-		System.out
-				.println("*****************************************************");
-		String s = "";
-		for (int i = 0; i < 7; i++) {
-			s = "[";
-			for (int k = 0; k < 4; k++) {
-				if (idPic[i][k] == null)
-					s += "-1,";
-				else
-					s += idPic[i][k].getKind() + ",";
-			}
-			s += "]";
-			System.out.println(s);
-		}
 	}
 }

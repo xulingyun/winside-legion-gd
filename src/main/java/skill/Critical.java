@@ -1,5 +1,7 @@
 package skill;
 
+import hero.Monster;
+
 public class Critical {
 
 	private int x;
@@ -8,6 +10,24 @@ public class Critical {
 	private long time;
 	public static long showtime = 1000;
 	private int count = 0;
+	private int index;
+	private Monster m;
+
+	public Monster getM() {
+		return m;
+	}
+
+	public void setM(Monster m) {
+		this.m = m;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
 
 	public int getCount() {
 		return count;
@@ -67,11 +87,13 @@ public class Critical {
 		this.time = time;
 	}
 
-	public Critical(int x, int y, int num) {
+	public Critical(int x, int y, int num, Monster m) {
 		this.x = x;
 		this.y = y;
 		this.num = num;
+		this.m = m;
 		this.time = System.currentTimeMillis();
+		index = 0;
 	}
 
 }
